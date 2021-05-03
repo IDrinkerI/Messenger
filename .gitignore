@@ -348,7 +348,10 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# Node 
+###############
+# Node ########
+###############
+
 # Logs
 logs
 *.log
@@ -437,3 +440,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+###################
+# Custom ##########
+###################
+
+/backend/MessengerApi/wwwroot
