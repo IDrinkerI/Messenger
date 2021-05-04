@@ -1,12 +1,15 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import HtmlContainer from "./HtmlContainer.jsx";
 import Messenger from "./Messenger.jsx";
 
 
 const Application = () => (
     <Provider store={store}>
-        <Messenger />
+        <HtmlContainer>
+            <Messenger />
+        </HtmlContainer>
     </Provider>
 )
 

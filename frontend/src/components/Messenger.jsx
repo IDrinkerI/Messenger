@@ -15,7 +15,7 @@ const Messenger = () => (
 
         <div className="messenger_inner">
             <InputField />
-            <Button />
+            <Button>Send</Button>
         </div>
     </div>
 );
