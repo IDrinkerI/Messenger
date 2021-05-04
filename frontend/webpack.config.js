@@ -6,7 +6,7 @@ module.exports = {
     entry: path.join(__dirname, "src", "main.jsx"),
     output: {
         path: path.join(__dirname, "..", "backend/MessengerApi/wwwroot"),
-        filename: "main.js",
+        filename: "./main.js",
         publicPath: "/",
     },
     devtool: "source-map",
