@@ -1,11 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import Messenger from "./Messenger.jsx";
 
 
 const Application = () => (
     <Provider store={store}>
-        <h1> Hallo from react</ h1>
+        <Messenger />
     </Provider>
 )
 
