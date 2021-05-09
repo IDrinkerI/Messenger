@@ -1,0 +1,1 @@
+export const ADD_MESSAGE = "MESSAGE::ADD_MESSAGE";
