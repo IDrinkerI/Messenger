@@ -1,42 +1,28 @@
-import { ADD_MESSAGE, LOAD_MESSAGES } from "./types";
-import MessageModel from "../../model/MessageModel";
+import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 
-const API_URL = "";
 
-const initialStore = () => {
-    loadMessages();
-    return {
-        messageList: [
-            new MessageModel("bot", "hallo"),
-            new MessageModel("bot", "Message 1"),
-            new MessageModel("bot", "Message 2"),
-            new MessageModel("bot", "Message 3"),
-        ],
-    }
-}
+const initialStore = () => ({
+    messageList: [],
+    updateTimer: undefined,
+});
 
 export const messageReduser = (store = initialStore(), action) => {
     switch (action.type) {
         case ADD_MESSAGE: {
+            console.log({action})
             return {
                 ...store,
                 messageList: [...store.messageList, action.payload],
             }
         }
-        case LOAD_MESSAGES: {
+        case INIT_MESSAGE_STORE: {
             return {
                 ...store,
-                messageList: payload,
+                messageList: action.payload.messageList,
+                updateTimer: action.payload.updateTimer,
             }
         }
         default:
             return store;
     }
-}
-
-const loadMessages = () => {
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(mes => console.log(mes))
-        .catch((e) => console.log(`failed feath: ${e}`));
 }
