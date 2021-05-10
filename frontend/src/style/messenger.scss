@@ -1,0 +1,9 @@
+.messenger {
+    border: 1px solid black;
+    margin: 2px;
+
+    &_inner{
+        display: flex;
+        justify-content:space-between;
+    }
+}

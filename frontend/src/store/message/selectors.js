@@ -1,0 +1,1 @@
+export const getMessages = (store) => store.message.messageList;
