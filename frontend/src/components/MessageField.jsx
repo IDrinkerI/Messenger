@@ -2,22 +2,21 @@ import React from "react";
 import MessageModel from "../model/MessageModel.js";
 import Message from "./Message.jsx";
 import "../style/message_field.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { getMessages } from "../store/message/selectors.js";
 
 
-const MessageField = () => (
-    <div className="message_field">
-        {_messageList.map((item, index) =>
-            <Message message={item} key={index} />
-        )}
-    </div>
-);
+const MessageField = () => {
+    const dispatch = useDispatch();
+    const messageList = useSelector(getMessages);
+
+    return (
+        <div className="message_field">
+            {messageList?.map((item, index) =>
+                <Message message={item} key={index} />
+            )}
+        </div>
+    );
+}
 
 export default MessageField;
-
-
-const _messageList = [
-    new MessageModel("bot", "hallo"),
-    new MessageModel("bot", "Message 1"),
-    new MessageModel("bot", "Message 2"),
-    new MessageModel("bot", "Message 3"),
-];
