@@ -12,18 +12,22 @@ namespace MessengerApi.Controllers
     [Route("api/[controller]")]
     public class MessageController : ControllerBase
     {
-        [HttpGet]
-        public JsonResult GetMessages()
+        private List<MessageModel> _messages;
+
+        public MessageController()
         {
-            var messages = new MessageModel[]
+            _messages = new List<MessageModel>()
             {
                 new MessageModel("bot", "hallo"),
                 new MessageModel("bot", "Message 1"),
                 new MessageModel("bot", "Message 2"),
                 new MessageModel("bot", "Message 3"),
             };
-
-            return new JsonResult(messages);
         }
+
+        [HttpGet]
+        public JsonResult GetMessages() => new JsonResult(_messages);
+
+        
     }
 }
