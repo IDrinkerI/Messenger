@@ -28,7 +28,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpPost]
-        public async Task<StatusCodeResult> AddMessage(Message message)
+        public async Task<StatusCodeResult> AddMessage([FromBody] Message message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
