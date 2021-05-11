@@ -9,7 +9,6 @@ const initialStore = () => ({
 export const messageReduser = (store = initialStore(), action) => {
     switch (action.type) {
         case ADD_MESSAGE: {
-            console.log({action})
             return {
                 ...store,
                 messageList: [...store.messageList, action.payload],
