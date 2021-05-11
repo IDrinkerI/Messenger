@@ -26,8 +26,19 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetMessages() => new JsonResult(_messages);
+        public JsonResult GetMessages()
+        {
+            return new JsonResult(_messages);
+        }
 
-        
+        [HttpPost]
+        public StatusCodeResult AddMessage(MessageModel message)
+        {
+            if (message is null)
+                return new UnsupportedMediaTypeResult();
+
+            _messages.Add(message);
+            return new OkResult();
+        }
     }
 }
