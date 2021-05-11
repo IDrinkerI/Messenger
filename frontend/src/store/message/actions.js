@@ -20,5 +20,16 @@ export const initMessageStoreAction = () =>
 
 export const addMessageAction = (message) =>
     (dispatch) => {
-        dispatch(addMessage(message));
+        if (process.env.NODE_ENV == "development") {
+            dispatch(addMessage(message));
+            return;
+        }
+
+        fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        });
     }

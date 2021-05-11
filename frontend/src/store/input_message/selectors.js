@@ -1,0 +1,1 @@
+export const getInputMessage = (store => store.inputText.text);
