@@ -33,6 +33,9 @@ namespace MessengerApi.Controllers
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
+            if (message.UserName is null)
+                return new UnsupportedMediaTypeResult();
+
             await _store.Messages.AddAsync(message);
             await _store.SaveChangesAsync();
             return new OkResult();
