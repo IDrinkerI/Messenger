@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MessengerApi.Models
 {
-    public sealed class MessageModel
+    public sealed class Message
     {
         public string UserName { get; set; }
         public string MessageText { get; set; }
 
-        public MessageModel() { }
+        public Message() { }
 
-        public MessageModel(string userName, string messageText)
+        public Message(string userName, string messageText)
         {
             UserName = userName;
             MessageText = messageText;

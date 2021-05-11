@@ -12,16 +12,16 @@ namespace MessengerApi.Controllers
     [Route("api/[controller]")]
     public class MessageController : ControllerBase
     {
-        private List<MessageModel> _messages;
+        private List<Message> _messages;
 
         public MessageController()
         {
-            _messages = new List<MessageModel>()
+            _messages = new List<Message>()
             {
-                new MessageModel("bot", "hallo"),
-                new MessageModel("bot", "Message 1"),
-                new MessageModel("bot", "Message 2"),
-                new MessageModel("bot", "Message 3"),
+                new Message("bot", "hallo"),
+                new Message("bot", "Message 1"),
+                new Message("bot", "Message 2"),
+                new Message("bot", "Message 3"),
             };
         }
 
@@ -32,7 +32,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpPost]
-        public StatusCodeResult AddMessage(MessageModel message)
+        public StatusCodeResult AddMessage(Message message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
