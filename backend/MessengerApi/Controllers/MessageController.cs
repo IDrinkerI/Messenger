@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MessengerApi.Models;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace MessengerApi.Controllers
 {
@@ -12,32 +13,28 @@ namespace MessengerApi.Controllers
     [Route("api/[controller]")]
     public class MessageController : ControllerBase
     {
-        private List<Message> _messages;
+        private Store _store;
 
-        public MessageController()
+        public MessageController(Store store)
         {
-            _messages = new List<Message>()
-            {
-                new Message("bot", "hallo"),
-                new Message("bot", "Message 1"),
-                new Message("bot", "Message 2"),
-                new Message("bot", "Message 3"),
-            };
+            _store = store;
         }
 
         [HttpGet]
-        public JsonResult GetMessages()
+        public async Task<JsonResult> GetMessages()
         {
-            return new JsonResult(_messages);
+            var messages = await _store.Messages.ToListAsync();
+            return new JsonResult(messages);
         }
 
         [HttpPost]
-        public StatusCodeResult AddMessage(Message message)
+        public async Task<StatusCodeResult> AddMessage(Message message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            _messages.Add(message);
+            await _store.Messages.AddAsync(message);
+            await _store.SaveChangesAsync();
             return new OkResult();
         }
     }
