@@ -10,6 +10,8 @@ namespace MessengerApi.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public List<Message> Messages { get; set; }
+
         public Chat() { }
 
         public Chat(string name)
