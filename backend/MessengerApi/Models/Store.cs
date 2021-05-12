@@ -14,10 +14,6 @@ namespace MessengerApi.Models
 
         public Store(DbContextOptions options) : base(options)
         {
-#if DEBUG
-            Database.EnsureDeleted();
-#endif
-
             Database.EnsureCreated();
         }
     }
