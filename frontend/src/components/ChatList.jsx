@@ -1,20 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { chatListSelector } from "../store/chats/selectors";
 import "../style/chatlist.scss";
 import Chat from "./Chat.jsx";
 
 
 const ChatList = () => {
-    const chats = [
-        "chat 1",
-        "chat 2",
-        "chat 3",
-        "chat 4",
-    ];
+    const chats = useSelector(chatListSelector);
 
     return (
         <div className="chatlist">
             <ul>
-                {chats.map(item => <Chat name={item} />)}
+                {chats?.map((item, index) => <Chat name={item} key={index} />)}
             </ul>
         </div>
     );
