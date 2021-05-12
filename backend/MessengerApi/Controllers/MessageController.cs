@@ -21,16 +21,9 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetMessages(int chatId)
+        public JsonResult GetMessages(int chatId)
         {
-            if (chatId != 1) { return new JsonResult(new { message = "chat is not found" }); }
-
-            var messages = _store.Messages.Include(m => m.Chat);
-
-
-            //var messages = _store.Messages.
-            //var messages = _store.Messages.Include(m => m.Chat).ToList();//.Where(m => m.ChatId == chatId).ToList();
-            //var result = await _store.Messages.AsQueryable().Where(m => m.ChatId == chatId).AsAsyncEnumerable().GroupBy(b => b.Rating);
+            var messages = _store.Messages.Include(m => m.Chat).Where(m => m.ChatId == chatId).ToArray();
             return new JsonResult(messages);
         }
 
@@ -48,8 +41,6 @@ namespace MessengerApi.Controllers
             if (chat is null) { return new OkResult(); }
 
             await _store.Messages.AddAsync(message);
-
-            //await _store.Messages.AddAsync(message);
             await _store.SaveChangesAsync();
             return new OkResult();
         }
