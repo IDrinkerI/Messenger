@@ -12,7 +12,8 @@ export const initMessageStoreAction = () =>
         if (getState().message.updateTimer) return;
 
         const timer = setInterval(async () => {
-            const response = await fetch(API_URL);
+            const currentChatId = getState().chats.currentChatId;
+            const response = await fetch(API_URL+`/${currentChatId}`);
             const messageList = await response.json();
             dispath(initMessageStore(messageList, timer));
         }, UPDATE_INTERVAL);

@@ -1,0 +1,9 @@
+.chat{    
+    color: lightgray;
+    list-style: none;
+    cursor: pointer;
+
+    &_current{
+        color: lightblue;
+    }
+}

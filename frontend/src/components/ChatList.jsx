@@ -8,15 +8,17 @@ import Chat from "./Chat.jsx";
 
 
 const ChatList = () => {
+
     const chats = useSelector(chatListSelector);
     const dispatch = useDispatch();
 
-    useEffect(() => dispatch(initChatListAction()), []);
+    if (process.env.NODE_ENV == "production")
+        useEffect(() => dispatch(initChatListAction()), []);
 
     return (
         <div className="chatlist">
             <ul>
-                {chats?.map((item) => <Chat name={item.name} key={item.id} />)}
+                {chats?.map((item) => <Chat chat={item} key={item.id} />)}
             </ul>
         </div>
     );

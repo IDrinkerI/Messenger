@@ -1,5 +1,5 @@
 import ChatModel from "../../model/ChatModel";
-import { ADD_CHAT, INIT_CHAT_LIST } from "./types";
+import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 
 
 let chatList = [];
@@ -16,6 +16,7 @@ if (process.env.NODE_ENV == "development")
 const initialStore = {
     chatList: chatList,
     updateTimer: null,
+    currentChatId: null
 }
 
 export const chatsReducer = (store = initialStore, action) => {
@@ -31,6 +32,12 @@ export const chatsReducer = (store = initialStore, action) => {
                 ...store,
                 chatList: action.payload.chatList,
                 updateTimer: action.payload.timer,
+            }
+        }
+        case SELECT_CURRENT_CHAT: {
+            return {
+                ...store,
+                currentChatId: action.payload,
             }
         }
         default:
