@@ -1,14 +1,21 @@
-import { ADD_CHAT, ADD_CHAT_LIST } from "./types";
+import ChatModel from "../../model/ChatModel";
+import { ADD_CHAT, INIT_CHAT_LIST } from "./types";
 
+
+let chatList = [];
+
+if (process.env.NODE_ENV == "development")
+    chatList = [
+        new ChatModel("1", "Dev Chat 1"),
+        new ChatModel("2", "Dev Chat 2"),
+        new ChatModel("3", "Dev Chat 3"),
+        new ChatModel("4", "Dev Chat 4"),
+        new ChatModel("5", "Dev Chat 5"),
+    ];
 
 const initialStore = {
-    chatList: [
-        "Chat 1",
-        "Chat 2",
-        "Chat 3",
-        "Chat 4",
-        "Chat 5",
-    ],
+    chatList: chatList,
+    updateTimer: null,
 }
 
 export const chatsReducer = (store = initialStore, action) => {
@@ -19,10 +26,11 @@ export const chatsReducer = (store = initialStore, action) => {
                 chatList: [...store.chatList, action.payload],
             }
         }
-        case ADD_CHAT_LIST: {
+        case INIT_CHAT_LIST: {
             return {
                 ...store,
-                chatList: action.payload,
+                chatList: action.payload.chatList,
+                updateTimer: action.payload.timer,
             }
         }
         default:
