@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MessengerApi.Controllers
 {
     [Controller]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{chatId?}")]
     public class MessageController : ControllerBase
     {
         private Store _store;
@@ -21,9 +21,9 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetMessages()
+        public JsonResult GetMessages(int chatId)
         {
-            var messages = await _store.Messages.ToListAsync();
+            var messages = _store.Messages.Include(m => m.Chat).Where(m => m.ChatId == chatId).ToArray();
             return new JsonResult(messages);
         }
 
@@ -35,6 +35,10 @@ namespace MessengerApi.Controllers
 
             if (message.UserName is null)
                 return new UnsupportedMediaTypeResult();
+
+            var chat = await _store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
+            // TODO: alter this trash
+            if (chat is null) { return new OkResult(); }
 
             await _store.Messages.AddAsync(message);
             await _store.SaveChangesAsync();
