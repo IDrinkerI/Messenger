@@ -10,6 +10,8 @@ namespace MessengerApi.Models
     public class Store : DbContext
     {
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+
         public Store(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
