@@ -11,7 +11,7 @@ const ChatList = () => {
     return (
         <div className="chatlist">
             <ul>
-                {chats?.map((item, index) => <Chat name={item} key={index} />)}
+                {chats?.map((item) => <Chat name={item.name} key={item.id} />)}
             </ul>
         </div>
     );
