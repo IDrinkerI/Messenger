@@ -20,9 +20,9 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetChats()
+        public  JsonResult GetChats()
         {
-            var chats = await _store.Chats.ToListAsync();
+            var chats =  _store.Chats.Select(chat => new { chat.Id, chat.Name }).ToList();
             return new JsonResult(chats);
         }
 
