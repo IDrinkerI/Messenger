@@ -2,11 +2,11 @@ import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 
 
 const API_URL = "/api/chat";
-const UPDATE_INTERVAL = 1000;
+const UPDATE_INTERVAL = 500;
 
 export const addChatAction = (chat) => ({ type: ADD_CHAT, payload: chat });
-export const selectChatAction = (chatId) => ({type: SELECT_CURRENT_CHAT, payload: chatId});
-const initChatList = (chatList, timer) => ({ type: INIT_CHAT_LIST, payload: { chatList: chatList, timer: timer } });
+export const selectChatAction = (chatId) => ({ type: SELECT_CURRENT_CHAT, payload: chatId });
+const initChatList = (chatList, timer) => ({ type: INIT_CHAT_LIST, payload: { chatList, timer } });
 
 export const initChatListAction = () =>
     (dispatch) => {
