@@ -1,8 +1,19 @@
+import MessageModel from "../../model/MessageModel";
 import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 
 
+let messageList = [];
+
+if (process.env.NODE_ENV == "development")
+    messageList = [
+        new MessageModel("TestBot", "Hallo!"),
+        new MessageModel("TestBot", "Some message"),
+        new MessageModel("TestBot", "Some message"),
+        new MessageModel("TestBot", "Some message"),
+    ];
+
 const initialStore = () => ({
-    messageList: [],
+    messageList,
     updateTimer: undefined,
 });
 
