@@ -19,6 +19,7 @@ const initialStore = () => ({
 
 export const messageReduser = (store = initialStore(), action) => {
     switch (action.type) {
+        //TODO: delete this case
         case ADD_MESSAGE: {
             return {
                 ...store,
