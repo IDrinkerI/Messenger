@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+
 
 namespace MessengerApi.Models
 {
@@ -11,10 +8,18 @@ namespace MessengerApi.Models
     {
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
+        private string _connection;
 
-        public Store(DbContextOptions options) : base(options)
+        public Store(IConfiguration config)
         {
+            _connection = config.GetConnectionString("DefaultConnection");
             Database.EnsureCreated();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(_connection);
         }
     }
 }
