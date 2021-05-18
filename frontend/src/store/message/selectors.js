@@ -1,1 +1,1 @@
-export const getMessages = (store) => store.message.messageList;
+export const messagesSelector = (store) => store.message.messageList;

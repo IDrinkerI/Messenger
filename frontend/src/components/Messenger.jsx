@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MessageModel from "../model/MessageModel";
 import { updateInputMessageAction } from "../store/input_message/actions";
-import { getInputMessage } from "../store/input_message/selectors";
+import { inputMessageSelector } from "../store/input_message/selectors";
 import { addMessageAction } from "../store/message/actions";
 import "../style/messenger.scss";
 import Button from "./Button.jsx";
@@ -13,7 +13,7 @@ import MessageField from "./MessageField.jsx";
 
 const Messenger = () => {
     const dispatch = useDispatch();
-    const inputMessage = useSelector(getInputMessage);
+    const inputMessage = useSelector(inputMessageSelector);
     const buttonHandler = () => {
         dispatch(addMessageAction(new MessageModel("bot", inputMessage)));
         dispatch(updateInputMessageAction(""));

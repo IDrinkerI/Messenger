@@ -1,1 +1,1 @@
-export const getInputMessage = (store => store.inputText.text);
+export const inputMessageSelector = (store) => store.inputText.text;
