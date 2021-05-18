@@ -9,7 +9,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
     combineReducers({
-        message: messageReduser,
+        messages: messageReduser,
         inputText: inputMessageReducer,
         chats: chatsReducer,
     }),

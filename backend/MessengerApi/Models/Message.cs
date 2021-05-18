@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
-namespace MessengerApi.Models
+﻿namespace MessengerApi.Models
 {
     public sealed class Message
     {
@@ -13,13 +7,5 @@ namespace MessengerApi.Models
         public string MessageText { get; set; }
         public Chat Chat { get; set; }
         public int ChatId { get; set; }
-
-        public Message() { }
-
-        public Message(string userName, string messageText)
-        {
-            UserName = userName;
-            MessageText = messageText;
-        }
     }
 }

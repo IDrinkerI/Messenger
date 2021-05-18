@@ -8,10 +8,10 @@ import Chat from "./Chat.jsx";
 
 
 const ChatList = () => {
-
     const chats = useSelector(chatListSelector);
     const dispatch = useDispatch();
 
+    //TODO: Use env variable
     if (process.env.NODE_ENV == "production")
         useEffect(() => dispatch(initChatListAction()), []);
 
