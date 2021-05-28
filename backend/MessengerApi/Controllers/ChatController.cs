@@ -21,7 +21,9 @@ namespace MessengerApi.Controllers
         [HttpGet]
         public async Task<JsonResult> GetChats()
         {
-            var chats = await _store.Chats.Select(chat => new { chat.Id, chat.Name }).ToArrayAsync();
+            var chats = await _store.Chats.Select(chat => new { chat.Id, chat.Name })
+                .ToArrayAsync();
+
             return new JsonResult(chats);
         }
 
