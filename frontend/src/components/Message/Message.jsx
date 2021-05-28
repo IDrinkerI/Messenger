@@ -1,7 +1,7 @@
 import React from "react";
-import "../style/message.scss";
+import "./message.scss";
 
-const Message = (props) => {
+export const Message = (props) => {
     const { userName, messageText } = props.message;
 
     return (
@@ -11,5 +11,3 @@ const Message = (props) => {
         </div>
     );
 }
-
-export default Message;

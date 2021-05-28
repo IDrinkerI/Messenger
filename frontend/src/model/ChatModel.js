@@ -1,4 +1,4 @@
-export default class ChatModel {
+export class ChatModel {
     constructor(id, name) {
         this.id = id;
         this.name = name;

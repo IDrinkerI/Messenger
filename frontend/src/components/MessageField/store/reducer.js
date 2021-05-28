@@ -1,4 +1,4 @@
-import MessageModel from "../../model/MessageModel";
+import { MessageModel } from "../../../model/MessageModel";
 import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 
 
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV == "development")
 
 const initialStore = () => ({
     messageList,
-    updateTimer: undefined,
+    updateTimer: null,
 });
 
 export const messageReduser = (store = initialStore(), action) => {
@@ -30,7 +30,7 @@ export const messageReduser = (store = initialStore(), action) => {
             return {
                 ...store,
                 messageList: action.payload.messageList,
-                updateTimer: action.payload.updateTimer,
+                updateTimer: action.payload.timer,
             }
         }
         default:
