@@ -1,4 +1,4 @@
-import MessageModel from "../../model/MessageModel";
+import { MessageModel } from "../../model/MessageModel";
 import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 
 

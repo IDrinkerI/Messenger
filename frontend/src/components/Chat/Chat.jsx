@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectChatAction } from "../store/chats/actions";
-import { currentChatIdSelector } from "../store/chats/selectors";
-import "../style/chat.scss";
+import { selectChatAction } from "../../store/chats/actions";
+import { currentChatIdSelector } from "../../store/chats/selectors";
+import "./chat.scss";
 
 
-const Chat = (props) => {
+export const Chat = (props) => {
     const { id, name } = props.chat;
     const dispatch = useDispatch();
     const selectedChatId = useSelector(currentChatIdSelector);
@@ -19,5 +19,3 @@ const Chat = (props) => {
         </li>
     )
 }
-
-export default Chat;

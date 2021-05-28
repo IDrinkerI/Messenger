@@ -1,4 +1,4 @@
-import ChatModel from "../../model/ChatModel";
+import { ChatModel } from "../../model/ChatModel";
 import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 
 

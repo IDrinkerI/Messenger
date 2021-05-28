@@ -1,13 +1,13 @@
 import React from "react";
-import Message from "./Message.jsx";
-import "../style/message_field.scss";
+import { Message } from "../Message";
+import "./message_field.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { messagesSelector } from "../store/message/selectors.js";
+import { messagesSelector } from "../../store/message/selectors.js";
 import { useEffect } from "react";
-import { initMessageStoreAction } from "../store/message/actions.js";
+import { initMessageStoreAction } from "../../store/message/actions.js";
 
 
-const MessageField = () => {
+export const MessageField = () => {
     const dispatch = useDispatch();
     const messageList = useSelector(messagesSelector);
 
@@ -23,5 +23,3 @@ const MessageField = () => {
         </div>
     );
 }
-
-export default MessageField;

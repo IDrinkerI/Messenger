@@ -1,16 +1,14 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "../store";
-import HtmlContainer from "./HtmlContainer.jsx";
-import Messenger from "./Messenger.jsx";
+import { store } from "../../store";
+import { HtmlContainer } from "../HtmlContainer";
+import { Messenger } from "../Messenger";
 
 
-const Application = () => (
+export const Application = () => (
     <Provider store={store}>
         <HtmlContainer>
             <Messenger />
         </HtmlContainer>
     </Provider>
 )
-
-export default Application;
