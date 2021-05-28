@@ -2,9 +2,9 @@ import React from "react";
 import { Message } from "../Message";
 import "./message_field.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { messagesSelector } from "../../store/message/selectors.js";
+import { messagesSelector } from "./store/selectors";
 import { useEffect } from "react";
-import { initMessageStoreAction } from "../../store/message/actions.js";
+import { initMessageStoreAction } from "./store/actions";
 
 
 export const MessageField = () => {

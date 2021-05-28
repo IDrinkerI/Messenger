@@ -4,12 +4,12 @@ const { ADD_MESSAGE, INIT_MESSAGE_STORE } = require("./types");
 const API_URL = "/api/message";
 const UPDATE_INTERVAL = 500;
 
-export const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });
-const initMessageStore = (messageList, updateTimer) => ({ type: INIT_MESSAGE_STORE, payload: { messageList, updateTimer } });
+const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });
+const initMessageStore = (messageList, timer) => ({ type: INIT_MESSAGE_STORE, payload: { messageList, timer } });
 
 export const initMessageStoreAction = () =>
     (dispath, getState) => {
-        if (getState().message.updateTimer) return;
+        if (getState().messages.updateTimer) return;
 
         const timer = setInterval(async () => {
             const currentChatId = getState().chats.currentChatId;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectChatAction } from "../../store/chats/actions";
-import { currentChatIdSelector } from "../../store/chats/selectors";
+import { selectChatAction, currentChatIdSelector } from "../ChatList";
 import "./chat.scss";
 
 
