@@ -19,9 +19,12 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetMessages(int chatId)
+        public async Task<JsonResult> GetMessages(int chatId)
         {
-            var messages = _store.Messages.Include(m => m.Chat).Where(m => m.ChatId == chatId).ToArray();
+            var messages = await _store.Messages.Where(m => m.ChatId == chatId)
+                .Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText })
+                .ToArrayAsync();
+
             return new JsonResult(messages);
         }
 
