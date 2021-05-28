@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, combineReducers, compose, } from "redux";
 import thunk from "redux-thunk";
-import { chatsReducer } from "./chats/reducer";
-import { inputMessageReducer } from "./input_message/reducer";
-import { messageReduser } from "./message/reducer";
+import { chatsReducer } from "../components/ChatList";
+import { inputMessageReducer } from "../components/InputField";
+import { messageReduser } from "../components/MessageField";
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,8 +1,6 @@
 import React from "react";
-import "../style/messenger_button.scss";
+import "./messenger_button.scss";
 
-const Button = (props) => (
+export const Button = (props) => (
     <button className="messenger_button" onClick={props.onClick}>{props.children}</button>
 );
-
-export default Button;

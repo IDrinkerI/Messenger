@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: path.join(__dirname, "src", "main.jsx"),
+    entry: path.join(__dirname, "src", "main.js"),
     output: {
         path: path.join(__dirname, "..", "backend/MessengerApi/wwwroot"),
         filename: "./main.js",

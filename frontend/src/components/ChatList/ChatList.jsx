@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { initChatListAction } from "../store/chats/actions";
-import { chatListSelector } from "../store/chats/selectors";
-import "../style/chatlist.scss";
-import Chat from "./Chat.jsx";
+import { initChatListAction } from "./store/actions";
+import { chatListSelector } from "./store/selectors";
+import "./chatlist.scss";
+import { Chat } from "../Chat";
 
 
-const ChatList = () => {
+export const ChatList = () => {
     const chats = useSelector(chatListSelector);
     const dispatch = useDispatch();
 
@@ -23,5 +23,3 @@ const ChatList = () => {
         </div>
     );
 }
-
-export default ChatList;
