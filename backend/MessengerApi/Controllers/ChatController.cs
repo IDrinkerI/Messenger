@@ -1,5 +1,6 @@
 ﻿using MessengerApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,9 +19,9 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public  JsonResult GetChats()
+        public async Task<JsonResult> GetChats()
         {
-            var chats =  _store.Chats.Select(chat => new { chat.Id, chat.Name }).ToList();
+            var chats = await _store.Chats.Select(chat => new { chat.Id, chat.Name }).ToArrayAsync();
             return new JsonResult(chats);
         }
 
