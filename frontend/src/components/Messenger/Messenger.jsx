@@ -29,7 +29,7 @@ export const Messenger = () => {
                 </div>
 
                 <div className="messenger_inner">
-                    <InputField valueSelector={inputMessageSelector} updateValueAction={updateInputMessageAction} />
+                    <InputField value={inputMessage} updateStorageAction={updateInputMessageAction} />
                     <Button onClick={buttonHandler}>Send</Button>
                 </div>
             </div>
