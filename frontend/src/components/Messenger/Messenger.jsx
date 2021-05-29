@@ -20,7 +20,7 @@ export const Messenger = () => {
         dispatch(updateInputMessageAction(""));
     }
 
-    const inputFieldOnChangeHadler = (event) => {
+    const inputFieldOnChangeHandler = (event) => {
         const text = event.target.value;
         dispatch(updateInputMessageAction(text));
     }
@@ -34,7 +34,7 @@ export const Messenger = () => {
                 </div>
 
                 <div className="messenger_inner">
-                    <InputField value={inputMessage} onChange={inputFieldOnChangeHadler} />
+                    <InputField value={inputMessage} onChange={inputFieldOnChangeHandler} />
                     <Button onClick={buttonHandler}>Send</Button>
                 </div>
             </div>
