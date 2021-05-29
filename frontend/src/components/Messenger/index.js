@@ -1,1 +1,1 @@
-export { Messenger as Messenger } from "./Messenger.jsx";
+export { Messenger } from "./Messenger.jsx";
