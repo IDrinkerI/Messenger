@@ -22,5 +22,13 @@ namespace MessengerApi.Controllers
 
             return new JsonResult(profile);
         }
+
+        [HttpPost]
+        public async Task<StatusCodeResult> UpdateProfile([FromBody] Profile profile)
+        {
+            if (profile is null) return new UnsupportedMediaTypeResult();
+
+            else return new OkResult();
+        }
     }
 }
