@@ -16,4 +16,4 @@ export const store = createStore(
         profile: profileReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))
-)
+);
