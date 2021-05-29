@@ -10,5 +10,9 @@ namespace MessengerApi.Models
         public int Id { get; set; }
         public string Nickname { get; set; }
 
+        public void CopyFrom(Profile other)
+        {
+            Nickname = other.Nickname;
+        }
     }
 }
