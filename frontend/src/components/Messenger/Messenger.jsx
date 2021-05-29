@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MessageModel } from "../../model/MessageModel";
+import { MessageModel } from "../../models/MessageModel";
 import { Button } from "../Button";
 import { ChatList } from "../ChatList";
 import { InputField, inputMessageSelector, updateInputMessageAction } from "../InputField";
