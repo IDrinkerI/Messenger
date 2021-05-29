@@ -11,8 +11,10 @@ import "./messenger.scss";
 export const Messenger = () => {
     const dispatch = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
+
     const buttonHandler = () => {
-        dispatch(addMessageAction(new MessageModel("bot", inputMessage)));
+        const message = new MessageModel("bot", inputMessage);
+        dispatch(addMessageAction(message));
         dispatch(updateInputMessageAction(""));
     }
 
