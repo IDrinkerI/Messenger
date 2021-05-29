@@ -2,7 +2,7 @@ const { ADD_MESSAGE, INIT_MESSAGE_STORE } = require("./types");
 
 
 const API_URL = "/api/message";
-const UPDATE_INTERVAL = 500;
+const UPDATE_INTERVAL = 250;
 
 const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });
 const initMessageStore = (messageList, timer) => ({ type: INIT_MESSAGE_STORE, payload: { messageList, timer } });
@@ -30,9 +30,7 @@ export const addMessageAction = (message) =>
 
         fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ...message, chatId })
         });
     }
