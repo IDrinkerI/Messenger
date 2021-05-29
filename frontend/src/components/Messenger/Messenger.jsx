@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { MessageModel } from "../../models/MessageModel";
 import { Button } from "../Button";
 import { ChatList } from "../ChatList";
+import { HtmlContainer } from "../HtmlContainer";
 import { InputField, inputMessageSelector, updateInputMessageAction } from "../InputField";
-import { MessageField, addMessageAction} from "../MessageField";
+import { MessageField, addMessageAction } from "../MessageField";
 import "./messenger.scss";
 
 
@@ -19,16 +20,18 @@ export const Messenger = () => {
     }
 
     return (
-        <div className="messenger">
-            <div className="messenger_inner">
-                <ChatList />
-                <MessageField />
-            </div>
+        <HtmlContainer>
+            <div className="messenger">
+                <div className="messenger_inner">
+                    <ChatList />
+                    <MessageField />
+                </div>
 
-            <div className="messenger_inner">
-                <InputField />
-                <Button onClick={buttonHandler}>Send</Button>
+                <div className="messenger_inner">
+                    <InputField />
+                    <Button onClick={buttonHandler}>Send</Button>
+                </div>
             </div>
-        </div>
+        </HtmlContainer>
     );
 }
