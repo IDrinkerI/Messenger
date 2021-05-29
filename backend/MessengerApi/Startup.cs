@@ -12,6 +12,7 @@ namespace MessengerApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MessageStore>();
+            services.AddDbContext<ProfileStore>();
 
             services.AddControllers(config => config.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
