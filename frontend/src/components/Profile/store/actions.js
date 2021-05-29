@@ -1,10 +1,13 @@
 import { CHANGE_PROFILE, INIT_PROFILE } from "./types";
 
+
+const API_URL = "/api/profile";
+
 const initProfile = (state) => ({ type: INIT_PROFILE, payload: state });
 const changeProfile = (state) => ({ type: CHANGE_PROFILE, payload: state });
 
-export const initProfileAction = () =>
-    (dispatch, getState) => {
+export const initProfileAction =  () =>
+    async (dispatch, getState) => {
         if (!getState().profile.isInitialized) {
             let devState = {};
 
@@ -15,7 +18,8 @@ export const initProfileAction = () =>
                 }
             }
             else {
-                // Fetch
+                const response = await fetch(API_URL);
+                devState = await response.json();
             }
 
             dispatch(initProfile(devState));
