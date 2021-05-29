@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MessageModel } from "../../models/MessageModel";
 import { Button } from "../Button";
@@ -8,6 +8,7 @@ import { InputField } from "../InputField";
 import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
 import { profileNicknameSelector } from "../Profile";
+import { initProfileAction } from "../Profile/store/actions";
 import "./messenger.scss";
 
 
@@ -26,6 +27,10 @@ export const Messenger = () => {
         const text = event.target.value;
         dispatch(updateInputMessageAction(text));
     }
+
+    useEffect(() => {
+        dispatch(initProfileAction())
+    }, []);
 
     return (
         <HtmlContainer>
