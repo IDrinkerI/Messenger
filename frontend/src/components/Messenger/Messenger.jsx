@@ -7,15 +7,17 @@ import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
+import { profileNicknameSelector } from "../Profile";
 import "./messenger.scss";
 
 
 export const Messenger = () => {
     const dispatch = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
+    const nickName = useSelector(profileNicknameSelector);
 
     const buttonHandler = () => {
-        const message = new MessageModel("bot", inputMessage);
+        const message = new MessageModel(nickName, inputMessage);
         dispatch(addMessageAction(message));
         dispatch(updateInputMessageAction(""));
     }
