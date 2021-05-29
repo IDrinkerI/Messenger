@@ -11,9 +11,9 @@ namespace MessengerApi.Controllers
     [Route("api/[controller]/{chatId?}")]
     public class MessageController : ControllerBase
     {
-        private Store _store;
+        private MessageStore _store;
 
-        public MessageController(Store store)
+        public MessageController(MessageStore store)
         {
             _store = store;
         }

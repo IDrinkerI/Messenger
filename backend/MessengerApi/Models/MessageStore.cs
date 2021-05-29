@@ -4,13 +4,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace MessengerApi.Models
 {
-    public class Store : DbContext
+    public class MessageStore : DbContext
     {
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
         private string _connection;
 
-        public Store(IConfiguration config)
+        public MessageStore(IConfiguration config)
         {
             _connection = config.GetConnectionString("DefaultConnection");
             Database.EnsureCreated();
