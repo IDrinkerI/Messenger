@@ -1,7 +1,14 @@
 import { CHANGE_NICKNAME } from "./types";
 
+
+let nickname = "";
+
+if (process.env.NODE_ENV == "development") {
+    nickname = "Developer";
+}
+
 const initialStore = {
-    nickname: "",
+    nickname: nickname,
     id: 0,
 }
 
