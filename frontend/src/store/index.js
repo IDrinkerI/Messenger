@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose, } from "redux";
 import thunk from "redux-thunk";
 import { chatsReducer } from "../components/ChatList";
-import { inputMessageReducer } from "../components/InputField";
+import { inputMessageReducer } from "../components/InputMessage";
 import { messageReduser } from "../components/MessageField";
 
 

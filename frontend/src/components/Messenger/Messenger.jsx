@@ -4,7 +4,8 @@ import { MessageModel } from "../../models/MessageModel";
 import { Button } from "../Button";
 import { ChatList } from "../ChatList";
 import { HtmlContainer } from "../HtmlContainer";
-import { InputField, inputMessageSelector, updateInputMessageAction } from "../InputField";
+import { InputField } from "../InputField";
+import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
 import "./messenger.scss";
 
@@ -28,7 +29,7 @@ export const Messenger = () => {
                 </div>
 
                 <div className="messenger_inner">
-                    <InputField />
+                    <InputField valueSelector={inputMessageSelector} updateValueAction={updateInputMessageAction} />
                     <Button onClick={buttonHandler}>Send</Button>
                 </div>
             </div>

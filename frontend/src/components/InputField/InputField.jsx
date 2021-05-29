@@ -1,17 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { updateInputMessageAction } from "./store/actions";
-import { inputMessageSelector } from "./store/selectors";
 import "./input_field.scss";
 
 
-export const InputField = () => {
+export const InputField = (props) => {
     const dispatch = useDispatch();
-    const value = useSelector(inputMessageSelector);
+    const value = useSelector(props.valueSelector);
+
     const onChangeHadler = (event) => {
         const text = event.target.value;
-        dispatch(updateInputMessageAction(text))
+        dispatch(props.updateValueAction(text))
     }
 
     return (
