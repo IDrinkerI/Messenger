@@ -23,15 +23,14 @@ export const Singin = () => {
     const signinButtonHandler = async (event) => {
         event.preventDefault();
 
-        const response = await fetch(API, {
+        /*const response =*/
+        await fetch(API, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
         });
 
-        const signinResult = await response.json();
-
-        console.log("Signin result:", { signinResult });
+        //const signinResult = await response.status;
 
         setEmail("");
         setPassword("");
