@@ -1,5 +1,4 @@
 using MessengerApi.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +16,7 @@ namespace MessengerApi
             services.AddControllers(config => config.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+            services.AuthenticationSetup();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
