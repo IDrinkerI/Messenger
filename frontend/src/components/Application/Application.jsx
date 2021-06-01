@@ -1,10 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { store } from "../../store";
 import { Messenger } from "../Messenger";
 import { Navigator } from "../Navigator";
 import { Profile } from "../Profile";
+import { Signin } from "../Signin";
+import { Signup } from "../Signup";
 
 
 export const Application = () => (
@@ -16,9 +18,19 @@ export const Application = () => (
                     <Messenger />
                 </Route>
 
-                <Route path="/profile">
+                <Route exact path="/profile">
                     <Profile />
                 </Route>
+
+                <Route exact path="/signin">
+                    <Signin />
+                </Route>
+
+                <Route exact path="/signup">
+                    <Signup />
+                </Route>
+
+                <Redirect to="/" />
             </Switch>
         </BrowserRouter>
     </Provider>

@@ -5,7 +5,8 @@ import { Label } from "./Label.jsx";
 
 const InputField = (props) => {
     return (
-        <input type="text" className="input_field" value={props.value} onChange={props.onChange} />
+        <input type="text" className="input_field" value={props.value} onChange={props.onChange}
+            style={{ ...props.style }} />
     );
 }
 

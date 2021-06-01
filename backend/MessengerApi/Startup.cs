@@ -15,6 +15,8 @@ namespace MessengerApi
 
             services.AddControllers(config => config.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AuthenticationSetup();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -23,9 +25,12 @@ namespace MessengerApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc();
 
+            app.UseMvc();
             app.UseFileServer();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
         }
     }
 }
