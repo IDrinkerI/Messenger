@@ -1,3 +1,4 @@
+import { ChatModel } from "../../../models/ChatModel";
 import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 
 
@@ -10,6 +11,18 @@ const initChatList = (chatList, timer) => ({ type: INIT_CHAT_LIST, payload: { ch
 
 export const initChatListAction = () =>
     (dispatch) => {
+        if (process.env.NODE_ENV == "development") {
+            const devChatList = [
+                new ChatModel("1", "Dev Chat 1"),
+                new ChatModel("2", "Dev Chat 2"),
+                new ChatModel("3", "Dev Chat 3"),
+                new ChatModel("4", "Dev Chat 4"),
+                new ChatModel("5", "Dev Chat 5"),
+            ];
+
+            return dispatch(initChatList(devChatList, 1));
+        }
+
         const timer = setInterval(async () => {
             const response = await fetch(API_URL);
             const chatList = await response.json();

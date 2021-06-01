@@ -11,9 +11,7 @@ export const ChatList = () => {
     const chats = useSelector(chatListSelector);
     const dispatch = useDispatch();
 
-    //TODO: Use env variable
-    if (process.env.NODE_ENV == "production")
-        useEffect(() => dispatch(initChatListAction()), []);
+    useEffect(() => dispatch(initChatListAction()), []);
 
     return (
         <div className="chatlist">

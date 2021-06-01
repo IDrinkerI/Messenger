@@ -11,9 +11,7 @@ export const MessageField = () => {
     const dispatch = useDispatch();
     const messageList = useSelector(messagesSelector);
 
-    //TODO: Use env variable
-    if (process.env.NODE_ENV != "development")
-        useEffect(() => dispatch(initMessageStoreAction()), []);
+    useEffect(() => dispatch(initMessageStoreAction()), []);
 
     return (
         <div className="message_field">
