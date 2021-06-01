@@ -10,11 +10,13 @@ export const Singin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // TODO: DRY
     const emailOnChangeHandler = ({ target }) => {
         const value = target.value;
         setEmail(value);
     }
 
+    // TODO: DRY
     const passwordOnChangeHandler = ({ target }) => {
         const value = target.value;
         setPassword(value);
