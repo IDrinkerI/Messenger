@@ -1,19 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { HtmlContainer } from "../HtmlContainer";
 import "./navigator.scss";
 
 
 export const Navigator = () => {
     const history = useHistory();
-    const homeLinkClickHandler = () => { history.push("/"); }
-    const profileLinkClickHandler = () => history.push("/profile");
+    const onClickHandler = (event) => history.push(event.target.attributes["path"].value);
 
     return (
-        <nav>
-            <ul className="navigator-link_wrapper">
-                <li onClick={homeLinkClickHandler}>Home</li>
-                <li onClick={profileLinkClickHandler}>Profile</li>
-            </ul>
-        </nav>
+        <HtmlContainer>
+            <nav>
+                <ul className="navigator-link_wrapper">
+                    <li path="/" onClick={onClickHandler}>Home</li>
+                    <li path="/profile" onClick={onClickHandler}>Profile</li>
+                    <li path="/singin" onClick={onClickHandler}>SingIn</li>
+                    <li path="/signup" onClick={onClickHandler}>Signup</li>
+                </ul>
+            </nav>
+        </HtmlContainer>
     );
 }

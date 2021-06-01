@@ -10,6 +10,7 @@ namespace MessengerApi.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public Store(IConfiguration config)
         {
@@ -46,6 +47,11 @@ namespace MessengerApi.Models
                 {
                     new Profile () {Id = 1, Nickname = "User"},
                     new Profile () {Id = 2, Nickname = "Backender"},
+                });
+
+            modelBuilder.Entity<User>().HasData(new User[]
+                {
+                    new User{Id = 1, Email = "login@mail.ru", Password = "qwerty", ProfileId = 1},
                 });
         }
     }

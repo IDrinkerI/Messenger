@@ -41,7 +41,7 @@ export const Messenger = () => {
                 </div>
 
                 <div className="messenger_inner">
-                    <InputField value={inputMessage} onChange={inputFieldOnChangeHandler} />
+                    <InputField style={{ "flex-grow": "1" }} value={inputMessage} onChange={inputFieldOnChangeHandler} />
                     <Button onClick={buttonHandler}>Send</Button>
                 </div>
             </div>

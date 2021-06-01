@@ -28,7 +28,6 @@ export const changeProfileAction = (state) =>
             return dispatch(changeProfile(state));
         }
         else {
-            console.log("change profile: ", state);
             fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
