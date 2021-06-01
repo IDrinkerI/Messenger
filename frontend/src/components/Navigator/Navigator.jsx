@@ -14,8 +14,8 @@ export const Navigator = () => {
                 <ul className="navigator-link_wrapper">
                     <li path="/" onClick={onClickHandler}>Home</li>
                     <li path="/profile" onClick={onClickHandler}>Profile</li>
-                    <li path="/singin" onClick={onClickHandler}>SingIn</li>
-                    <li path="/signup" onClick={onClickHandler}>Signup</li>
+                    <li path="/signin" onClick={onClickHandler}>SignIn</li>
+                    <li path="/signup" onClick={onClickHandler}>SignUp</li>
                 </ul>
             </nav>
         </HtmlContainer>

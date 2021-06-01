@@ -1,1 +1,1 @@
-export { Singin } from "./Singin.jsx";
+export { Signin } from "./Signin.jsx";
