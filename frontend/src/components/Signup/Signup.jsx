@@ -53,7 +53,7 @@ export const Signup = () => {
     return (
         <HtmlContainer>
             <form className="signup-inner">
-                <h3>Signup</h3>
+                <h3>SignUp</h3>
                 <InputField.Label label="Email:">
                     <InputField value={email} onChange={emailOnChangeHandler} />
                 </InputField.Label>

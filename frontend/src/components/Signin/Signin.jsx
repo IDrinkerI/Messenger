@@ -6,7 +6,7 @@ import "./signin.scss";
 
 const API = "api/signin";
 
-export const Singin = () => {
+export const Signin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
