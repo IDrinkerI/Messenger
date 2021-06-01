@@ -15,6 +15,7 @@ export const Navigator = () => {
                     <li path="/" onClick={onClickHandler}>Home</li>
                     <li path="/profile" onClick={onClickHandler}>Profile</li>
                     <li path="/singin" onClick={onClickHandler}>SingIn</li>
+                    <li path="/signup" onClick={onClickHandler}>Signup</li>
                 </ul>
             </nav>
         </HtmlContainer>

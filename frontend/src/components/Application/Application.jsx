@@ -6,6 +6,7 @@ import { Messenger } from "../Messenger";
 import { Navigator } from "../Navigator";
 import { Profile } from "../Profile";
 import { Singin } from "../Signin";
+import { Signup } from "../Signup";
 
 
 export const Application = () => (
@@ -23,6 +24,10 @@ export const Application = () => (
 
                 <Route exact path="/singin">
                     <Singin />
+                </Route>
+
+                <Route exact path="/signup">
+                    <Signup />
                 </Route>
 
                 <Redirect to="/" />
