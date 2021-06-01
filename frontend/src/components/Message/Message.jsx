@@ -1,6 +1,7 @@
 import React from "react";
 import "./message.scss";
 
+
 export const Message = (props) => {
     const { userName, messageText } = props.message;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./container.scss"
+import "./container.scss";
 
 
 export const HtmlContainer = (props) => (
