@@ -1,4 +1,5 @@
-const { ADD_MESSAGE, INIT_MESSAGE_STORE } = require("./types");
+import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
+import { MessageModel } from "../../../models/MessageModel";
 
 
 const API_URL = "/api/message";
@@ -10,6 +11,17 @@ const initMessageStore = (messageList, timer) => ({ type: INIT_MESSAGE_STORE, pa
 export const initMessageStoreAction = () =>
     (dispath, getState) => {
         if (getState().messages.updateTimer) return;
+
+        if (process.env.NODE_ENV == "development") {
+            const devMessageList = [
+                new MessageModel("TestBot", "Hallo!"),
+                new MessageModel("TestBot", "Some message"),
+                new MessageModel("TestBot", "Some message"),
+                new MessageModel("TestBot", "Some message"),
+            ];
+
+            return dispath(initMessageStore(devMessageList, 1));
+        }
 
         const timer = setInterval(async () => {
             const currentChatId = getState().chats.currentChatId;

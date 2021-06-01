@@ -27,11 +27,10 @@ export const changeProfileAction = (state) =>
         if (process.env.NODE_ENV == "development") {
             return dispatch(changeProfile(state));
         }
-        else {
-            fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...getState().profile, ...state }),
-            });
-        }
+
+        fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...getState().profile, ...state }),
+        });
     }
