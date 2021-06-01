@@ -19,7 +19,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetChats()
+        public async Task<IActionResult> GetChats()
         {
             var chats = await _store.Chats.Select(chat => new { chat.Id, chat.Name })
                 .ToArrayAsync();
@@ -28,7 +28,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpPost]
-        public async Task<StatusCodeResult> AddChat([FromBody] Chat chat)
+        public async Task<IActionResult> AddChat([FromBody] Chat chat)
         {
             if (chat is null)
                 return new UnsupportedMediaTypeResult();

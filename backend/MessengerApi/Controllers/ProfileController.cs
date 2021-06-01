@@ -19,7 +19,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetProfile()
+        public async Task<IActionResult> GetProfile()
         {
             var id = 1;
             var profile = await _store.Profiles.FirstOrDefaultAsync(p => p.Id == id);
@@ -28,7 +28,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpPost]
-        public async Task<StatusCodeResult> UpdateProfile([FromBody] Profile value)
+        public async Task<IActionResult> UpdateProfile([FromBody] Profile value)
         {
             if (value is null) { return new UnsupportedMediaTypeResult(); }
 

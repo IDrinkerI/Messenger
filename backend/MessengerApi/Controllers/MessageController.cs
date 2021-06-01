@@ -19,7 +19,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetMessages(int chatId)
+        public async Task<IActionResult> GetMessages(int chatId)
         {
             var messages = await _store.Messages.Where(m => m.ChatId == chatId)
                 .Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText })
@@ -29,7 +29,7 @@ namespace MessengerApi.Controllers
         }
 
         [HttpPost]
-        public async Task<StatusCodeResult> AddMessage([FromBody] Message message)
+        public async Task<IActionResult> AddMessage([FromBody] Message message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
