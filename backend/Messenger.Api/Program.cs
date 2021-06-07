@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 
-namespace MessengerApi
+namespace Messenger.Api
 {
     public class Program
     {

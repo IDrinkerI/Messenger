@@ -41,7 +41,7 @@ export const addMessageAction = (message) =>
         const chatId = setState().chats.currentChatId;
 
         fetch(API_URL, {
-            method: "POST",
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ...message, chatId })
         });
