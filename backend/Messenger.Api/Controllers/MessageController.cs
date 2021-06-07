@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using MessengerApi.Models;
+using Messenger.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace MessengerApi.Controllers
+namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]/{chatId?}")]

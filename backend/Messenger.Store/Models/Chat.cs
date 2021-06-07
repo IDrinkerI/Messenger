@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace MessengerApi.Models
+namespace Messenger.Data.Models
 {
     public class Chat
     {

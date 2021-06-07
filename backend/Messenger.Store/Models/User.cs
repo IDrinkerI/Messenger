@@ -1,4 +1,4 @@
-﻿namespace MessengerApi.Models
+﻿namespace Messenger.Data.Models
 {
     public class User
     {

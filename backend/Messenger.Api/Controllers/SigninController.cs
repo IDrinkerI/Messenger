@@ -1,4 +1,4 @@
-﻿using MessengerApi.Models;
+﻿using Messenger.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 
-namespace MessengerApi.Controllers
+namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
