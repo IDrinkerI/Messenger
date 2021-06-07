@@ -1,7 +1,6 @@
 ﻿using Messenger.Data;
 using Messenger.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,12 +11,10 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
     {
-        private Store _store;
         private ChatRepository _repository;
 
-        public ChatController(Store store, ChatRepository repository)
+        public ChatController(ChatRepository repository)
         {
-            _store = store;
             _repository = repository;
         }
 
