@@ -1,8 +1,8 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,26 +12,26 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public class SigninController : ControllerBase
+    public sealed class SigninController : ControllerBase
     {
-        private Store _store;
+        private readonly UserRepository _repository;
 
-        public SigninController(Store store)
+        public SigninController(UserRepository repository)
         {
-            _store = store;
+            _repository = repository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Singin([FromBody] User singinData)
+        public async Task<IActionResult> Signin([FromBody] User signinData)
         {
-            var user = await _store.Users.FirstOrDefaultAsync((u) =>
-                u.Email == singinData.Email && u.Password == singinData.Password);
+            var checkResult = await _repository.CheckPassword(signinData.Email, signinData.Password);
 
-            if (user is null) { return BadRequest(new { errorText = "Invalid username or password." }); }
+            if (!checkResult)
+                return BadRequest(new { errorText = "Invalid username or password." });
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, signinData.Email),
             };
 
             var claimIdentity = new ClaimsIdentity(claims, "Messenger", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

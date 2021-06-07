@@ -1,25 +1,26 @@
 ﻿using System.Threading.Tasks;
+using Messenger.Data;
 using Messenger.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public class SignupController : ControllerBase
+    public sealed class SignupController : ControllerBase
     {
-        private Store _store;
+        private readonly UserRepository _repository;
 
-        public SignupController(Store store)
+        public SignupController(UserRepository repository)
         {
-            _store = store;
+            _repository = repository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Singup([FromBody] User newUser)
+        public async Task<IActionResult> Signup([FromBody] User newUser)
         {
+            // TODO: remove unnecessary checks 
             if (newUser is null ||
                 newUser.Email is null ||
                 newUser.Password is null)
@@ -27,19 +28,10 @@ namespace Messenger.Api.Controllers
                 return BadRequest(new { errorText = "wrong user info" });
             }
 
-            var user = await _store.Users.FirstOrDefaultAsync(u => u.Email == newUser.Email);
+            var user = await _repository.GetUser(newUser.Email);
             if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
 
-            var newProfile = new Profile()
-            {
-                Nickname = newUser.Email,
-            };
-
-            newUser.Profile = newProfile;
-            await _store.Profiles.AddAsync(newProfile);
-
-            await _store.Users.AddAsync(newUser);
-            await _store.SaveChangesAsync();
+            _repository.AddUser(newUser);
 
             return new OkResult();
         }
