@@ -17,7 +17,7 @@ namespace Messenger.Api.Controllers
             _repository = repository;
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Signup([FromBody] User newUser)
         {
             // TODO: remove unnecessary checks 

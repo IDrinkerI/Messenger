@@ -40,7 +40,7 @@ export const Signup = () => {
         }
 
         await fetch(API, {
-            method: "POST",
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
         });
