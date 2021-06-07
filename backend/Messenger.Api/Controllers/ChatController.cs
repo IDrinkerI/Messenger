@@ -1,4 +1,5 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -12,19 +13,21 @@ namespace Messenger.Api.Controllers
     public class ChatController : ControllerBase
     {
         private Store _store;
+        private ChatRepository _repository;
 
-        public ChatController(Store store)
+        public ChatController(Store store, ChatRepository repository)
         {
             _store = store;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var chats = await _store.Chats.Select(chat => new { chat.Id, chat.Name })
-                .ToArrayAsync();
+            var chats = await _repository.GetChats();
+            var cleanedChats = chats.Select(chat => new { chat.Id, chat.Name });
 
-            return new JsonResult(chats);
+            return new JsonResult(cleanedChats);
         }
 
         [HttpPost]
@@ -33,9 +36,11 @@ namespace Messenger.Api.Controllers
             if (chat is null)
                 return new UnsupportedMediaTypeResult();
 
-            await _store.Chats.AddAsync(chat);
-            await _store.SaveChangesAsync();
-            return new OkResult();
+            var additionResult = await _repository.AddChat(chat);
+            if (additionResult)
+                return new OkResult();
+            else
+                return new BadRequestResult();
         }
     }
 }

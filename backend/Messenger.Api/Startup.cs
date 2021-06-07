@@ -20,6 +20,7 @@ namespace Messenger.Api
             services.AuthenticationSetup();
 
             services.AddScoped<MessageRepository>();
+            services.AddScoped<ChatRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
