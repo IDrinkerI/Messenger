@@ -30,7 +30,7 @@ namespace Messenger.Api.Controllers
             return new JsonResult(cleanedChats);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> AddChat([FromBody] Chat chat)
         {
             if (chat is null)
