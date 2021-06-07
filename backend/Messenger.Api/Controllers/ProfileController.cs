@@ -1,28 +1,27 @@
-﻿using MessengerApi.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MessengerApi.Controllers
+namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
     public class ProfileController : ControllerBase
     {
-        private Store _store;
+        ProfileRepository _repository;
 
-        public ProfileController(Store store)
+        public ProfileController(ProfileRepository repository)
         {
-            _store = store;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProfile()
         {
             var id = 1;
-            var profile = await _store.Profiles.FirstOrDefaultAsync(p => p.Id == id);
+            var profile = await _repository.GetProfile(id);
 
             return new JsonResult(profile);
         }
@@ -35,13 +34,11 @@ namespace MessengerApi.Controllers
             // TODO: need cookes
             var id = value.Id;
 
-            var profile = _store.Profiles.FirstOrDefault(p => p.Id == id);
-            if (profile is null) { return new UnsupportedMediaTypeResult(); }
-
-            profile.CopyFrom(value);
-            await _store.SaveChangesAsync();
-
-            return new OkResult();
+            var updateResult = await _repository.UpdateProfile(id, value);
+            if (updateResult)
+                return new OkResult();
+            else
+                return new BadRequestResult();
         }
     }
 }

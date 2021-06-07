@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 
-namespace MessengerApi
+namespace Messenger.Api
 {
     public static class AuthenticationSetupExtension
     {
