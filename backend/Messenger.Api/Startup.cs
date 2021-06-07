@@ -1,3 +1,4 @@
+using Messenger.Data;
 using Messenger.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,8 @@ namespace Messenger.Api
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AuthenticationSetup();
+
+            services.AddScoped<MessageRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

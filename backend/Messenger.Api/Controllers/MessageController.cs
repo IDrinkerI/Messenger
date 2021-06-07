@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Messenger.Data.Models;
-using Microsoft.EntityFrameworkCore;
-
+using Messenger.Data;
 
 namespace Messenger.Api.Controllers
 {
@@ -11,39 +10,34 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]/{chatId?}")]
     public class MessageController : ControllerBase
     {
-        private Store _store;
+        private MessageRepository _repository;
 
-        public MessageController(Store store)
+        public MessageController(MessageRepository repository)
         {
-            _store = store;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMessages(int chatId)
         {
-            var messages = await _store.Messages.Where(m => m.ChatId == chatId)
-                .Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText })
-                .ToArrayAsync();
+            var messages = await _repository.GetMessages(chatId);
+            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText });
 
-            return new JsonResult(messages);
+            return new JsonResult(cleanedMessage);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> AddMessage([FromBody] Message message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            if (message.UserName is null)
-                return new UnsupportedMediaTypeResult();
+            var additionResult = await _repository.AddMessage(message);
 
-            var chat = await _store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
-            // TODO: alter this trash
-            if (chat is null) { return new OkResult(); }
-
-            await _store.Messages.AddAsync(message);
-            await _store.SaveChangesAsync();
-            return new OkResult();
+            if (additionResult)
+                return new OkResult();
+            else
+                return new BadRequestResult();
         }
     }
 }
