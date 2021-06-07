@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     entry: path.join(__dirname, "src", "main.js"),
     output: {
-        path: path.join(__dirname, "..", "backend/MessengerApi/wwwroot"),
+        path: path.join(__dirname, "..", "backend/Messenger.Api/wwwroot"),
         filename: "./main.js",
         publicPath: "/",
     },
