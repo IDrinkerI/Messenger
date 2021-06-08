@@ -11,22 +11,18 @@ namespace Messenger.Store
     {
         private readonly StoreContext _store;
 
-        public ProfileRepository(StoreContext store)
-        {
-            _store = store;
-        }
+        public ProfileRepository(StoreContext store) => _store = store;
 
         public async Task<Profile> Get(int id) =>
             await _store.Profiles.FirstOrDefaultAsync(p => p.Id == id);
 
-        public Task<bool> Add(Profile item)
+        public async Task<bool> Add(Profile newProfile)
         {
-            throw new System.NotImplementedException();
-        }
+            if (newProfile.Id != 0) { return false; }
 
-        public Task<IEnumerable<Profile>> GetAll()
-        {
-            throw new System.NotImplementedException();
+            await _store.Profiles.AddAsync(newProfile);
+            await _store.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> Update(int id, Profile newState)
@@ -38,6 +34,11 @@ namespace Messenger.Store
             await _store.SaveChangesAsync();
 
             return true;
+        }
+
+        public Task<IEnumerable<Profile>> GetAll()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
