@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 
 
-namespace Messenger.Data.Models
+namespace Messenger.Store.Models
 {
     public class StoreContext : DbContext
     {

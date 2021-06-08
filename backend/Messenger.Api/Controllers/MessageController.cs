@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Messenger.Data.Models;
-using Messenger.Data;
+using Messenger.Store.Models;
+using Messenger.Store;
 
 namespace Messenger.Api.Controllers
 {

@@ -1,8 +1,8 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public static class MessengerDataExtension
     {

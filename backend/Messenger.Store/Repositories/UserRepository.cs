@@ -1,9 +1,9 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class UserRepository
     {

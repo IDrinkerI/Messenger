@@ -1,10 +1,10 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class ProfileRepository
     {

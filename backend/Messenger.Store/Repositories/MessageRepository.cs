@@ -1,4 +1,4 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class MessageRepository
     {
