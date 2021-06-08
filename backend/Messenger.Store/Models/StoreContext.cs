@@ -21,7 +21,7 @@ namespace Messenger.Data.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_connection);
+            optionsBuilder.UseSqlServer(_connection, o => o.MigrationsAssembly("Messenger.Api"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
