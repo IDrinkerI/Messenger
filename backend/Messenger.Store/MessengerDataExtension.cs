@@ -11,7 +11,7 @@ namespace Messenger.Store
             services.AddDbContext<StoreContext>();
             services.AddScoped<MessageRepository>();
             services.AddScoped<ChatRepository>();
-            services.AddScoped<ProfileRepository>();
+            services.AddScoped<IRepository<Profile>, ProfileRepository>();
             services.AddScoped<UserRepository>();
         }
     }
