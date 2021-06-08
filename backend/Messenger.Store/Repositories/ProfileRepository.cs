@@ -16,15 +16,6 @@ namespace Messenger.Store
         public async Task<Profile> Get(int id) =>
             await _store.Profiles.FirstOrDefaultAsync(p => p.Id == id);
 
-        public async Task<bool> Add(Profile newProfile)
-        {
-            if (newProfile.Id != 0) { return false; }
-
-            await _store.Profiles.AddAsync(newProfile);
-            await _store.SaveChangesAsync();
-            return true;
-        }
-
         public async Task<bool> Update(int id, Profile newState)
         {
             var profile = _store.Profiles.FirstOrDefault(p => p.Id == id);
@@ -34,6 +25,16 @@ namespace Messenger.Store
             await _store.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> Add(Profile newProfile)
+        {
+            throw new System.NotImplementedException();
+            //if (newProfile.Id != 0) { return false; }
+
+            //await _store.Profiles.AddAsync(newProfile);
+            //await _store.SaveChangesAsync();
+            //return true;
         }
 
         public Task<IEnumerable<Profile>> GetAll()

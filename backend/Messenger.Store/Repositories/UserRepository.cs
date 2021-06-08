@@ -28,20 +28,17 @@ namespace Messenger.Store
         public async Task<User> GetUser(string email)
         {
             var user = await _store.Users.FirstOrDefaultAsync(u => u.Email == email);
-
             return user;
         }
 
         public async void AddUser(User newUser)
         {
-            var newProfile = new Profile()
+            var newProfile = new Profile
             {
                 Nickname = newUser.Email,
             };
 
             newUser.Profile = newProfile;
-            await _store.Profiles.AddAsync(newProfile);
-
             await _store.Users.AddAsync(newUser);
             await _store.SaveChangesAsync();
         }
