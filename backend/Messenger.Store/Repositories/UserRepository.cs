@@ -31,7 +31,7 @@ namespace Messenger.Store
             return user;
         }
 
-        public async void AddUser(User newUser)
+        public async Task<bool> AddUser(User newUser)
         {
             var newProfile = new Profile
             {
@@ -41,6 +41,8 @@ namespace Messenger.Store
             newUser.Profile = newProfile;
             await _store.Users.AddAsync(newUser);
             await _store.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Messenger.Store
             return true;
         }
 
-        public async Task<bool> Add(Profile newProfile)
+        public Task<bool> Add(Profile newProfile)
         {
             throw new System.NotImplementedException();
             //if (newProfile.Id != 0) { return false; }

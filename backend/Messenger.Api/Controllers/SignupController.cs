@@ -31,7 +31,7 @@ namespace Messenger.Api.Controllers
             var user = await _repository.GetUser(newUser.Email);
             if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
 
-            _repository.AddUser(newUser);
+            await _repository.AddUser(newUser);
 
             return new OkResult();
         }
