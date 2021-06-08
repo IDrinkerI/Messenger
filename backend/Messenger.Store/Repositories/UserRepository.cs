@@ -7,9 +7,9 @@ namespace Messenger.Data
 {
     public sealed class UserRepository
     {
-        private readonly Store _store;
+        private readonly StoreContext _store;
 
-        public UserRepository(Store store)
+        public UserRepository(StoreContext store)
         {
             _store = store;
         }

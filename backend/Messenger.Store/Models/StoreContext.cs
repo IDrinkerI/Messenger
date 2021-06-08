@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Messenger.Data.Models
 {
-    public class Store : DbContext
+    public class StoreContext : DbContext
     {
         private string _connection;
         public DbSet<Message> Messages { get; set; }
@@ -12,7 +12,7 @@ namespace Messenger.Data.Models
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public Store(IConfiguration config)
+        public StoreContext(IConfiguration config)
         {
             _connection = config.GetConnectionString("DefaultConnection");
             Database.EnsureCreated();

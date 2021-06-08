@@ -8,9 +8,9 @@ namespace Messenger.Data
 {
     public sealed class ProfileRepository
     {
-        private readonly Store _store;
+        private readonly StoreContext _store;
 
-        public ProfileRepository(Store store)
+        public ProfileRepository(StoreContext store)
         {
             _store = store;
         }

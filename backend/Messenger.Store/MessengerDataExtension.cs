@@ -8,7 +8,7 @@ namespace Messenger.Data
     {
         public static void AddMessengerDataRepositories(this IServiceCollection services)
         {
-            services.AddDbContext<Store>();
+            services.AddDbContext<StoreContext>();
             services.AddScoped<MessageRepository>();
             services.AddScoped<ChatRepository>();
             services.AddScoped<ProfileRepository>();

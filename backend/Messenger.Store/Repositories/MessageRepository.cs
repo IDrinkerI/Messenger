@@ -11,9 +11,9 @@ namespace Messenger.Data
 {
     public sealed class MessageRepository
     {
-        private Store _store;
+        private StoreContext _store;
 
-        public MessageRepository(Store store)
+        public MessageRepository(StoreContext store)
         {
             _store = store;
         }
