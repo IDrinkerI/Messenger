@@ -12,7 +12,7 @@ namespace Messenger.Api.Controllers
     {
         IRepository<Profile> _repository;
 
-        public ProfileController(ProfileRepository repository)
+        public ProfileController(IRepository<Profile> repository)
         {
             _repository = repository;
         }
