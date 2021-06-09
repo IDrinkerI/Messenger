@@ -9,7 +9,7 @@ namespace Messenger.Store
         public static void AddMessengerDataRepositories(this IServiceCollection services)
         {
             services.AddDbContext<StoreContext>();
-            services.AddScoped<MessageRepository>();
+            services.AddScoped<IRepository<Message>, MessageRepository>();
             services.AddScoped<IRepository<Chat>, ChatRepository>();
             services.AddScoped<IRepository<Profile>, ProfileRepository>();
             services.AddScoped<UserRepository>();
