@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Messenger.Api
 {
@@ -15,8 +17,14 @@ namespace Messenger.Api
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AuthenticationSetup();
-            services.AddSwaggerGen();
             services.AddMessengerDataRepositories();
+            services.AddSwaggerGen(setup =>
+                {
+                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    setup.IncludeXmlComments(xmlPath);
+                }
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
