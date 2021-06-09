@@ -15,7 +15,7 @@ namespace Messenger.Api
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AuthenticationSetup();
-
+            services.AddSwaggerGen();
             services.AddMessengerDataRepositories();
         }
 
@@ -28,6 +28,9 @@ namespace Messenger.Api
 
             app.UseMvc();
             app.UseFileServer();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseAuthentication();
             app.UseAuthorization();
