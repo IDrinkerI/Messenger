@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Messenger.Store
 {
-    public sealed class ChatRepository
+    public sealed class ChatRepository : IRepository<Chat>
     {
         private readonly StoreContext _store;
 
@@ -17,9 +17,9 @@ namespace Messenger.Store
             _store = store;
         }
 
-        public async Task<bool> AddChat(Chat chat)
+        public async Task<bool> Add(Chat chat)
         {
-            if(chat.Name is null) { return false; }
+            if (chat.Name is null) { return false; }
 
             await _store.Chats.AddAsync(chat);
             await _store.SaveChangesAsync();
@@ -27,12 +27,23 @@ namespace Messenger.Store
             return true;
         }
 
-        public async Task<IEnumerable<Chat>> GetChats()
+        public async Task<IEnumerable<Chat>> GetAll()
         {
             var chats = await _store.Chats
                 .ToArrayAsync();
 
             return chats;
+        }
+
+        public Task<Chat> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<bool> Update(int id, Chat newState)
+        {
+            throw new NotImplementedException();
         }
     }
 }
