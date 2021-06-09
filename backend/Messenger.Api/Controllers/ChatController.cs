@@ -11,9 +11,9 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public sealed class ChatController : ControllerBase
     {
-        private readonly IRepository<Chat> _repository;
+        private readonly ChatRepository _repository;
 
-        public ChatController(IRepository<Chat> repository)
+        public ChatController(ChatRepository repository)
         {
             _repository = repository;
         }
@@ -21,7 +21,7 @@ namespace Messenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var chats = await _repository.GetAll();
+            var chats = await _repository.GetChats();
             var cleanedChats = chats.Select(chat => new { chat.Id, chat.Name });
 
             return new JsonResult(cleanedChats);
@@ -33,7 +33,7 @@ namespace Messenger.Api.Controllers
             if (chat is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await _repository.Add(chat);
+            var additionResult = await _repository.AddChat(chat);
             if (additionResult)
                 return new OkResult();
             else

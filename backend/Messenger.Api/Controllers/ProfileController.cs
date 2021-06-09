@@ -10,9 +10,9 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public class ProfileController : ControllerBase
     {
-        IRepository<Profile> _repository;
+       private readonly ProfileRepository _repository;
 
-        public ProfileController(IRepository<Profile> repository)
+        public ProfileController(ProfileRepository repository)
         {
             _repository = repository;
         }
@@ -21,7 +21,7 @@ namespace Messenger.Api.Controllers
         public async Task<IActionResult> GetProfile()
         {
             var id = 1;
-            var profile = await _repository.Get(id);
+            var profile = await _repository.GetProfile(id);
 
             return new JsonResult(profile);
         }
@@ -34,7 +34,7 @@ namespace Messenger.Api.Controllers
             // TODO: need cookes
             var id = value.Id;
 
-            var updateResult = await _repository.Update(id, value);
+            var updateResult = await _repository.UpdateProfile(id, value);
             if (updateResult)
                 return new OkResult();
             else

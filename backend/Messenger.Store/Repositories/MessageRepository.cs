@@ -1,6 +1,5 @@
 ﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Store
 {
-    public sealed class MessageRepository : IRepository<Message>
+    public sealed class MessageRepository
     {
         private readonly StoreContext _store;
 
@@ -17,7 +16,7 @@ namespace Messenger.Store
             _store = store;
         }
 
-        public async Task<bool> Add(Message message)
+        public async Task<bool> AddMessage(Message message)
         {
             if (message is null ||
                 message.UserName is null)
@@ -35,28 +34,12 @@ namespace Messenger.Store
             return true;
         }
 
-        // TODO: remake method for interface
         public async Task<IEnumerable<Message>> GetMessages(int chatId)
         {
             var messages = await _store.Messages.Where(m => m.ChatId == chatId)
                 .ToArrayAsync();
 
             return messages;
-        }
-
-        public Task<IEnumerable<Message>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Update(int id, Message newState)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Message> IRepository<Message>.Get(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

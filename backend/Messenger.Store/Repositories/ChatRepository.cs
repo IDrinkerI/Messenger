@@ -1,14 +1,12 @@
 ﻿using Messenger.Store.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Messenger.Store
 {
-    public sealed class ChatRepository : IRepository<Chat>
+    public sealed class ChatRepository
     {
         private readonly StoreContext _store;
 
@@ -17,7 +15,7 @@ namespace Messenger.Store
             _store = store;
         }
 
-        public async Task<bool> Add(Chat chat)
+        public async Task<bool> AddChat(Chat chat)
         {
             if (chat.Name is null) { return false; }
 
@@ -27,23 +25,12 @@ namespace Messenger.Store
             return true;
         }
 
-        public async Task<IEnumerable<Chat>> GetAll()
+        public async Task<IEnumerable<Chat>> GetChats()
         {
             var chats = await _store.Chats
                 .ToArrayAsync();
 
             return chats;
-        }
-
-        public Task<Chat> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Task<bool> Update(int id, Chat newState)
-        {
-            throw new NotImplementedException();
         }
     }
 }
