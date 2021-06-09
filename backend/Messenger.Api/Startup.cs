@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
@@ -20,6 +21,13 @@ namespace Messenger.Api
             services.AddMessengerDataRepositories();
             services.AddSwaggerGen(setup =>
                 {
+                    setup.SwaggerDoc("v0.1", new OpenApiInfo
+                    {
+                        Title = "Messenger API",
+                        Version = "0.1",
+                    }
+                    );
+
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                     setup.IncludeXmlComments(xmlPath);
@@ -37,8 +45,13 @@ namespace Messenger.Api
             app.UseMvc();
             app.UseFileServer();
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwagger(setup => setup.RouteTemplate = "/api/doc/{documentName}/apidocs.json");
+            app.UseSwaggerUI(setup =>
+                {                    
+                    setup.SwaggerEndpoint("/api/doc/v0.1/apidocs.json", "Title");
+                    setup.RoutePrefix = "api/doc";
+                }
+            );
 
             app.UseAuthentication();
             app.UseAuthorization();
