@@ -1,19 +1,16 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class ProfileRepository
     {
-        private readonly Store _store;
+        private readonly StoreContext _store;
 
-        public ProfileRepository(Store store)
-        {
-            _store = store;
-        }
+        public ProfileRepository(StoreContext store) => _store = store;
 
         public async Task<Profile> GetProfile(int id) =>
             await _store.Profiles.FirstOrDefaultAsync(p => p.Id == id);

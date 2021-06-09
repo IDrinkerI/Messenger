@@ -1,15 +1,15 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class UserRepository
     {
-        private readonly Store _store;
+        private readonly StoreContext _store;
 
-        public UserRepository(Store store)
+        public UserRepository(StoreContext store)
         {
             _store = store;
         }
@@ -28,22 +28,21 @@ namespace Messenger.Data
         public async Task<User> GetUser(string email)
         {
             var user = await _store.Users.FirstOrDefaultAsync(u => u.Email == email);
-
             return user;
         }
 
-        public async void AddUser(User newUser)
+        public async Task<bool> AddUser(User newUser)
         {
-            var newProfile = new Profile()
+            var newProfile = new Profile
             {
                 Nickname = newUser.Email,
             };
 
             newUser.Profile = newProfile;
-            await _store.Profiles.AddAsync(newProfile);
-
             await _store.Users.AddAsync(newUser);
             await _store.SaveChangesAsync();
+
+            return true;
         }
     }
 }

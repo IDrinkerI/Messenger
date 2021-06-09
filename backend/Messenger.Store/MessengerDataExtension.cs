@@ -1,14 +1,14 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public static class MessengerDataExtension
     {
         public static void AddMessengerDataRepositories(this IServiceCollection services)
         {
-            services.AddDbContext<Store>();
+            services.AddDbContext<StoreContext>();
             services.AddScoped<MessageRepository>();
             services.AddScoped<ChatRepository>();
             services.AddScoped<ProfileRepository>();

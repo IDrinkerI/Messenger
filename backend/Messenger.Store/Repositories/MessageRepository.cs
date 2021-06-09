@@ -1,19 +1,17 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Store.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Messenger.Data
+namespace Messenger.Store
 {
     public sealed class MessageRepository
     {
-        private Store _store;
+        private readonly StoreContext _store;
 
-        public MessageRepository(Store store)
+        public MessageRepository(StoreContext store)
         {
             _store = store;
         }

@@ -1,22 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Messenger.Data.Models;
-using Messenger.Data;
+using Messenger.Store.Models;
+using Messenger.Store;
+
 
 namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]/{chatId?}")]
-    public class MessageController : ControllerBase
+    public sealed class MessageController : ControllerBase
     {
-        private MessageRepository _repository;
+        private readonly MessageRepository _repository;
 
         public MessageController(MessageRepository repository)
         {
             _repository = repository;
         }
 
+        /// <summary>
+        /// Return all messages by chat id
+        /// </summary>
+        /// <param name="chatId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetMessages(int chatId)
         {

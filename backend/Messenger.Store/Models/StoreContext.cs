@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Configuration;
 
 
-namespace Messenger.Data.Models
+namespace Messenger.Store.Models
 {
-    public class Store : DbContext
+    public class StoreContext : DbContext
     {
         private string _connection;
         public DbSet<Message> Messages { get; set; }
@@ -12,7 +12,7 @@ namespace Messenger.Data.Models
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public Store(IConfiguration config)
+        public StoreContext(IConfiguration config)
         {
             _connection = config.GetConnectionString("DefaultConnection");
             Database.EnsureCreated();
@@ -21,7 +21,10 @@ namespace Messenger.Data.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_connection);
+            optionsBuilder.UseSqlServer(_connection, o =>
+                // TODO: get asembly name from config
+                o.MigrationsAssembly("Messenger.Api")
+            );
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

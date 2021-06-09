@@ -1,4 +1,4 @@
-﻿namespace Messenger.Data.Models
+﻿namespace Messenger.Store.Models
 {
     public class User
     {
