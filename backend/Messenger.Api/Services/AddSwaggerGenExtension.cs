@@ -13,10 +13,10 @@ namespace Messenger.Api
         {
             services.AddSwaggerGen(setup =>
             {
-                setup.SwaggerDoc("v0.1", new OpenApiInfo
+                setup.SwaggerDoc("v1", new OpenApiInfo
                     {
                         Title = "Messenger API",
-                        Version = "0.1",
+                        Version = "1",
                     }
                 );
 

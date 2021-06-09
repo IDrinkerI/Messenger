@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
-using System.Reflection;
+
 
 namespace Messenger.Api
 {
@@ -32,10 +29,10 @@ namespace Messenger.Api
             app.UseMvc();
             app.UseFileServer();
 
-            app.UseSwagger(setup => setup.RouteTemplate = "/api/doc/{documentName}/apidocs.json");
+            app.UseSwagger(setup => setup.RouteTemplate = "/api/doc/{documentName}/apidoc.json");
             app.UseSwaggerUI(setup =>
                 {                    
-                    setup.SwaggerEndpoint("/api/doc/v0.1/apidocs.json", "Title");
+                    setup.SwaggerEndpoint("/api/doc/v1/apidoc.json", "Messenger API");
                     setup.RoutePrefix = "api/doc";
                 }
             );
