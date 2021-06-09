@@ -1,5 +1,5 @@
-﻿using Messenger.Data;
-using Messenger.Data.Models;
+﻿using Messenger.Store;
+using Messenger.Store.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public class ChatController : ControllerBase
+    public sealed class ChatController : ControllerBase
     {
-        private ChatRepository _repository;
+        private readonly ChatRepository _repository;
 
         public ChatController(ChatRepository repository)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Messenger.Data;
-using Messenger.Data.Models;
+using Messenger.Store;
+using Messenger.Store.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -31,7 +31,7 @@ namespace Messenger.Api.Controllers
             var user = await _repository.GetUser(newUser.Email);
             if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
 
-            _repository.AddUser(newUser);
+            await _repository.AddUser(newUser);
 
             return new OkResult();
         }

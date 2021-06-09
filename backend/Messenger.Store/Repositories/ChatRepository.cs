@@ -1,25 +1,23 @@
-﻿using Messenger.Data.Models;
-using System;
+﻿using Messenger.Store.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Messenger.Data
+
+namespace Messenger.Store
 {
     public sealed class ChatRepository
     {
-        private readonly Store _store;
+        private readonly StoreContext _store;
 
-        public ChatRepository(Store store)
+        public ChatRepository(StoreContext store)
         {
             _store = store;
         }
 
         public async Task<bool> AddChat(Chat chat)
         {
-            if(chat.Name is null) { return false; }
+            if (chat.Name is null) { return false; }
 
             await _store.Chats.AddAsync(chat);
             await _store.SaveChangesAsync();

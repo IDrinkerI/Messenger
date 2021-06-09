@@ -1,5 +1,5 @@
-﻿using Messenger.Data;
-using Messenger.Data.Models;
+﻿using Messenger.Store;
+using Messenger.Store.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public class ProfileController : ControllerBase
     {
-        ProfileRepository _repository;
+       private readonly ProfileRepository _repository;
 
         public ProfileController(ProfileRepository repository)
         {
