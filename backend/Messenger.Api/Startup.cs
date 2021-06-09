@@ -15,8 +15,8 @@ namespace Messenger.Api
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AuthenticationSetup();
-
             services.AddMessengerDataRepositories();
+            services.AddSwaggerGenCustom();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,6 +28,14 @@ namespace Messenger.Api
 
             app.UseMvc();
             app.UseFileServer();
+
+            app.UseSwagger(setup => setup.RouteTemplate = "/api/doc/{documentName}/apidoc.json");
+            app.UseSwaggerUI(setup =>
+                {                    
+                    setup.SwaggerEndpoint("/api/doc/v1/apidoc.json", "Messenger API");
+                    setup.RoutePrefix = "api/doc";
+                }
+            );
 
             app.UseAuthentication();
             app.UseAuthorization();

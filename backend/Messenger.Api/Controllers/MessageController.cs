@@ -18,6 +18,11 @@ namespace Messenger.Api.Controllers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Return all messages by chat id
+        /// </summary>
+        /// <param name="chatId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetMessages(int chatId)
         {
