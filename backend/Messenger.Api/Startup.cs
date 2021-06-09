@@ -19,20 +19,7 @@ namespace Messenger.Api
 
             services.AuthenticationSetup();
             services.AddMessengerDataRepositories();
-            services.AddSwaggerGen(setup =>
-                {
-                    setup.SwaggerDoc("v0.1", new OpenApiInfo
-                    {
-                        Title = "Messenger API",
-                        Version = "0.1",
-                    }
-                    );
-
-                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                    setup.IncludeXmlComments(xmlPath);
-                }
-            );
+            services.AddSwaggerGenCustom();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
