@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]")]
     public sealed class ChatController : ControllerBase
     {
-        private readonly ChatRepository _repository;
+        private readonly ChatRepository repository;
 
         public ChatController(ChatRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var chats = await _repository.GetChats();
+            var chats = await repository.GetChats();
             var cleanedChats = chats.Select(chat => new { chat.Id, chat.Name });
 
             return new JsonResult(cleanedChats);
@@ -33,7 +33,7 @@ namespace Messenger.Api.Controllers
             if (chat is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await _repository.AddChat(chat);
+            var additionResult = await repository.AddChat(chat);
             if (additionResult)
                 return new OkResult();
             else

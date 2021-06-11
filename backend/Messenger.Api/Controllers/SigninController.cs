@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]")]
     public sealed class SigninController : ControllerBase
     {
-        private readonly UserRepository _repository;
+        private readonly UserRepository repository;
 
         public SigninController(UserRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         [HttpPost]
         public async Task<IActionResult> Signin([FromBody] User signinData)
         {
-            var checkResult = await _repository.CheckPassword(signinData.Email, signinData.Password);
+            var checkResult = await repository.CheckPassword(signinData.Email, signinData.Password);
 
             if (!checkResult)
                 return BadRequest(new { errorText = "Invalid username or password." });

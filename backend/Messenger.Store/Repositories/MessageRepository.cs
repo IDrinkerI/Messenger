@@ -9,11 +9,11 @@ namespace Messenger.Store
 {
     public sealed class MessageRepository
     {
-        private readonly StoreContext _store;
+        private readonly StoreContext store;
 
         public MessageRepository(StoreContext store)
         {
-            _store = store;
+            this.store = store;
         }
 
         public async Task<bool> AddMessage(Message message)
@@ -24,19 +24,19 @@ namespace Messenger.Store
                 return false;
             }
 
-            var chat = await _store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
+            var chat = await store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
             // TODO: alter this trash
             if (chat is null) { return false; }
 
-            await _store.Messages.AddAsync(message);
-            await _store.SaveChangesAsync();
+            await store.Messages.AddAsync(message);
+            await store.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<IEnumerable<Message>> GetMessages(int chatId)
         {
-            var messages = await _store.Messages.Where(m => m.ChatId == chatId)
+            var messages = await store.Messages.Where(m => m.ChatId == chatId)
                 .ToArrayAsync();
 
             return messages;
