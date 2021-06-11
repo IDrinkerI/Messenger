@@ -8,6 +8,6 @@ namespace Messenger.Store.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Message> Messages { get; set; }
+        public HashSet<Message> Messages { get; set; }
     }
 }
