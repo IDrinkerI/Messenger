@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Messenger.Api
 {
-    public class Startup
+    public sealed class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
@@ -31,7 +31,7 @@ namespace Messenger.Api
 
             app.UseSwagger(setup => setup.RouteTemplate = "/api/doc/{documentName}/apidoc.json");
             app.UseSwaggerUI(setup =>
-                {                    
+                {
                     setup.SwaggerEndpoint("/api/doc/v1/apidoc.json", "Messenger API");
                     setup.RoutePrefix = "api/doc";
                 }

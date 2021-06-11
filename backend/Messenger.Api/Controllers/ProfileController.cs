@@ -8,7 +8,7 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public class ProfileController : ControllerBase
+    public sealed class ProfileController : ControllerBase
     {
        private readonly ProfileRepository repository;
 

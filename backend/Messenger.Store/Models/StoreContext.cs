@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Messenger.Store.Models
 {
-    public class StoreContext : DbContext
+    public sealed class StoreContext : DbContext
     {
-        private string connectionString;
+        private readonly string connectionString;
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Profile> Profiles { get; set; }
