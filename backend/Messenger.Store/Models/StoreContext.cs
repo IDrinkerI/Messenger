@@ -35,7 +35,7 @@ namespace Messenger.Store.Models
             modelBuilder.ApplyConfiguration(new MessageEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ChatEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileEntityConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
