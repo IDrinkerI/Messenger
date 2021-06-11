@@ -7,7 +7,7 @@ using Messenger.Store;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]/{chatId?}")]
     public sealed class MessageController : ControllerBase
     {

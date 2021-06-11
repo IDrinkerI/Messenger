@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]")]
     public sealed class SigninController : ControllerBase
     {

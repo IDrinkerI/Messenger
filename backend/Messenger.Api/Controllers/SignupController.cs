@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]")]
     public sealed class SignupController : ControllerBase
     {
