@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Messenger.Store.Configuration
 {
-    internal class ChatEntityConfiguration : IEntityTypeConfiguration<Chat>
+    internal sealed class ChatEntityConfiguration : IEntityTypeConfiguration<Chat>
     {
         public void Configure(EntityTypeBuilder<Chat> builder)
         {
