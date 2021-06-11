@@ -27,7 +27,7 @@ namespace Messenger.Api.Controllers
         public async Task<IActionResult> GetMessages(int chatId)
         {
             var messages = await repository.GetMessages(chatId);
-            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText });
+            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.Profile.Nickname, messageText = m.MessageText });
 
             return new JsonResult(cleanedMessage);
         }

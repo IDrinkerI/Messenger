@@ -18,11 +18,7 @@ namespace Messenger.Store
 
         public async Task<bool> AddMessage(Message message)
         {
-            if (message is null ||
-                message.UserName is null)
-            {
-                return false;
-            }
+            if (message is null) { return false; }
 
             var chat = await store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
             // TODO: alter this trash

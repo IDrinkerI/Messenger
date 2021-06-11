@@ -46,9 +46,10 @@ namespace Messenger.Store.Models
             modelBuilder.Entity<Message>().HasData(
                 new Message[]
                 {
-                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , UserName = "Backender" },
-                    new Message { Id = 2, ChatId = 1, MessageText = "blabla" , UserName = "Frontender" },
-                    new Message { Id = 3, ChatId = 2, MessageText = "aloha" , UserName = "Backender" },
+                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , ProfileId = 2 },
+                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , ProfileId = 1 },
+                    new Message { Id = 2, ChatId = 1, MessageText = "blabla" , ProfileId = 2 },
+                    new Message { Id = 3, ChatId = 2, MessageText = "aloha" , ProfileId = 3 },
                 });
 
             modelBuilder.Entity<Profile>().HasData(
@@ -56,6 +57,7 @@ namespace Messenger.Store.Models
                 {
                     new Profile { Id = 1, Nickname = "User" },
                     new Profile { Id = 2, Nickname = "Backender" },
+                    new Profile { Id = 3, Nickname = "Developer"},
                 });
 
             modelBuilder.Entity<User>().HasData(new User[]
