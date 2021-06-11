@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Messenger.Api
 {
-    public sealed class Program
+    internal sealed class Program
     {
         public static void Main(string[] args)
         {

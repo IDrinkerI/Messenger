@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Messenger.Api
 {
-    public sealed class Startup
+    internal sealed class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {

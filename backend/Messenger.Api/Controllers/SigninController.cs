@@ -12,7 +12,7 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public sealed class SigninController : ControllerBase
+    internal sealed class SigninController : ControllerBase
     {
         private readonly UserRepository repository;
 

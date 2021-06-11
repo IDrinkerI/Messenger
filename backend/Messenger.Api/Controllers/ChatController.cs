@@ -9,7 +9,7 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    public sealed class ChatController : ControllerBase
+    internal sealed class ChatController : ControllerBase
     {
         private readonly ChatRepository repository;
 
