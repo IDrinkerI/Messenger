@@ -7,15 +7,15 @@ using Messenger.Store;
 
 namespace Messenger.Api.Controllers
 {
-    [Controller]
+    [ApiController]
     [Route("api/[controller]/{chatId?}")]
     public sealed class MessageController : ControllerBase
     {
-        private readonly MessageRepository _repository;
+        private readonly MessageRepository repository;
 
         public MessageController(MessageRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Messenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMessages(int chatId)
         {
-            var messages = await _repository.GetMessages(chatId);
+            var messages = await repository.GetMessages(chatId);
             var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText });
 
             return new JsonResult(cleanedMessage);
@@ -38,7 +38,7 @@ namespace Messenger.Api.Controllers
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await _repository.AddMessage(message);
+            var additionResult = await repository.AddMessage(message);
 
             if (additionResult)
                 return new OkResult();

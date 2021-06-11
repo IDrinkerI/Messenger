@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api
 {
-    public static class AuthenticationSetupExtension
+    internal static class AuthenticationSetupExtension
     {
         public static void AuthenticationSetup(this IServiceCollection services)
         {

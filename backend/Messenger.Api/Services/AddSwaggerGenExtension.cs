@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Messenger.Api
 {
-    public static class AddSwaggerGenExtension
+    internal static class AddSwaggerGenExtension
     {
         public static void AddSwaggerGenCustom(this IServiceCollection services)
         {
