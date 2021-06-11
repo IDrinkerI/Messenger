@@ -8,7 +8,7 @@ namespace Messenger.Api.Controllers
 {
     [Controller]
     [Route("api/[controller]")]
-    internal sealed class SignupController : ControllerBase
+    public sealed class SignupController : ControllerBase
     {
         private readonly UserRepository repository;
 
