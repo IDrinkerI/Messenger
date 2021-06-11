@@ -9,7 +9,7 @@ namespace Messenger.Store.Configuration
     {
         public void Configure(EntityTypeBuilder<Chat> builder)
         {
-            builder.Property(nameof(Chat.Name)).HasMaxLength(50);
+            builder.Property(nameof(Chat.Name)).HasMaxLength(70);
         }
     }
 }
