@@ -10,11 +10,11 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public sealed class SignupController : ControllerBase
     {
-        private readonly UserRepository _repository;
+        private readonly UserRepository repository;
 
         public SignupController(UserRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         [HttpPut]
@@ -28,10 +28,10 @@ namespace Messenger.Api.Controllers
                 return BadRequest(new { errorText = "wrong user info" });
             }
 
-            var user = await _repository.GetUser(newUser.Email);
+            var user = await repository.GetUser(newUser.Email);
             if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
 
-            await _repository.AddUser(newUser);
+            await repository.AddUser(newUser);
 
             return new OkResult();
         }

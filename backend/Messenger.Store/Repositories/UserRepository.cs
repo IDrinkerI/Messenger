@@ -7,16 +7,16 @@ namespace Messenger.Store
 {
     public sealed class UserRepository
     {
-        private readonly StoreContext _store;
+        private readonly StoreContext store;
 
         public UserRepository(StoreContext store)
         {
-            _store = store;
+            this.store = store;
         }
 
         public async Task<bool> CheckPassword(string email, string password)
         {
-            var user = await _store.Users.FirstOrDefaultAsync((u) =>
+            var user = await store.Users.FirstOrDefaultAsync((u) =>
                 u.Email == email && u.Password == password);
 
             if (user is null)
@@ -27,7 +27,7 @@ namespace Messenger.Store
 
         public async Task<User> GetUser(string email)
         {
-            var user = await _store.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await store.Users.FirstOrDefaultAsync(u => u.Email == email);
             return user;
         }
 
@@ -39,8 +39,8 @@ namespace Messenger.Store
             };
 
             newUser.Profile = newProfile;
-            await _store.Users.AddAsync(newUser);
-            await _store.SaveChangesAsync();
+            await store.Users.AddAsync(newUser);
+            await store.SaveChangesAsync();
 
             return true;
         }

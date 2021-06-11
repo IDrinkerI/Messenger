@@ -6,7 +6,7 @@ namespace Messenger.Store.Models
 {
     public class StoreContext : DbContext
     {
-        private string _connection;
+        private string connectionString;
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Profile> Profiles { get; set; }
@@ -14,14 +14,14 @@ namespace Messenger.Store.Models
 
         public StoreContext(IConfiguration config)
         {
-            _connection = config.GetConnectionString("DefaultConnection");
+            connectionString = config.GetConnectionString("DefaultConnection");
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_connection, o =>
+            optionsBuilder.UseSqlServer(connectionString, o =>
                 // TODO: get asembly name from config
                 o.MigrationsAssembly("Messenger.Api")
             );
