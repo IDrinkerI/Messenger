@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Messenger.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 
@@ -30,6 +31,11 @@ namespace Messenger.Store.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new MessageEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ProfileEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
