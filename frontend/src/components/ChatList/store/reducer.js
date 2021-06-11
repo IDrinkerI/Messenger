@@ -4,7 +4,7 @@ import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 const initialStore = {
     chatList: [],
     updateTimer: null,
-    currentChatId: null
+    currentChatId: 0
 }
 
 export const chatsReducer = (store = initialStore, action) => {
