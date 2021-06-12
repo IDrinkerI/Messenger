@@ -9,7 +9,7 @@ namespace Messenger.Store.Configuration
     {
         public void Configure(EntityTypeBuilder<AuthInfo> builder)
         {
-            builder.Property(nameof(AuthInfo.PasswordHash)).IsRequired();
+            //builder.Property(nameof(AuthInfo.PasswordHash)).IsRequired();
         }
     }
 }

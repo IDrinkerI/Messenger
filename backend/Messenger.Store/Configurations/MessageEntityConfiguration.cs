@@ -13,7 +13,7 @@ namespace Messenger.Store.Configuration
             builder.Property(text).HasMaxLength(4096);
             builder.Property(text).IsRequired();
 
-            builder.Property(nameof(Message.ProfileId)).IsRequired();
+            //builder.Property(nameof(Message.ProfileId)).IsRequired();
         }
     }
 }
