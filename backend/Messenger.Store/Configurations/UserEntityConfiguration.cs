@@ -13,8 +13,7 @@ namespace Messenger.Store.Configuration
             builder.Property(email).HasMaxLength(500);
             builder.Property(email).IsRequired();
 
-            var password = nameof(User.Password);
-            builder.Property(password).HasMaxLength(64);
+            var password = nameof(User.AuthInfo);
             builder.Property(password).IsRequired();
         }
     }

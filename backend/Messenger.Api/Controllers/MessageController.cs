@@ -38,7 +38,7 @@ namespace Messenger.Api.Controllers
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await repository.AddMessage(message);
+            var additionResult = await repository.AddMessage(message, 1);
 
             if (additionResult)
                 return new OkResult();

@@ -1,7 +1,7 @@
 ﻿using Messenger.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using System.Collections.Generic;
 
 namespace Messenger.Store.Models
 {
@@ -43,17 +43,23 @@ namespace Messenger.Store.Models
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
-                    new Chat { Id = 1, Name = "Public" },
-                    new Chat { Id = 2, Name = "Private" },
-                });
-
-            modelBuilder.Entity<Message>().HasData(
-                new Message[]
-                {
-                    new Message { Id = 1, ChatId = 1, Text = "aloha" , ProfileId = 2 },
-                    new Message { Id = 1, ChatId = 1, Text = "aloha" , ProfileId = 1 },
-                    new Message { Id = 2, ChatId = 1, Text = "blabla" , ProfileId = 2 },
-                    new Message { Id = 3, ChatId = 2, Text = "aloha" , ProfileId = 3 },
+                    new Chat {
+                        Id = 1,
+                        Name = "Public" ,
+                        Messages = new List<Message>{
+                            new Message { Id = 1, Text = "aloha" , ProfileId = 2 },
+                            new Message { Id = 2, Text = "aloha" , ProfileId = 1 },
+                        }
+                    },
+                    new Chat {
+                        Id = 2,
+                        Name = "Private" ,
+                       Messages = new List<Message>
+                       {
+                           new Message { Id = 3, Text = "blabla" , ProfileId = 2 },
+                           new Message { Id = 4, Text = "aloha" , ProfileId = 3 },
+                       }
+                    },
                 });
 
             modelBuilder.Entity<Profile>().HasData(
@@ -66,7 +72,12 @@ namespace Messenger.Store.Models
 
             modelBuilder.Entity<User>().HasData(new User[]
                 {
-                    new User { Id = 1, Email = "login@mail.ru", Password = "qwerty", ProfileId = 1 },
+                    new User {
+                        Id = 1,
+                        Email = "login@mail.ru",
+                        AuthInfo = new AuthInfo{ Id =1, PasswordHash = "qwerty" },
+                        ProfileId = 1
+                    },
                 });
         }
     }
