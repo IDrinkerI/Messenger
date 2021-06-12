@@ -2,7 +2,7 @@ import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 import { MessageModel } from "../../../models/MessageModel";
 
 
-const API_URL = "/api/messagae";
+const API_URL = "/api/message";
 const UPDATE_INTERVAL = 250;
 
 const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });

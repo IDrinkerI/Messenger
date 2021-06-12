@@ -32,7 +32,7 @@ namespace Messenger.Store
 
         public async Task<IEnumerable<Message>> GetMessages(int chatId)
         {
-            var chat = await store.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
+            var chat = await store.Chats.Include(nameof(Chat.Messages)).FirstOrDefaultAsync(c => c.Id == chatId);
             var messages = chat.Messages.ToList();
 
             return messages;
