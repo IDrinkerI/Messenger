@@ -1,6 +1,6 @@
 ﻿namespace Messenger.Data.Entities
 {
-    public class ProfileEntity : BaseEntity
+    public class ProfileEntity : BaseEntity, IUpdatableEntity<ProfileEntity>
     {
         public string Nickname { get; set; }
         public string FirstName { get; set; }
