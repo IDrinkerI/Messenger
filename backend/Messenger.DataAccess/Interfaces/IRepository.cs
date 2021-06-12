@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace Messenger.Store
+namespace Messenger.DataAccess
 {
     public interface IRepository<T> where T : class
     {
