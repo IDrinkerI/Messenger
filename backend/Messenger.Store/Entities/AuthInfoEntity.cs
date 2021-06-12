@@ -1,6 +1,6 @@
-﻿namespace Messenger.Data.Models
+﻿namespace Messenger.Data.Entities
 {
-    public class AuthInfo
+    public class AuthInfoEntity
     {
         public int Id { get; set; }
         public string PasswordHash { get; set; }

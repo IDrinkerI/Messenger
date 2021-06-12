@@ -1,4 +1,4 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -9,10 +9,10 @@ namespace Messenger.Data
         public static void AddMessengerDataRepositories(this IServiceCollection services)
         {
             services.AddDbContext<StoreContext>();
-            services.AddScoped<MessageRepository>();
-            services.AddScoped<ChatRepository>();
-            services.AddScoped<ProfileRepository>();
-            services.AddScoped<UserRepository>();
+            //services.AddScoped<MessageRepository>();
+            //services.AddScoped<ChatRepository>();
+            //services.AddScoped<ProfileRepository>();
+            //services.AddScoped<UserRepository>();
         }
     }
 }

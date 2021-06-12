@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Messenger.Data.Models
+namespace Messenger.Data.Entities
 {
-    public class User
+    public class UserEntity
     {
         public int Id { get; set; }
         public string Email { get; set; }
         public int ProfileId { get; set; }
-        public Profile Profile { get; set; }
+        public ProfileEntity Profile { get; set; }
         public int AuthInfoId { get; set; }
-        public AuthInfo AuthInfo { get; set; }
-        public HashSet<Chat> Chats { get; set; }
+        public AuthInfoEntity AuthInfo { get; set; }
+        public HashSet<ChatEntity> Chats { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Messenger.Data.Models
+﻿namespace Messenger.Data.Entities
 {
-    public class Profile
+    public class ProfileEntity
     {
         public int Id { get; set; }
         public string Nickname { get; set; }
@@ -8,7 +8,7 @@
         public string LastName { get; set; }
 
         // TODO: rename method
-        public void CopyFrom(Profile other)
+        public void CopyFrom(ProfileEntity other)
         {
             Nickname = other.Nickname;
             FirstName = other.FirstName;

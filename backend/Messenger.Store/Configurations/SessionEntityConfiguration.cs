@@ -1,17 +1,17 @@
-﻿using Messenger.Data.Models;
+﻿using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
 namespace Messenger.Data.Configuration
 {
-    internal sealed class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
+    internal sealed class SessionEntityConfiguration : IEntityTypeConfiguration<SessionEntity>
     {
-        public void Configure(EntityTypeBuilder<Session> builder)
+        public void Configure(EntityTypeBuilder<SessionEntity> builder)
         {
-            builder.Property(nameof(Session.Token)).IsRequired();
-            builder.Property(nameof(Session.KillingTime)).IsRequired();
-            builder.Property(nameof(Session.UserId)).IsRequired();
+            builder.Property(nameof(SessionEntity.Token)).IsRequired();
+            builder.Property(nameof(SessionEntity.KillingTime)).IsRequired();
+            builder.Property(nameof(SessionEntity.UserId)).IsRequired();
         }
     }
 }

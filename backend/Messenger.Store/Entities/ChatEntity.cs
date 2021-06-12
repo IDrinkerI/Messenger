@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Messenger.Data.Models
+namespace Messenger.Data.Entities
 {
-    public class Chat
+    public class ChatEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Message> Messages { get; set; }
+        public List<MessageEntity> Messages { get; set; }
     }
 }
