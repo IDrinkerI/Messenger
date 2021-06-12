@@ -1,9 +1,10 @@
 ﻿using Messenger.Data.Configuration;
+using Messenger.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 
-namespace Messenger.Data.Models
+
+namespace Messenger.Data
 {
     public sealed class StoreContext : DbContext
     {
