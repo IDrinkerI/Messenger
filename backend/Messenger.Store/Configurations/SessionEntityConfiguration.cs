@@ -11,7 +11,7 @@ namespace Messenger.Store.Configuration
         {
             builder.Property(nameof(Session.Token)).IsRequired();
             builder.Property(nameof(Session.KillingTime)).IsRequired();
-            builder.Property(nameof(Session.User)).IsRequired();
+            builder.Property(nameof(Session.UserId)).IsRequired();
         }
     }
 }

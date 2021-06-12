@@ -13,8 +13,8 @@ namespace Messenger.Store.Configuration
             builder.Property(text).HasMaxLength(4096);
             builder.Property(text).IsRequired();
 
-            builder.Property(nameof(Message.Chat)).IsRequired();
-            builder.Property(nameof(Message.Profile)).IsRequired();
+            builder.Property(nameof(Message.ChatId)).IsRequired();
+            builder.Property(nameof(Message.ProfileId)).IsRequired();
         }
     }
 }

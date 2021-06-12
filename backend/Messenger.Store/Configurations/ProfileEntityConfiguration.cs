@@ -15,7 +15,7 @@ namespace Messenger.Store.Configuration
 
             builder.Property(nameof(Profile.FirstName)).HasMaxLength(70);
             builder.Property(nameof(Profile.LastName)).HasMaxLength(70);
-            builder.Property(nameof(Profile.User)).IsRequired();
+            builder.Property(nameof(Profile.UserId)).IsRequired();
         }
     }
 }
