@@ -9,7 +9,7 @@ namespace Messenger.DataAccess
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> Get(int id);
-        Task<bool> Add(T item);
-        Task<bool> Update(int id, T newState);
+        void Add(T item);
+        void Update(int id, T newState);
     }
 }
