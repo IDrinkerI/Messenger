@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Messenger.Store.Configuration
 {
-    internal class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
+    internal sealed class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
     {
         public void Configure(EntityTypeBuilder<Session> builder)
         {

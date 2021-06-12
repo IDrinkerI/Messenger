@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Messenger.Store.Configuration
 {
-    internal class AuthInfoEntityConfiguration : IEntityTypeConfiguration<AuthInfo>
+    internal sealed class AuthInfoEntityConfiguration : IEntityTypeConfiguration<AuthInfo>
     {
         public void Configure(EntityTypeBuilder<AuthInfo> builder)
         {
