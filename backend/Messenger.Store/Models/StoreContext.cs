@@ -12,6 +12,7 @@ namespace Messenger.Store.Models
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Session> Sessions { get; set; }
 
         public StoreContext(IConfiguration config)
         {
@@ -36,6 +37,7 @@ namespace Messenger.Store.Models
             modelBuilder.ApplyConfiguration(new ChatEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionEntityConfiguration());
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
