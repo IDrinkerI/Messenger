@@ -4,11 +4,17 @@
     {
         public int Id { get; set; }
         public string Nickname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
 
         // TODO: rename method
         public void CopyFrom(Profile other)
         {
             Nickname = other.Nickname;
+            FirstName = other.FirstName;
+            LastName = other.LastName;
         }
     }
 }
