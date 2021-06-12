@@ -13,6 +13,7 @@ namespace Messenger.Store.Models
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<AuthInfo> AuthInfos { get; set; }
 
         public StoreContext(IConfiguration config)
         {
@@ -38,6 +39,7 @@ namespace Messenger.Store.Models
             modelBuilder.ApplyConfiguration(new ProfileEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SessionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AuthInfoEntityConfiguration());
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
