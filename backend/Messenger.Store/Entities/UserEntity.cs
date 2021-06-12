@@ -3,9 +3,8 @@
 
 namespace Messenger.Data.Entities
 {
-    public class UserEntity
+    public class UserEntity : BaseEntity
     {
-        public int Id { get; set; }
         public string Email { get; set; }
         public int ProfileId { get; set; }
         public ProfileEntity Profile { get; set; }

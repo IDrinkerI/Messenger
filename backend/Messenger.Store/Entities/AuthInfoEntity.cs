@@ -1,8 +1,7 @@
 ﻿namespace Messenger.Data.Entities
 {
-    public class AuthInfoEntity
+    public class AuthInfoEntity : BaseEntity
     {
-        public int Id { get; set; }
         public string PasswordHash { get; set; }
     }
 }
