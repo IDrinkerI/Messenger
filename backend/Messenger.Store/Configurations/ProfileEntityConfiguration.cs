@@ -1,9 +1,9 @@
-﻿using Messenger.Store.Models;
+﻿using Messenger.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Messenger.Store.Configuration
+namespace Messenger.Data.Configuration
 {
     internal sealed class ProfileEntityConfiguration : IEntityTypeConfiguration<Profile>
     {

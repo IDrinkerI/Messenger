@@ -1,4 +1,4 @@
-﻿namespace Messenger.Store.Models
+﻿namespace Messenger.Data.Models
 {
     public class AuthInfo
     {

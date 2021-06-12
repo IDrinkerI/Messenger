@@ -1,5 +1,5 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;

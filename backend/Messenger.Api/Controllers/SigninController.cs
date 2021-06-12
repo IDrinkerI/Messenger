@@ -1,5 +1,5 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
