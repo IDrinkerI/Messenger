@@ -44,7 +44,7 @@ namespace Messenger.DataAccess
             await store.SaveChangesAsync();
         }
 
-        async Task<IEnumerable<UserEntity>> IRepository<UserEntity>.GetAll()
+        Task<IEnumerable<UserEntity>> IRepository<UserEntity>.GetAll()
         {
             throw new System.NotImplementedException();
         }
