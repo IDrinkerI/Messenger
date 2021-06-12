@@ -3,7 +3,7 @@
 
 namespace Messenger.Data.Entities
 {
-    public class UserEntity : BaseEntity
+    public class UserEntity : BaseEntity, IUpdatableEntity<UserEntity>
     {
         public string Email { get; set; }
         public int ProfileId { get; set; }
@@ -11,5 +11,10 @@ namespace Messenger.Data.Entities
         public int AuthInfoId { get; set; }
         public AuthInfoEntity AuthInfo { get; set; }
         public HashSet<ChatEntity> Chats { get; set; }
+
+        public void UpdateState(UserEntity newState)
+        {
+            Email = newState.Email;
+        }
     }
 }
