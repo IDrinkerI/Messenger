@@ -9,7 +9,12 @@ namespace Messenger.Store.Configuration
     {
         public void Configure(EntityTypeBuilder<Message> builder)
         {
-            builder.Property(nameof(Message.MessageText)).HasMaxLength(4096);
+            var messageText = nameof(Message.MessageText);
+            builder.Property(messageText).HasMaxLength(4096);
+            builder.Property(messageText).IsRequired();
+
+            builder.Property(nameof(Message.Chat)).IsRequired();
+            builder.Property(nameof(Message.Profile)).IsRequired();
         }
     }
 }
