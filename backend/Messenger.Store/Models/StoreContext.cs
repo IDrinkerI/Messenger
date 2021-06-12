@@ -46,10 +46,10 @@ namespace Messenger.Store.Models
             modelBuilder.Entity<Message>().HasData(
                 new Message[]
                 {
-                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , ProfileId = 2 },
-                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , ProfileId = 1 },
-                    new Message { Id = 2, ChatId = 1, MessageText = "blabla" , ProfileId = 2 },
-                    new Message { Id = 3, ChatId = 2, MessageText = "aloha" , ProfileId = 3 },
+                    new Message { Id = 1, ChatId = 1, Text = "aloha" , ProfileId = 2 },
+                    new Message { Id = 1, ChatId = 1, Text = "aloha" , ProfileId = 1 },
+                    new Message { Id = 2, ChatId = 1, Text = "blabla" , ProfileId = 2 },
+                    new Message { Id = 3, ChatId = 2, Text = "aloha" , ProfileId = 3 },
                 });
 
             modelBuilder.Entity<Profile>().HasData(
