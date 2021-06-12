@@ -9,8 +9,12 @@ namespace Messenger.Store.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(nameof(User.Email)).HasMaxLength(500);
-            builder.Property(nameof(User.Password)).HasMaxLength(64);
+            var email = nameof(User.Email);
+            builder.Property(email).HasMaxLength(500);
+            builder.Property(email).IsRequired();
+
+            //var password = nameof(User.AuthInfo);
+            //builder.Property(password).IsRequired();
         }
     }
 }

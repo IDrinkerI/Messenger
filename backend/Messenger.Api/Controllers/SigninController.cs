@@ -24,7 +24,7 @@ namespace Messenger.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Signin([FromBody] User signinData)
         {
-            var checkResult = await repository.CheckPassword(signinData.Email, signinData.Password);
+            var checkResult = await repository.CheckPassword(signinData.Email, signinData.AuthInfo.PasswordHash);
 
             if (!checkResult)
                 return BadRequest(new { errorText = "Invalid username or password." });

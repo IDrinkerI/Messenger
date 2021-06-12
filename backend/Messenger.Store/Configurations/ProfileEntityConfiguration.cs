@@ -9,7 +9,12 @@ namespace Messenger.Store.Configuration
     {
         public void Configure(EntityTypeBuilder<Profile> builder)
         {
-            builder.Property(nameof(Profile.Nickname)).HasMaxLength(70);
+            var nickname = nameof(Profile.Nickname);
+            builder.Property(nickname).HasMaxLength(70);
+            builder.Property(nickname).IsRequired();
+
+            builder.Property(nameof(Profile.FirstName)).HasMaxLength(70);
+            builder.Property(nameof(Profile.LastName)).HasMaxLength(70);
         }
     }
 }

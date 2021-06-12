@@ -17,7 +17,7 @@ namespace Messenger.Store
         public async Task<bool> CheckPassword(string email, string password)
         {
             var user = await store.Users.FirstOrDefaultAsync((u) =>
-                u.Email == email && u.Password == password);
+                u.Email == email && u.AuthInfo.PasswordHash == password);
 
             if (user is null)
                 return false;

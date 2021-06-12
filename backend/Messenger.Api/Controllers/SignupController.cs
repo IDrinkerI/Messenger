@@ -22,8 +22,7 @@ namespace Messenger.Api.Controllers
         {
             // TODO: remove unnecessary checks 
             if (newUser is null ||
-                newUser.Email is null ||
-                newUser.Password is null)
+                newUser.Email is null)
             {
                 return BadRequest(new { errorText = "wrong user info" });
             }

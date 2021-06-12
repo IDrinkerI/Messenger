@@ -1,7 +1,7 @@
 ﻿using Messenger.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using System.Collections.Generic;
 
 namespace Messenger.Store.Models
 {
@@ -12,6 +12,8 @@ namespace Messenger.Store.Models
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<AuthInfo> AuthInfos { get; set; }
 
         public StoreContext(IConfiguration config)
         {
@@ -36,6 +38,18 @@ namespace Messenger.Store.Models
             modelBuilder.ApplyConfiguration(new ChatEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AuthInfoEntityConfiguration());
+
+            modelBuilder.Entity<Message>().HasData(
+                new Message[]
+                    {
+                        new Message { Id = 1, Text = "aloha" , ProfileId = 2, ChatId = 1 },
+                        new Message { Id = 2, Text = "aloha" , ProfileId = 1, ChatId = 1},
+                        new Message { Id = 3, Text = "blabla" , ProfileId = 2, ChatId = 2},
+                        new Message { Id = 4, Text = "aloha" , ProfileId = 3, ChatId = 2},
+                    }
+                );
 
             modelBuilder.Entity<Chat>().HasData(
                 new Chat[] {
@@ -43,24 +57,24 @@ namespace Messenger.Store.Models
                     new Chat { Id = 2, Name = "Private" },
                 });
 
-            modelBuilder.Entity<Message>().HasData(
-                new Message[]
-                {
-                    new Message { Id = 1, ChatId = 1, MessageText = "aloha" , UserName = "Backender" },
-                    new Message { Id = 2, ChatId = 1, MessageText = "blabla" , UserName = "Frontender" },
-                    new Message { Id = 3, ChatId = 2, MessageText = "aloha" , UserName = "Backender" },
-                });
-
             modelBuilder.Entity<Profile>().HasData(
                 new Profile[]
                 {
                     new Profile { Id = 1, Nickname = "User" },
                     new Profile { Id = 2, Nickname = "Backender" },
+                    new Profile { Id = 3, Nickname = "Developer"},
                 });
+
+            modelBuilder.Entity<AuthInfo>().HasData(new AuthInfo() { Id = 1, PasswordHash = "qwerty" });
 
             modelBuilder.Entity<User>().HasData(new User[]
                 {
-                    new User { Id = 1, Email = "login@mail.ru", Password = "qwerty", ProfileId = 1 },
+                    new User {
+                        Id = 1,
+                        Email = "login@mail.ru",
+                        AuthInfoId = 1,
+                        ProfileId = 1
+                    },
                 });
         }
     }

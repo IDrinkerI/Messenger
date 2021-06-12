@@ -27,7 +27,7 @@ namespace Messenger.Api.Controllers
         public async Task<IActionResult> GetMessages(int chatId)
         {
             var messages = await repository.GetMessages(chatId);
-            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText });
+            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.Profile.Nickname, messageText = m.Text });
 
             return new JsonResult(cleanedMessage);
         }
@@ -38,7 +38,7 @@ namespace Messenger.Api.Controllers
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await repository.AddMessage(message);
+            var additionResult = await repository.AddMessage(message, 1);
 
             if (additionResult)
                 return new OkResult();

@@ -16,15 +16,11 @@ namespace Messenger.Store
             this.store = store;
         }
 
-        public async Task<bool> AddMessage(Message message)
+        public async Task<bool> AddMessage(Message message, int chatId)
         {
-            if (message is null ||
-                message.UserName is null)
-            {
-                return false;
-            }
+            if (message is null) { return false; }
 
-            var chat = await store.Chats.FirstOrDefaultAsync(chat => chat.Id == message.ChatId);
+            var chat = await store.Chats.FirstOrDefaultAsync(chat => chat.Id == chatId);
             // TODO: alter this trash
             if (chat is null) { return false; }
 
@@ -36,8 +32,8 @@ namespace Messenger.Store
 
         public async Task<IEnumerable<Message>> GetMessages(int chatId)
         {
-            var messages = await store.Messages.Where(m => m.ChatId == chatId)
-                .ToArrayAsync();
+            var chat = await store.Chats.Include(nameof(Chat.Messages)).FirstOrDefaultAsync(c => c.Id == chatId);
+            var messages = chat.Messages.ToList();
 
             return messages;
         }
