@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+    <ProjectReference Include="..\Messenger.Model\Messenger.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interface\" />
   </ItemGroup>
 

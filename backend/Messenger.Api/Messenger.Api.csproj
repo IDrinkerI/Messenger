@@ -21,6 +21,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+        <ProjectReference Include="..\Messenger.Service\Messenger.Service.csproj" />
         <ProjectReference Include="..\Messenger.Store\Messenger.Data.csproj" />
     </ItemGroup>
 

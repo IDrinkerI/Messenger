@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Messenger.Data;
 
 
-namespace Messenger.DataAccess.Repositories
+namespace Messenger.DataAccess
 {
-    public class SessionRepository : IRepository<SessionEntity>
+    public sealed class SessionRepository : IRepository<SessionEntity>
     {
         private readonly StoreContext store;
 
