@@ -9,6 +9,7 @@ namespace Messenger.Service
         {
             services.AddScoped<MessageService>();
             services.AddScoped<ChatService>();
+            services.AddScoped<ProfileService>();
         }
     }
 }

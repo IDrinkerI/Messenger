@@ -1,5 +1,6 @@
 ﻿using Messenger.Data;
 using Messenger.Data.Entities;
+using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -10,18 +11,18 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public sealed class ProfileController : ControllerBase
     {
-       private readonly ProfileRepository repository;
+        private readonly ProfileService profileService;
 
-        public ProfileController(ProfileRepository repository)
+        public ProfileController(ProfileService profileService)
         {
-            this.repository = repository;
+            this.profileService = profileService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProfile()
         {
             var id = 1;
-            var profile = await repository.GetProfile(id);
+            var profile = await profileService.GetProfile(id);
 
             return new JsonResult(profile);
         }
@@ -34,11 +35,9 @@ namespace Messenger.Api.Controllers
             // TODO: need cookes
             var id = value.Id;
 
-            var updateResult = await repository.UpdateProfile(id, value);
-            if (updateResult)
-                return new OkResult();
-            else
-                return new BadRequestResult();
+            await profileService.UpdateProfile(id, value);
+
+            return new OkResult();
         }
     }
 }
