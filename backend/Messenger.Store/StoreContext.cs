@@ -43,40 +43,30 @@ namespace Messenger.Data
             modelBuilder.ApplyConfiguration(new AuthInfoEntityConfiguration());
 
             modelBuilder.Entity<MessageEntity>().HasData(
-                new MessageEntity[]
-                    {
-                        new MessageEntity { Id = 1, Text = "aloha" , ProfileId = 2, ChatId = 1 },
-                        new MessageEntity { Id = 2, Text = "aloha" , ProfileId = 1, ChatId = 1},
-                        new MessageEntity { Id = 3, Text = "blabla" , ProfileId = 2, ChatId = 2},
-                        new MessageEntity { Id = 4, Text = "aloha" , ProfileId = 3, ChatId = 2},
-                    }
+                        new MessageEntity { Id = 1, Text = "Aloha", ProfileId = 1, ChatId = 1 }
                 );
 
             modelBuilder.Entity<ChatEntity>().HasData(
-                new ChatEntity[] {
-                    new ChatEntity { Id = 1, Name = "Public" },
-                    new ChatEntity { Id = 2, Name = "Private" },
-                });
+                    new ChatEntity { Id = 1, Name = "Test" }
+                );
 
             modelBuilder.Entity<ProfileEntity>().HasData(
-                new ProfileEntity[]
-                {
-                    new ProfileEntity { Id = 1, Nickname = "User" },
-                    new ProfileEntity { Id = 2, Nickname = "Backender" },
-                    new ProfileEntity { Id = 3, Nickname = "Developer"},
-                });
+                    new ProfileEntity { Id = 1, Nickname = "Developer" }
+                );
 
-            modelBuilder.Entity<AuthInfoEntity>().HasData(new AuthInfoEntity() { Id = 1, PasswordHash = "qwerty" });
+            modelBuilder.Entity<AuthInfoEntity>().HasData(
+                    new AuthInfoEntity() { Id = 1, PasswordHash = "qwerty" }
+                );
 
-            modelBuilder.Entity<UserEntity>().HasData(new UserEntity[]
-                {
-                    new UserEntity {
+            modelBuilder.Entity<UserEntity>().HasData(
+                    new UserEntity
+                    {
                         Id = 1,
                         Email = "login@mail.ru",
                         AuthInfoId = 1,
                         ProfileId = 1
-                    },
-                });
+                    }
+                );
         }
     }
 }
