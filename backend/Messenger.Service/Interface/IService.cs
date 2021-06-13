@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Messenger.Service.Services
+namespace Messenger.Service
 {
     public interface IService<T> where T: IModel
     {
