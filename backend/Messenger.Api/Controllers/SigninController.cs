@@ -1,5 +1,7 @@
 ﻿using Messenger.Data;
 using Messenger.Data.Entities;
+using Messenger.Model;
+using Messenger.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +16,17 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public sealed class SigninController : ControllerBase
     {
-        private readonly UserRepository repository;
+        private readonly AuthService authService;
 
-        public SigninController(UserRepository repository)
+        public SigninController(AuthService authService)
         {
-            this.repository = repository;
+            this.authService = authService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Signin([FromBody] UserEntity signinData)
+        public async Task<IActionResult> Signin([FromBody] AuthInfoModel signinData)
         {
-            var checkResult = await repository.CheckPassword(signinData.Email, signinData.AuthInfo.PasswordHash);
+            var checkResult = await authService.CheckPassword(signinData);
 
             if (!checkResult)
                 return BadRequest(new { errorText = "Invalid username or password." });

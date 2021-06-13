@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Messenger.Data;
 using Messenger.Data.Entities;
+using Messenger.Model;
+using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,15 +12,15 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]")]
     public sealed class SignupController : ControllerBase
     {
-        private readonly UserRepository repository;
+        private readonly AuthService authService;
 
-        public SignupController(UserRepository repository)
+        public SignupController(AuthService authService)
         {
-            this.repository = repository;
+            this.authService = authService;
         }
 
         [HttpPut]
-        public async Task<IActionResult> Signup([FromBody] UserEntity newUser)
+        public async Task<IActionResult> Signup([FromBody] AuthInfoModel newUser)
         {
             // TODO: remove unnecessary checks 
             if (newUser is null ||
@@ -27,10 +29,10 @@ namespace Messenger.Api.Controllers
                 return BadRequest(new { errorText = "wrong user info" });
             }
 
-            var user = await repository.GetUser(newUser.Email);
-            if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
+            var check = await authService.Contains(newUser);
+            if (!check) { return BadRequest(new { erroeText = "Than email is taken." }); }
 
-            await repository.AddUser(newUser);
+            await authService.AddUser(newUser);
 
             return new OkResult();
         }
