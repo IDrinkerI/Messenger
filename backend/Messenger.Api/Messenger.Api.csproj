@@ -20,7 +20,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Messenger.Store\Messenger.Store.csproj" />
+        <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+        <ProjectReference Include="..\Messenger.Store\Messenger.Data.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Messenger.Store;
-using Messenger.Store.Models;
+using Messenger.Data;
+using Messenger.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -18,7 +18,7 @@ namespace Messenger.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Signup([FromBody] User newUser)
+        public async Task<IActionResult> Signup([FromBody] UserEntity newUser)
         {
             // TODO: remove unnecessary checks 
             if (newUser is null ||

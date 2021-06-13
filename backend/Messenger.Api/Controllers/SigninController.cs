@@ -1,5 +1,5 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace Messenger.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Signin([FromBody] User signinData)
+        public async Task<IActionResult> Signin([FromBody] UserEntity signinData)
         {
             var checkResult = await repository.CheckPassword(signinData.Email, signinData.AuthInfo.PasswordHash);
 

@@ -1,20 +1,20 @@
-﻿using Messenger.Store.Models;
+﻿using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Messenger.Store.Configuration
+namespace Messenger.Data.Configuration
 {
-    internal sealed class ProfileEntityConfiguration : IEntityTypeConfiguration<Profile>
+    internal sealed class ProfileEntityConfiguration : IEntityTypeConfiguration<ProfileEntity>
     {
-        public void Configure(EntityTypeBuilder<Profile> builder)
+        public void Configure(EntityTypeBuilder<ProfileEntity> builder)
         {
-            var nickname = nameof(Profile.Nickname);
+            var nickname = nameof(ProfileEntity.Nickname);
             builder.Property(nickname).HasMaxLength(70);
             builder.Property(nickname).IsRequired();
 
-            builder.Property(nameof(Profile.FirstName)).HasMaxLength(70);
-            builder.Property(nameof(Profile.LastName)).HasMaxLength(70);
+            builder.Property(nameof(ProfileEntity.FirstName)).HasMaxLength(70);
+            builder.Property(nameof(ProfileEntity.LastName)).HasMaxLength(70);
         }
     }
 }

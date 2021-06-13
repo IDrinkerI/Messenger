@@ -1,13 +1,13 @@
-﻿using Messenger.Store.Models;
+﻿using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Messenger.Store.Configuration
+namespace Messenger.Data.Configuration
 {
-    internal sealed class AuthInfoEntityConfiguration : IEntityTypeConfiguration<AuthInfo>
+    internal sealed class AuthInfoEntityConfiguration : IEntityTypeConfiguration<AuthInfoEntity>
     {
-        public void Configure(EntityTypeBuilder<AuthInfo> builder)
+        public void Configure(EntityTypeBuilder<AuthInfoEntity> builder)
         {
             //builder.Property(nameof(AuthInfo.PasswordHash)).IsRequired();
         }

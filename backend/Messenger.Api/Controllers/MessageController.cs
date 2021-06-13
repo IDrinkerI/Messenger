@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Messenger.Store.Models;
-using Messenger.Store;
+using Messenger.Data.Entities;
+using Messenger.Data;
 
 
 namespace Messenger.Api.Controllers
@@ -33,7 +33,7 @@ namespace Messenger.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> AddMessage([FromBody] Message message)
+        public async Task<IActionResult> AddMessage([FromBody] MessageEntity message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();

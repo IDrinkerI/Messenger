@@ -1,5 +1,5 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Data;
+using Messenger.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -27,7 +27,7 @@ namespace Messenger.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProfile([FromBody] Profile value)
+        public async Task<IActionResult> UpdateProfile([FromBody] ProfileEntity value)
         {
             if (value is null) { return new UnsupportedMediaTypeResult(); }
 
