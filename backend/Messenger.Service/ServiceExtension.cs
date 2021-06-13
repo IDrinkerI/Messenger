@@ -7,7 +7,8 @@ namespace Messenger.Service
     {
         public static void AddMessengerServices(this IServiceCollection services)
         {
-            services.AddSingleton<MessageService>();
+            services.AddScoped<MessageService>();
+            services.AddScoped<ChatService>();
         }
     }
 }
