@@ -1,4 +1,5 @@
 using Messenger.DataAccess;
+using Messenger.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace Messenger.Api
 
             services.AuthenticationSetup();
             services.AddMessengerDataRepositories();
+            services.AddMessengerServices();
             services.AddSwaggerGenCustom();
         }
 
