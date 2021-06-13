@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Messenger.Data.Entities;
-using Messenger.Data;
+using Messenger.Service;
+using Messenger.Model;
 
 
 namespace Messenger.Api.Controllers
@@ -11,11 +11,11 @@ namespace Messenger.Api.Controllers
     [Route("api/[controller]/{chatId?}")]
     public sealed class MessageController : ControllerBase
     {
-        private readonly MessageRepository repository;
+        private readonly MessageService messageService;
 
-        public MessageController(MessageRepository repository)
+        public MessageController(MessageService messageService)
         {
-            this.repository = repository;
+            this.messageService = messageService;
         }
 
         /// <summary>
@@ -26,24 +26,21 @@ namespace Messenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMessages(int chatId)
         {
-            var messages = await repository.GetMessages(chatId);
-            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.Profile.Nickname, messageText = m.Text });
+            var messages = await messageService.GetMessages(chatId);
+            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.Nickname, messageText = m.Text });
 
             return new JsonResult(cleanedMessage);
         }
 
         [HttpPut]
-        public async Task<IActionResult> AddMessage([FromBody] MessageEntity message)
+        public async Task<IActionResult> AddMessage([FromBody] MessageModel message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await repository.AddMessage(message, 1);
+            await messageService.AddMessage(message);
 
-            if (additionResult)
-                return new OkResult();
-            else
-                return new BadRequestResult();
+            return new OkResult();
         }
     }
 }
