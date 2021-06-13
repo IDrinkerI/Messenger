@@ -16,7 +16,7 @@ namespace Messenger.Service
             throw new NotImplementedException();
         }
 
-        async public Task AddChat(ChatEntity chat)
+        async public Task AddChat(ChatModel chat)
         {
             throw new NotImplementedException();
         }

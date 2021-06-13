@@ -15,7 +15,7 @@ namespace Messenger.Service
             throw new NotImplementedException();
         }
 
-        public async Task UpdateProfile(int id, ProfileEntity value)
+        public async Task UpdateProfile(int id, ProfileModel value)
         {
             throw new NotImplementedException();
         }

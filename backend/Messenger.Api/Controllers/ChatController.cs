@@ -1,4 +1,4 @@
-﻿using Messenger.Data.Entities;
+﻿using Messenger.Model;
 using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace Messenger.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> AddChat([FromBody] ChatEntity chat)
+        public async Task<IActionResult> AddChat([FromBody] ChatModel chat)
         {
             if (chat is null)
                 return new UnsupportedMediaTypeResult();
