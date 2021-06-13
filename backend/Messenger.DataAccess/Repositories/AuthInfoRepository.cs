@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Messenger.DataAccess
 {
-    public class AuthInfoRepository : IRepository<AuthInfoEntity>
+    public sealed class AuthInfoRepository : IRepository<AuthInfoEntity>
     {
         private readonly StoreContext store;
 
