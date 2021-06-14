@@ -1,4 +1,7 @@
-﻿namespace Messenger.Data.Entities
+﻿using System.Threading.Tasks;
+
+
+namespace Messenger.Data.Entities
 {
     public class SessionEntity : BaseEntity, IUpdatableEntity<SessionEntity>
     {
@@ -7,9 +10,10 @@
         public int UserId { get; set; }
         public UserEntity User { get; set; }
 
-        public void UpdateState(SessionEntity newState)
+        public Task UpdateState(SessionEntity newState)
         {
             KillingTime = newState.KillingTime;
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace Messenger.Data.Entities
@@ -12,9 +13,10 @@ namespace Messenger.Data.Entities
         public AuthInfoEntity AuthInfo { get; set; }
         public HashSet<ChatEntity> Chats { get; set; }
 
-        public void UpdateState(UserEntity newState)
+        public Task UpdateState(UserEntity newState)
         {
             Email = newState.Email;
+            return Task.CompletedTask;
         }
     }
 }
