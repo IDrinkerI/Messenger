@@ -19,7 +19,7 @@ namespace Messenger.DataAccess
             this.store = store;
         }
 
-        async void IRepository<AuthInfoEntity>.Add(AuthInfoEntity item)
+        async Task IRepository<AuthInfoEntity>.Add(AuthInfoEntity item)
         {
             if (item is null) { return; }
 
@@ -27,9 +27,9 @@ namespace Messenger.DataAccess
             await store.SaveChangesAsync();
         }
 
-        Task<AuthInfoEntity> IRepository<AuthInfoEntity>.Get(int id)
+        async Task<AuthInfoEntity> IRepository<AuthInfoEntity>.Get(int id)
         {
-            var authInfo = store.AuthInfos
+            var authInfo = await store.AuthInfos
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             return authInfo;
@@ -40,14 +40,14 @@ namespace Messenger.DataAccess
             throw new NotImplementedException();
         }
 
-        async void IRepository<AuthInfoEntity>.Update(int id, AuthInfoEntity newState)
+        async Task IRepository<AuthInfoEntity>.Update(int id, AuthInfoEntity newState)
         {
             var authInfo = await store.AuthInfos
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             if (authInfo is null) { return; }
 
-            authInfo.UpdateState(newState);
+            await authInfo.UpdateState(newState);
             await store.SaveChangesAsync();
         }
     }

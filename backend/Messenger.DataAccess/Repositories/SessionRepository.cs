@@ -19,7 +19,7 @@ namespace Messenger.DataAccess
             this.store = store;
         }
 
-        async void IRepository<SessionEntity>.Add(SessionEntity item)
+        async Task IRepository<SessionEntity>.Add(SessionEntity item)
         {
             if (item is null) { return; }
 
@@ -40,14 +40,14 @@ namespace Messenger.DataAccess
             throw new NotImplementedException();
         }
 
-      async  void IRepository<SessionEntity>.Update(int id, SessionEntity newState)
+        async Task IRepository<SessionEntity>.Update(int id, SessionEntity newState)
         {
             var session = await store.Sessions
                 .FirstOrDefaultAsync(s => s.Id == id);
 
-            if(session is null) { return; }
+            if (session is null) { return; }
 
-            session.UpdateState(newState);
+            await session.UpdateState(newState);
             await store.SaveChangesAsync();
         }
     }

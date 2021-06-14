@@ -14,7 +14,7 @@ namespace Messenger.DataAccess
 
         public ProfileRepository(StoreContext store) => this.store = store;
 
-        async void IRepository<ProfileEntity>.Add(ProfileEntity item)
+        async Task IRepository<ProfileEntity>.Add(ProfileEntity item)
         {
             if (item is null) { return; }
 
@@ -30,7 +30,7 @@ namespace Messenger.DataAccess
             return profile;
         }
 
-       async Task<IEnumerable<ProfileEntity>> IRepository<ProfileEntity>.GetAll()
+        async Task<IEnumerable<ProfileEntity>> IRepository<ProfileEntity>.GetAll()
         {
             var profiles = await store.Profiles
                 .ToArrayAsync();
@@ -38,13 +38,13 @@ namespace Messenger.DataAccess
             return profiles;
         }
 
-        async void IRepository<ProfileEntity>.Update(int id, ProfileEntity newState)
+        async Task IRepository<ProfileEntity>.Update(int id, ProfileEntity newState)
         {
             var profile = store.Profiles.FirstOrDefault(p => p.Id == id);
             if (profile is null) { return; }
 
 
-            profile.UpdateState(newState);
+            await profile.UpdateState(newState);
             await store.SaveChangesAsync();
         }
     }

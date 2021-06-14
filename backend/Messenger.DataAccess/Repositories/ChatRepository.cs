@@ -16,7 +16,7 @@ namespace Messenger.DataAccess
             this.store = store;
         }
 
-        async void IRepository<ChatEntity>.Add(ChatEntity item)
+        async Task IRepository<ChatEntity>.Add(ChatEntity item)
         {
             if (item is null) { return; }
 
@@ -40,7 +40,7 @@ namespace Messenger.DataAccess
             return chats;
         }
 
-        async void IRepository<ChatEntity>.Update(int id, ChatEntity newState)
+        async Task IRepository<ChatEntity>.Update(int id, ChatEntity newState)
         {
             var chat = await store.Chats
                 .FirstOrDefaultAsync(c => c.Id == id);

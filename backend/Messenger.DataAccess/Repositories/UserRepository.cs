@@ -24,7 +24,7 @@ namespace Messenger.DataAccess
             return user;
         }
 
-        async void IRepository<UserEntity>.Add(UserEntity item)
+        async Task IRepository<UserEntity>.Add(UserEntity item)
         {
             var newProfile = new ProfileEntity { Nickname = item.Email, };
             item.Profile = newProfile;
@@ -33,14 +33,14 @@ namespace Messenger.DataAccess
             await store.SaveChangesAsync();
         }
 
-        async void IRepository<UserEntity>.Update(int id, UserEntity newState)
+        async Task IRepository<UserEntity>.Update(int id, UserEntity newState)
         {
             var user = await store.Users
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (user is null) { return; }
 
-            user.UpdateState(newState);
+            await user.UpdateState(newState);
             await store.SaveChangesAsync();
         }
 
