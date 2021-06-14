@@ -16,6 +16,7 @@ namespace Messenger.Mapper
             var entity = new ChatEntity
             {
                 Name = chatModel.Name,
+                Id = chatModel.Id,
             };
 
             return entity;
@@ -26,6 +27,7 @@ namespace Messenger.Mapper
             var model = new ChatModel
             {
                 Name = chatEntity.Name,
+                Id = chatEntity.Id,
             };
 
             return model;
