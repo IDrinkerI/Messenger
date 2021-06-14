@@ -1,24 +1,35 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Messenger.Mapper
 {
-   public static class ProfileMapper
+    public static class ProfileMapper
     {
         public static ProfileEntity ToEntity(this ProfileModel profileModel)
         {
-            throw new NotImplementedException();
+            var entity = new ProfileEntity
+            {
+                Id = profileModel.Id,
+                Nickname = profileModel.Nickname,
+                FirstName = profileModel.FirstName,
+                LastName = profileModel.LastName,
+            };
+
+            return entity;
         }
 
         public static ProfileModel ToModel(this ProfileEntity profileEntity)
         {
-            throw new NotImplementedException();
+            var model = new ProfileModel
+            {
+                Id = profileEntity.Id,
+                Nickname = profileEntity.Nickname,
+                FirstName = profileEntity.FirstName,
+                LastName = profileEntity.LastName,
+            };
+
+            return model;
         }
     }
 }
