@@ -13,12 +13,22 @@ namespace Messenger.Mapper
     {
         public static ChatEntity ToEntity(this ChatModel chatModel)
         {
-            throw new NotImplementedException();
+            var entity = new ChatEntity
+            {
+                Name = chatModel.Name,
+            };
+
+            return entity;
         }
 
         public static ChatModel ToModel(this ChatEntity chatEntity)
         {
-            throw new NotImplementedException();
+            var model = new ChatModel
+            {
+                Name = chatEntity.Name,
+            };
+
+            return model;
         }
     }
 }
