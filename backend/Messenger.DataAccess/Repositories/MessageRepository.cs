@@ -19,7 +19,10 @@ namespace Messenger.DataAccess
 
         async Task<IEnumerable<MessageEntity>> IMessageRepository<MessageEntity>.GetAll(int chatId)
         {
-            throw new System.NotImplementedException();
+            var messages = await store.Messages.Where(m => m.ChatId == chatId)
+                .ToListAsync();
+
+            return messages;
         }
 
         async Task IRepository<MessageEntity>.Add(MessageEntity item)
