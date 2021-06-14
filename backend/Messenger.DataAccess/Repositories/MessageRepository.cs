@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.DataAccess
 {
-    public sealed class MessageRepository : IRepository<MessageEntity>, IMessageRepository<MessageEntity>
+    public sealed class MessageRepository : IMessageRepository<MessageEntity>
     {
         private readonly StoreContext store;
 
