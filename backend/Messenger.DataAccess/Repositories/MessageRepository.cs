@@ -17,7 +17,7 @@ namespace Messenger.DataAccess
             this.store = store;
         }
 
-        async public Task<IEnumerable<MessageEntity>> GetAll(int chatId)
+        async Task<IEnumerable<MessageEntity>> IMessageRepository<MessageEntity>.GetAll(int chatId)
         {
             throw new System.NotImplementedException();
         }

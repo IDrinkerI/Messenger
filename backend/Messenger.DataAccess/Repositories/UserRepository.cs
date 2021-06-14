@@ -2,12 +2,13 @@
 using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
 namespace Messenger.DataAccess
 {
-    public sealed class UserRepository : IRepository<UserEntity>
+    public sealed class UserRepository : IUserRepository<UserEntity>
     {
         private readonly StoreContext store;
 
@@ -47,6 +48,14 @@ namespace Messenger.DataAccess
         Task<IEnumerable<UserEntity>> IRepository<UserEntity>.GetAll()
         {
             throw new System.NotImplementedException();
+        }
+
+        async Task<UserEntity> IUserRepository<UserEntity>.Get(string email)
+        {
+            var user = await store.Users.Where(u => u.Email == email)
+                .FirstAsync();
+
+            return user;
         }
     }
 }
