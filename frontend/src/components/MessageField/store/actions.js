@@ -14,10 +14,10 @@ export const initMessageStoreAction = () =>
 
         if (process.env.NODE_ENV == "development") {
             const devMessageList = [
-                new MessageModel("TestBot", "Hallo!"),
-                new MessageModel("TestBot", "Some message"),
-                new MessageModel("TestBot", "Some message"),
-                new MessageModel("TestBot", "Some message"),
+                new MessageModel("TestBot", "Hallo!", 1, 1),
+                new MessageModel("TestBot", "Some message", 1, 1),
+                new MessageModel("TestBot", "Some message", 1, 1),
+                new MessageModel("TestBot", "Some message", 1, 1),
             ];
 
             return dispath(initMessageStore(devMessageList, 1));
@@ -43,6 +43,6 @@ export const addMessageAction = (message) =>
         fetch(API_URL, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...message, chatId })
+            body: JSON.stringify(message)
         });
     }

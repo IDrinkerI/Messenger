@@ -1,6 +1,8 @@
 export class MessageModel {
-    constructor(userName, messageText) {
-        this.userName = userName;
-        this.messageText = messageText;
+    constructor(nickname, text, profileId, chatId) {
+        this.nickname = nickname;
+        this.text = text;
+        this.profileId = profileId;
+        this.chatId = chatId
     }
 }
