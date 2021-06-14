@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+    <ProjectReference Include="..\Messenger.Mapper\Messenger.Mapper.csproj" />
     <ProjectReference Include="..\Messenger.Model\Messenger.Model.csproj" />
   </ItemGroup>
 

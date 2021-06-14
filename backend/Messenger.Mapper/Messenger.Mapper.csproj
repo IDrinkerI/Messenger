@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.Model\Messenger.Model.csproj" />
+    <ProjectReference Include="..\Messenger.Store\Messenger.Data.csproj" />
+  </ItemGroup>
+
 </Project>
