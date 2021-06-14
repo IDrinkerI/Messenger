@@ -1,10 +1,5 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Messenger.Mapper
@@ -13,12 +8,28 @@ namespace Messenger.Mapper
     {
         public static MessageEntity ToEntity(this MessageModel messageModel)
         {
-            throw new NotImplementedException();
+            var entity = new MessageEntity
+            {
+                Text = messageModel.Text,
+                ChatId = messageModel.ChatId,
+                ProfileId = messageModel.ProfileId,
+            };
+
+            return entity;
         }
 
         public static MessageModel ToModel(this MessageEntity messageEntity)
         {
-            throw new NotImplementedException();
+            var model = new MessageModel
+            {
+                Id = messageEntity.Id,
+                Text = messageEntity.Text,
+                ChatId = messageEntity.ChatId,
+                ProfileId = messageEntity.ProfileId,
+                Nickname = messageEntity.Profile.Nickname,
+            };
+
+            return model;
         }
     }
 }
