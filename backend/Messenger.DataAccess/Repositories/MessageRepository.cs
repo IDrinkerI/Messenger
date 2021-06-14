@@ -20,6 +20,7 @@ namespace Messenger.DataAccess
         async Task<IEnumerable<MessageEntity>> IMessageRepository<MessageEntity>.GetAll(int chatId)
         {
             var messages = await store.Messages.Where(m => m.ChatId == chatId)
+                .Include(nameof(MessageEntity.Profile))
                 .ToListAsync();
 
             return messages;
