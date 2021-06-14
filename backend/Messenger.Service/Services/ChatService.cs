@@ -1,4 +1,6 @@
 ﻿using Messenger.Data.Entities;
+using Messenger.DataAccess;
+using Messenger.Mapper;
 using Messenger.Model;
 using System;
 using System.Collections.Generic;
@@ -11,14 +13,28 @@ namespace Messenger.Service
 {
     public class ChatService
     {
+        private readonly IRepository<ChatEntity> repository;
+
+        public ChatService(IRepository<ChatEntity> repository)
+        {
+            this.repository = repository;
+        }
+
         async public Task<IEnumerable<ChatModel>> GetChats()
         {
-            throw new NotImplementedException();
+            var chatEntities = await repository.GetAll();
+
+            var chats = new List<ChatModel>();
+            foreach (var entity in chatEntities)
+                chats.Add(entity.ToModel());
+
+            return chats;
         }
 
         async public Task AddChat(ChatModel chat)
         {
-            throw new NotImplementedException();
+            var entity = chat.ToEntity();
+            await repository.Add(entity);
         }
     }
 }
