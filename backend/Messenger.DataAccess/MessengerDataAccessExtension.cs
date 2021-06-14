@@ -10,10 +10,10 @@ namespace Messenger.DataAccess
         public static void AddMessengerDataRepositories(this IServiceCollection services)
         {
             services.AddDbContext<StoreContext>();
-            services.AddScoped<IRepository<MessageEntity>, MessageRepository>();
+            services.AddScoped<IMessageRepository<MessageEntity>, MessageRepository>();
             services.AddScoped<IRepository<ChatEntity>, ChatRepository>();
             services.AddScoped<IRepository<ProfileEntity>, ProfileRepository>();
-            services.AddScoped<IRepository<UserEntity>, UserRepository>();
+            services.AddScoped<IUserRepository<UserEntity>, UserRepository>();
             services.AddScoped<IRepository<AuthInfoEntity>, AuthInfoRepository>();
             services.AddScoped<IRepository<SessionEntity>, SessionRepository>();
         }
