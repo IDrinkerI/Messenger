@@ -14,11 +14,11 @@ namespace Messenger.Api
         {
             services.AddControllers(config => config.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            services.AddHttpContextAccessor();
             services.AuthenticationSetup();
+            services.AddSwaggerGenCustom();
             services.AddMessengerDataRepositories();
             services.AddMessengerServices();
-            services.AddSwaggerGenCustom();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
