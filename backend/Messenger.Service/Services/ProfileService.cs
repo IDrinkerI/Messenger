@@ -23,6 +23,8 @@ namespace Messenger.Service
         public async Task<ProfileModel> GetProfile(int id)
         {
             var entity = await profileRepository.Get(id);
+            if(entity is null) { return new ProfileModel(); }
+
             return entity.ToModel();
         }
 
