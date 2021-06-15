@@ -1,10 +1,5 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Messenger.Mapper
@@ -16,7 +11,7 @@ namespace Messenger.Mapper
             var entity = new ChatEntity
             {
                 Name = chatModel.Name,
-                Id = chatModel.Id,
+                Id   = chatModel.Id,
             };
 
             return entity;
@@ -27,7 +22,7 @@ namespace Messenger.Mapper
             var model = new ChatModel
             {
                 Name = chatEntity.Name,
-                Id = chatEntity.Id,
+                Id   = chatEntity.Id,
             };
 
             return model;

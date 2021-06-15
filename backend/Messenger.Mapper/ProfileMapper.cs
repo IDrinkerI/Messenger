@@ -10,10 +10,10 @@ namespace Messenger.Mapper
         {
             var entity = new ProfileEntity
             {
-                Id = profileModel.Id,
-                Nickname = profileModel.Nickname,
+                Id        = profileModel.Id,
+                Nickname  = profileModel.Nickname,
                 FirstName = profileModel.FirstName,
-                LastName = profileModel.LastName,
+                LastName  = profileModel.LastName,
             };
 
             return entity;
@@ -23,10 +23,10 @@ namespace Messenger.Mapper
         {
             var model = new ProfileModel
             {
-                Id = profileEntity.Id,
-                Nickname = profileEntity.Nickname,
+                Id        = profileEntity.Id,
+                Nickname  = profileEntity.Nickname,
                 FirstName = profileEntity.FirstName,
-                LastName = profileEntity.LastName,
+                LastName  = profileEntity.LastName,
             };
 
             return model;
