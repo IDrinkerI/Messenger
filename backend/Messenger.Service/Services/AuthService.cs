@@ -1,27 +1,41 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.DataAccess;
 using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 
 namespace Messenger.Service
 {
-    public class AuthService
+    public sealed class AuthService
     {
         private readonly IRepository<AuthInfoEntity> authInfoRepository;
         private readonly IUserRepository<UserEntity> userRepository;
+        private readonly IHttpContextAccessor contextAccessor;
 
-        public AuthService(IRepository<AuthInfoEntity> authInfoRepository, IUserRepository<UserEntity> userRepository)
+        public int CurrentUserId
         {
-            this.authInfoRepository = authInfoRepository;
-            this.userRepository = userRepository;
+            get
+            {
+                var user  = contextAccessor.HttpContext.User;
+                var claim = user.FindFirst(c => c.Type == "Id");
+                if (claim is null) { return 0; }
+
+                var id = int.Parse(claim.Value);
+                return id;
+            }
         }
 
-        async public Task<bool> CheckPassword(AuthInfoModel signinData)
+        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
+                           IUserRepository<UserEntity> userRepository,
+                           IHttpContextAccessor contextAccessor)
+        {
+            this.authInfoRepository = authInfoRepository;
+            this.userRepository     = userRepository;
+            this.contextAccessor    = contextAccessor;
+        }
+
+        public async Task<bool> CheckPassword(AuthInfoModel signinData)
         {
             var user = await userRepository.Get(signinData.Email);
             if (user is null) { return false; }
@@ -32,28 +46,22 @@ namespace Messenger.Service
             return passwordHash == signinData.Password;
         }
 
-        async public Task AddUser(AuthInfoModel newUser)
+        public async Task AddUser(AuthInfoModel newUser)
         {
             var checkUser = await userRepository.Get(newUser.Email);
             if (checkUser is not null) { return; }
 
             var user = new UserEntity
             {
-                Email = newUser.Email,
-                AuthInfo = new AuthInfoEntity
-                {
-                    PasswordHash = newUser.Password
-                },
-                Profile = new ProfileEntity
-                {
-                    Nickname = newUser.Email
-                }
+                Email    = newUser.Email,
+                AuthInfo = new AuthInfoEntity { PasswordHash = newUser.Password },
+                Profile  = new ProfileEntity { Nickname = newUser.Email }
             };
 
             await userRepository.Add(user);
         }
 
-        async public Task<bool> Contains(AuthInfoModel newUser)
+        public async Task<bool> Contains(AuthInfoModel newUser)
         {
             var user = await userRepository.Get(newUser.Email);
 

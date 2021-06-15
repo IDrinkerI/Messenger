@@ -6,22 +6,17 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class ChatController : ControllerBase
+    public sealed class ChatController : MessengerApiController
     {
         private readonly ChatService chatService;
 
-        public ChatController(ChatService chatService)
-        {
+        public ChatController(ChatService chatService) =>
             this.chatService = chatService;
-        }
 
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
             var chats = await chatService.GetChats();
-
             return new JsonResult(chats);
         }
 

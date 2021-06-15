@@ -1,6 +1,4 @@
-﻿using Messenger.Data;
-using Messenger.Data.Entities;
-using Messenger.Model;
+﻿using Messenger.Model;
 using Messenger.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,16 +10,12 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class SigninController : ControllerBase
+    public sealed class SigninController : MessengerApiController
     {
         private readonly AuthService authService;
 
-        public SigninController(AuthService authService)
-        {
+        public SigninController(AuthService authService) =>
             this.authService = authService;
-        }
 
         [HttpPost]
         public async Task<IActionResult> Signin([FromBody] AuthInfoModel signinData)
@@ -34,13 +28,13 @@ namespace Messenger.Api.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, signinData.Email),
+                new Claim("Id", "1"),
             };
 
-            var claimIdentity = new ClaimsIdentity(claims, "Messenger", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            var claimPrincipal = new ClaimsPrincipal(claimIdentity);
+            var claimId = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            var claimPrincipal = new ClaimsPrincipal(claimId);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
-
             return new OkResult();
         }
     }

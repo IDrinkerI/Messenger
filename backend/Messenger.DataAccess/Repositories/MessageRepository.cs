@@ -12,19 +12,7 @@ namespace Messenger.DataAccess
     {
         private readonly StoreContext store;
 
-        public MessageRepository(StoreContext store)
-        {
-            this.store = store;
-        }
-
-        async Task<IEnumerable<MessageEntity>> IMessageRepository<MessageEntity>.GetAll(int chatId)
-        {
-            var messages = await store.Messages.Where(m => m.ChatId == chatId)
-                .Include(nameof(MessageEntity.Profile))
-                .ToListAsync();
-
-            return messages;
-        }
+        public MessageRepository(StoreContext store) => this.store = store;
 
         async Task IRepository<MessageEntity>.Add(MessageEntity item)
         {
@@ -34,12 +22,21 @@ namespace Messenger.DataAccess
             await store.SaveChangesAsync();
         }
 
-        Task<MessageEntity> IRepository<MessageEntity>.Get(int id)
+        async Task<MessageEntity> IRepository<MessageEntity>.Get(int id)
         {
-            var message = store.Messages
+            var message = await store.Messages
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             return message;
+        }
+
+        async Task<IEnumerable<MessageEntity>> IMessageRepository<MessageEntity>.GetAll(int chatId)
+        {
+            var messages = await store.Messages.Where(m => m.ChatId == chatId)
+                .Include(nameof(MessageEntity.Profile))
+                .ToListAsync();
+
+            return messages;
         }
 
         Task<IEnumerable<MessageEntity>> IRepository<MessageEntity>.GetAll()

@@ -2,7 +2,6 @@
 using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -12,9 +11,23 @@ namespace Messenger.DataAccess
     {
         private readonly StoreContext store;
 
-        public UserRepository(StoreContext store)
+        public UserRepository(StoreContext store) => this.store = store;
+
+        async Task IRepository<UserEntity>.Add(UserEntity item)
         {
-            this.store = store;
+            var newProfile = new ProfileEntity { Nickname = item.Email, };
+            item.Profile = newProfile;
+
+            await store.Users.AddAsync(item);
+            await store.SaveChangesAsync();
+        }
+
+        async Task<UserEntity> IUserRepository<UserEntity>.Get(string email)
+        {
+            var user = await store.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            return user;
         }
 
         async Task<UserEntity> IRepository<UserEntity>.Get(int id)
@@ -25,13 +38,9 @@ namespace Messenger.DataAccess
             return user;
         }
 
-        async Task IRepository<UserEntity>.Add(UserEntity item)
+        Task<IEnumerable<UserEntity>> IRepository<UserEntity>.GetAll()
         {
-            var newProfile = new ProfileEntity { Nickname = item.Email, };
-            item.Profile = newProfile;
-
-            await store.Users.AddAsync(item);
-            await store.SaveChangesAsync();
+            throw new System.NotImplementedException();
         }
 
         async Task IRepository<UserEntity>.Update(int id, UserEntity newState)
@@ -43,19 +52,6 @@ namespace Messenger.DataAccess
 
             await user.UpdateState(newState);
             await store.SaveChangesAsync();
-        }
-
-        Task<IEnumerable<UserEntity>> IRepository<UserEntity>.GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        async Task<UserEntity> IUserRepository<UserEntity>.Get(string email)
-        {
-            var user = await store.Users.Where(u => u.Email == email)
-                .FirstAsync();
-
-            return user;
         }
     }
 }

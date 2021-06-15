@@ -19,7 +19,10 @@ export const Messenger = () => {
     const chatId = useSelector(currentChatIdSelector);
 
     const buttonHandler = () => {
-        const message = new MessageModel("", inputMessage, profileId, chatId);
+        const message = new MessageModel();
+        message.text = inputMessage;
+        message.chatId = chatId;
+
         dispatch(addMessageAction(message));
         dispatch(updateInputMessageAction(""));
     }

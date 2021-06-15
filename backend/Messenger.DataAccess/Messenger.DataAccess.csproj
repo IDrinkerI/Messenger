@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messenger.Store\Messenger.Data.csproj" />
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj" />
   </ItemGroup>
 
 </Project>
