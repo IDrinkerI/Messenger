@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Messenger.Data;
-using Messenger.Data.Entities;
 using Messenger.Model;
 using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class SignupController : ControllerBase
+    public sealed class SignupController : MessengerApiController
     {
         private readonly AuthService authService;
 

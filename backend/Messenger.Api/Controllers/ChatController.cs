@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class ChatController : ControllerBase
+    public sealed class ChatController : MessengerApiController
     {
         private readonly ChatService chatService;
 

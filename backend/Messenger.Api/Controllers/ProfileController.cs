@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class ProfileController : ControllerBase
+    public sealed class ProfileController : MessengerApiController
     {
         private readonly ProfileService profileService;
 

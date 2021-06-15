@@ -7,9 +7,7 @@ using Messenger.Model;
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]/{chatId?}")]
-    public sealed class MessageController : ControllerBase
+    public sealed class MessageController : MessengerApiController
     {
         private readonly MessageService messageService;
 
@@ -23,7 +21,7 @@ namespace Messenger.Api.Controllers
         /// </summary>
         /// <param name="chatId"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{chatId?}")]
         public async Task<IActionResult> GetMessages(int chatId)
         {
             var messages = await messageService.GetMessages(chatId);
