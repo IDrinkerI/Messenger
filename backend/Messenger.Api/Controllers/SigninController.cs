@@ -14,10 +14,8 @@ namespace Messenger.Api.Controllers
     {
         private readonly AuthService authService;
 
-        public SigninController(AuthService authService)
-        {
+        public SigninController(AuthService authService) =>
             this.authService = authService;
-        }
 
         [HttpPost]
         public async Task<IActionResult> Signin([FromBody] AuthInfoModel signinData)
@@ -37,7 +35,6 @@ namespace Messenger.Api.Controllers
             var claimPrincipal = new ClaimsPrincipal(claimId);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
-
             return new OkResult();
         }
     }

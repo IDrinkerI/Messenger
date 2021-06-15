@@ -10,16 +10,13 @@ namespace Messenger.Api.Controllers
     {
         private readonly ChatService chatService;
 
-        public ChatController(ChatService chatService)
-        {
+        public ChatController(ChatService chatService) =>
             this.chatService = chatService;
-        }
 
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
             var chats = await chatService.GetChats();
-
             return new JsonResult(chats);
         }
 

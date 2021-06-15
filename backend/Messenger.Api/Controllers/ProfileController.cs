@@ -23,7 +23,7 @@ namespace Messenger.Api.Controllers
         [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetProfile()
         {
-            var id      = authService.CurrentUserId;
+            var id = authService.CurrentUserId;
             var profile = await profileService.GetProfile(id);
 
             return new JsonResult(profile);

@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Messenger.Model;
 using Messenger.Service;
-using Messenger.Model;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 
 namespace Messenger.Api.Controllers
@@ -11,10 +10,8 @@ namespace Messenger.Api.Controllers
     {
         private readonly MessageService messageService;
 
-        public MessageController(MessageService messageService)
-        {
+        public MessageController(MessageService messageService) =>
             this.messageService = messageService;
-        }
 
         /// <summary>
         /// Return all messages by chat id
@@ -25,9 +22,7 @@ namespace Messenger.Api.Controllers
         public async Task<IActionResult> GetMessages(int chatId)
         {
             var messages = await messageService.GetMessages(chatId);
-            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.Nickname, messageText = m.Text });
-
-            return new JsonResult(cleanedMessage);
+            return new JsonResult(messages);
         }
 
         [HttpPut]
@@ -37,7 +32,6 @@ namespace Messenger.Api.Controllers
                 return new UnsupportedMediaTypeResult();
 
             await messageService.AddMessage(message);
-
             return new OkResult();
         }
     }
