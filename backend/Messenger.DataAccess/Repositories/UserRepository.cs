@@ -52,8 +52,8 @@ namespace Messenger.DataAccess
 
         async Task<UserEntity> IUserRepository<UserEntity>.Get(string email)
         {
-            var user = await store.Users.Where(u => u.Email == email)
-                .FirstAsync();
+            var user = await store.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
 
             return user;
         }
