@@ -3,9 +3,9 @@ using Messenger.DataAccess;
 using Messenger.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 
 namespace Messenger.Service
@@ -14,11 +14,28 @@ namespace Messenger.Service
     {
         private readonly IRepository<AuthInfoEntity> authInfoRepository;
         private readonly IUserRepository<UserEntity> userRepository;
+        private readonly IHttpContextAccessor contextAccessor;
 
-        public AuthService(IRepository<AuthInfoEntity> authInfoRepository, IUserRepository<UserEntity> userRepository)
+        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
+                           IUserRepository<UserEntity> userRepository,
+                           IHttpContextAccessor contextAccessor)
         {
             this.authInfoRepository = authInfoRepository;
             this.userRepository = userRepository;
+            this.contextAccessor = contextAccessor;
+        }
+
+        public int CurrentUserId
+        {
+            get
+            {
+                var user = contextAccessor.HttpContext.User;
+                var claim = user.FindFirst(c => c.Type == "Id");
+                if (claim is null) { return 0; }
+
+                var id = int.Parse(claim.Value);
+                return id;
+            }
         }
 
         async public Task<bool> CheckPassword(AuthInfoModel signinData)
