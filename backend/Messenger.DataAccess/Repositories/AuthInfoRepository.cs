@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Messenger.Data;
+﻿using Messenger.Data;
 using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace Messenger.DataAccess
@@ -14,10 +12,7 @@ namespace Messenger.DataAccess
     {
         private readonly StoreContext store;
 
-        public AuthInfoRepository(StoreContext store)
-        {
-            this.store = store;
-        }
+        public AuthInfoRepository(StoreContext store) => this.store = store;
 
         async Task IRepository<AuthInfoEntity>.Add(AuthInfoEntity item)
         {

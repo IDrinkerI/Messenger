@@ -1,8 +1,8 @@
-﻿using Messenger.Data.Entities;
+﻿using Messenger.Data;
+using Messenger.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Messenger.Data;
 
 
 namespace Messenger.DataAccess
@@ -11,10 +11,7 @@ namespace Messenger.DataAccess
     {
         private readonly StoreContext store;
 
-        public ChatRepository(StoreContext store)
-        {
-            this.store = store;
-        }
+        public ChatRepository(StoreContext store) => this.store = store;
 
         async Task IRepository<ChatEntity>.Add(ChatEntity item)
         {

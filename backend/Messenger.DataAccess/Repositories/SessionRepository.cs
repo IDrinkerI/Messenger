@@ -1,11 +1,9 @@
-﻿using Messenger.Data.Entities;
+﻿using Messenger.Data;
+using Messenger.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Messenger.Data;
 
 
 namespace Messenger.DataAccess
@@ -14,10 +12,7 @@ namespace Messenger.DataAccess
     {
         private readonly StoreContext store;
 
-        public SessionRepository(StoreContext store)
-        {
-            this.store = store;
-        }
+        public SessionRepository(StoreContext store) => this.store = store;
 
         async Task IRepository<SessionEntity>.Add(SessionEntity item)
         {
