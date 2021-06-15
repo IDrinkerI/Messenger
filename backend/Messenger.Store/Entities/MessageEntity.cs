@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 
+
 namespace Messenger.Data.Entities
 {
     public sealed class MessageEntity : BaseEntity, IUpdatableEntity<MessageEntity>
@@ -12,7 +13,7 @@ namespace Messenger.Data.Entities
 
         public Task UpdateState(MessageEntity newState)
         {
-            Text = newState.Text ;
+            Text = newState.Text;
             return Task.CompletedTask;
         }
     }
