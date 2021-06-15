@@ -1,12 +1,8 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.DataAccess;
-using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Messenger.Mapper;
+using Messenger.Model;
+using System.Threading.Tasks;
 
 
 namespace Messenger.Service
@@ -15,15 +11,13 @@ namespace Messenger.Service
     {
         private readonly IRepository<ProfileEntity> profileRepository;
 
-        public ProfileService(IRepository<ProfileEntity> profileRepository)
-        {
+        public ProfileService(IRepository<ProfileEntity> profileRepository) => 
             this.profileRepository = profileRepository;
-        }
 
         public async Task<ProfileModel> GetProfile(int id)
         {
             var entity = await profileRepository.Get(id);
-            if(entity is null) { return new ProfileModel(); }
+            if (entity is null) { return new ProfileModel(); }
 
             return entity.ToModel();
         }

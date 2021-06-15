@@ -1,41 +1,38 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.DataAccess;
 using Messenger.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 
 namespace Messenger.Service
 {
-    public class AuthService
+    public sealed class AuthService
     {
         private readonly IRepository<AuthInfoEntity> authInfoRepository;
         private readonly IUserRepository<UserEntity> userRepository;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
-                           IUserRepository<UserEntity> userRepository,
-                           IHttpContextAccessor contextAccessor)
-        {
-            this.authInfoRepository = authInfoRepository;
-            this.userRepository = userRepository;
-            this.contextAccessor = contextAccessor;
-        }
-
         public int CurrentUserId
         {
             get
             {
-                var user = contextAccessor.HttpContext.User;
+                var user  = contextAccessor.HttpContext.User;
                 var claim = user.FindFirst(c => c.Type == "Id");
                 if (claim is null) { return 0; }
 
                 var id = int.Parse(claim.Value);
                 return id;
             }
+        }
+
+        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
+                           IUserRepository<UserEntity> userRepository,
+                           IHttpContextAccessor contextAccessor)
+        {
+            this.authInfoRepository = authInfoRepository;
+            this.userRepository     = userRepository;
+            this.contextAccessor    = contextAccessor;
         }
 
         async public Task<bool> CheckPassword(AuthInfoModel signinData)
@@ -56,15 +53,9 @@ namespace Messenger.Service
 
             var user = new UserEntity
             {
-                Email = newUser.Email,
-                AuthInfo = new AuthInfoEntity
-                {
-                    PasswordHash = newUser.Password
-                },
-                Profile = new ProfileEntity
-                {
-                    Nickname = newUser.Email
-                }
+                Email    = newUser.Email,
+                AuthInfo = new AuthInfoEntity { PasswordHash = newUser.Password },
+                Profile  = new ProfileEntity { Nickname = newUser.Email }
             };
 
             await userRepository.Add(user);
