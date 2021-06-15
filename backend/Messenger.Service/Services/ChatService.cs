@@ -14,7 +14,7 @@ namespace Messenger.Service
 
         public ChatService(IRepository<ChatEntity> repository) => this.repository = repository;
 
-        async public Task<IEnumerable<ChatModel>> GetChats()
+        public async Task<IEnumerable<ChatModel>> GetChats()
         {
             var chatEntities = await repository.GetAll();
             var chats = new List<ChatModel>();
@@ -25,7 +25,7 @@ namespace Messenger.Service
             return chats;
         }
 
-        async public Task AddChat(ChatModel chat)
+        public async Task AddChat(ChatModel chat)
         {
             var entity = chat.ToEntity();
             await repository.Add(entity);

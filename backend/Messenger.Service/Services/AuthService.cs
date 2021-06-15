@@ -35,7 +35,7 @@ namespace Messenger.Service
             this.contextAccessor    = contextAccessor;
         }
 
-        async public Task<bool> CheckPassword(AuthInfoModel signinData)
+        public async Task<bool> CheckPassword(AuthInfoModel signinData)
         {
             var user = await userRepository.Get(signinData.Email);
             if (user is null) { return false; }
@@ -46,7 +46,7 @@ namespace Messenger.Service
             return passwordHash == signinData.Password;
         }
 
-        async public Task AddUser(AuthInfoModel newUser)
+        public async Task AddUser(AuthInfoModel newUser)
         {
             var checkUser = await userRepository.Get(newUser.Email);
             if (checkUser is not null) { return; }
@@ -61,7 +61,7 @@ namespace Messenger.Service
             await userRepository.Add(user);
         }
 
-        async public Task<bool> Contains(AuthInfoModel newUser)
+        public async Task<bool> Contains(AuthInfoModel newUser)
         {
             var user = await userRepository.Get(newUser.Email);
 
