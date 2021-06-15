@@ -30,10 +30,11 @@ namespace Messenger.Api.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, signinData.Email),
+                new Claim("Id", "1"),
             };
 
-            var claimIdentity = new ClaimsIdentity(claims, "Messenger", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            var claimPrincipal = new ClaimsPrincipal(claimIdentity);
+            var claimId = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            var claimPrincipal = new ClaimsPrincipal(claimId);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
 
