@@ -22,9 +22,9 @@ namespace Messenger.DataAccess
             await store.SaveChangesAsync();
         }
 
-        Task<MessageEntity> IRepository<MessageEntity>.Get(int id)
+        async Task<MessageEntity> IRepository<MessageEntity>.Get(int id)
         {
-            var message = store.Messages
+            var message = await store.Messages
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             return message;
