@@ -1,49 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using Messenger.Model;
+using Messenger.Service;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Messenger.Store.Models;
-using Messenger.Store;
 
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]/{chatId?}")]
-    public sealed class MessageController : ControllerBase
+    public sealed class MessageController : MessengerApiController
     {
-        private readonly MessageRepository repository;
+        private readonly MessageService messageService;
 
-        public MessageController(MessageRepository repository)
-        {
-            this.repository = repository;
-        }
+        public MessageController(MessageService messageService) =>
+            this.messageService = messageService;
 
         /// <summary>
         /// Return all messages by chat id
         /// </summary>
         /// <param name="chatId"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{chatId?}")]
         public async Task<IActionResult> GetMessages(int chatId)
         {
-            var messages = await repository.GetMessages(chatId);
-            var cleanedMessage = messages.Select(m => new { id = m.Id, userName = m.UserName, messageText = m.MessageText });
-
-            return new JsonResult(cleanedMessage);
+            var messages = await messageService.GetMessages(chatId);
+            return new JsonResult(messages);
         }
 
         [HttpPut]
-        public async Task<IActionResult> AddMessage([FromBody] Message message)
+        public async Task<IActionResult> AddMessage([FromBody] MessageModel message)
         {
             if (message is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await repository.AddMessage(message);
-
-            if (additionResult)
-                return new OkResult();
-            else
-                return new BadRequestResult();
+            await messageService.AddMessage(message);
+            return new OkResult();
         }
     }
 }

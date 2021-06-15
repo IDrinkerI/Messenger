@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+    <ProjectReference Include="..\Messenger.Mapper\Messenger.Mapper.csproj" />
+    <ProjectReference Include="..\Messenger.Model\Messenger.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,37 +1,33 @@
-﻿using System.Threading.Tasks;
-using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Model;
+using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class SignupController : ControllerBase
+    public sealed class SignupController : MessengerApiController
     {
-        private readonly UserRepository repository;
+        private readonly AuthService authService;
 
-        public SignupController(UserRepository repository)
-        {
-            this.repository = repository;
-        }
+        public SignupController(AuthService authService) =>
+            this.authService = authService;
 
         [HttpPut]
-        public async Task<IActionResult> Signup([FromBody] User newUser)
+        public async Task<IActionResult> Signup([FromBody] AuthInfoModel newUser)
         {
             // TODO: remove unnecessary checks 
-            if (newUser is null ||
+            if (newUser is null       ||
                 newUser.Email is null ||
                 newUser.Password is null)
             {
                 return BadRequest(new { errorText = "wrong user info" });
             }
 
-            var user = await repository.GetUser(newUser.Email);
-            if (!(user is null)) { return BadRequest(new { erroeText = "Than email is taken." }); }
+            if (await authService.Contains(newUser))
+                return BadRequest(new { erroeText = "Than email is taken." });
 
-            await repository.AddUser(newUser);
+            await authService.AddUser(newUser);
 
             return new OkResult();
         }

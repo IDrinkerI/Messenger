@@ -14,10 +14,9 @@ export const initMessageStoreAction = () =>
 
         if (process.env.NODE_ENV == "development") {
             const devMessageList = [
-                new MessageModel("TestBot", "Hallo!"),
-                new MessageModel("TestBot", "Some message"),
-                new MessageModel("TestBot", "Some message"),
-                new MessageModel("TestBot", "Some message"),
+                new MessageModel("TestBot", "Hallo!", 1, 1),
+                new MessageModel("TestBot", "Some message", 1, 1),
+                new MessageModel("TestBot", "Some message", 1, 1),
             ];
 
             return dispath(initMessageStore(devMessageList, 1));
@@ -33,16 +32,17 @@ export const initMessageStoreAction = () =>
 
 export const addMessageAction = (message) =>
     (dispatch, setState) => {
+        message.profileId = setState().profile.id;
+        console.log("ProfileID: ", setState().profile.id)
         if (process.env.NODE_ENV == "development") {
+            message.nickname = "Developer";
             dispatch(addMessage(message));
             return;
         }
 
-        const chatId = setState().chats.currentChatId;
-
         fetch(API_URL, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...message, chatId })
+            body: JSON.stringify(message)
         });
     }

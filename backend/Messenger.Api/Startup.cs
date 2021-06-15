@@ -1,4 +1,5 @@
-using Messenger.Store;
+using Messenger.DataAccess;
+using Messenger.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,10 +14,11 @@ namespace Messenger.Api
         {
             services.AddControllers(config => config.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            services.AddHttpContextAccessor();
             services.AuthenticationSetup();
-            services.AddMessengerDataRepositories();
             services.AddSwaggerGenCustom();
+            services.AddMessengerDataRepositories();
+            services.AddMessengerServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

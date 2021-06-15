@@ -1,43 +1,33 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Model;
+using Messenger.Service;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class ChatController : ControllerBase
+    public sealed class ChatController : MessengerApiController
     {
-        private readonly ChatRepository repository;
+        private readonly ChatService chatService;
 
-        public ChatController(ChatRepository repository)
-        {
-            this.repository = repository;
-        }
+        public ChatController(ChatService chatService) =>
+            this.chatService = chatService;
 
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var chats = await repository.GetChats();
-            var cleanedChats = chats.Select(chat => new { chat.Id, chat.Name });
-
-            return new JsonResult(cleanedChats);
+            var chats = await chatService.GetChats();
+            return new JsonResult(chats);
         }
 
         [HttpPut]
-        public async Task<IActionResult> AddChat([FromBody] Chat chat)
+        public async Task<IActionResult> AddChat([FromBody] ChatModel chat)
         {
             if (chat is null)
                 return new UnsupportedMediaTypeResult();
 
-            var additionResult = await repository.AddChat(chat);
-            if (additionResult)
-                return new OkResult();
-            else
-                return new BadRequestResult();
+            await chatService.AddChat(chat);
+            return new OkResult();
         }
     }
 }

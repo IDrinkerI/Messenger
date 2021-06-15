@@ -5,8 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Interfaces\" />
-        <Folder Include="Models\" />
         <Folder Include="wwwroot\" />
     </ItemGroup>
 
@@ -20,7 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Messenger.Store\Messenger.Store.csproj" />
+        <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+        <ProjectReference Include="..\Messenger.Service\Messenger.Service.csproj" />
+        <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj" />
     </ItemGroup>
 
     <ItemGroup>

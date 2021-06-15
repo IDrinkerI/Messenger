@@ -1,44 +1,44 @@
-﻿using Messenger.Store;
-using Messenger.Store.Models;
+﻿using Messenger.Model;
+using Messenger.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 
 namespace Messenger.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public sealed class ProfileController : ControllerBase
+    public sealed class ProfileController : MessengerApiController
     {
-       private readonly ProfileRepository repository;
+        private readonly ProfileService profileService;
+        private readonly AuthService    authService;
 
-        public ProfileController(ProfileRepository repository)
+        public ProfileController(ProfileService profileService, AuthService authService)
         {
-            this.repository = repository;
+            this.profileService = profileService;
+            this.authService    = authService;
         }
 
         [HttpGet]
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetProfile()
         {
-            var id = 1;
-            var profile = await repository.GetProfile(id);
+            var id = authService.CurrentUserId;
+            var profile = await profileService.GetProfile(id);
 
             return new JsonResult(profile);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProfile([FromBody] Profile value)
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> UpdateProfile([FromBody] ProfileModel value)
         {
             if (value is null) { return new UnsupportedMediaTypeResult(); }
 
-            // TODO: need cookes
-            var id = value.Id;
+            var id = authService.CurrentUserId;
+            await profileService.UpdateProfile(id, value);
 
-            var updateResult = await repository.UpdateProfile(id, value);
-            if (updateResult)
-                return new OkResult();
-            else
-                return new BadRequestResult();
+            return new OkResult();
         }
     }
 }

@@ -10,10 +10,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
     combineReducers({
-        messages: messageReduser,
-        inputText: inputMessageReducer,
-        chats: chatsReducer,
-        profile: profileReducer,
+        messages:   messageReduser,
+        inputText:  inputMessageReducer,
+        chats:      chatsReducer,
+        profile:    profileReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))
 );

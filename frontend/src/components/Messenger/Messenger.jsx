@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MessageModel } from "../../models/MessageModel";
 import { Button } from "../Button";
-import { ChatList } from "../ChatList";
+import { ChatList, currentChatIdSelector } from "../ChatList";
 import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
-import { profileNicknameSelector } from "../Profile";
+import { profileIdSelector } from "../Profile";
 import { initProfileAction } from "../Profile/store/actions";
 import "./messenger.scss";
 
@@ -15,10 +15,14 @@ import "./messenger.scss";
 export const Messenger = () => {
     const dispatch = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
-    const nickName = useSelector(profileNicknameSelector);
+    const profileId = useSelector(profileIdSelector);
+    const chatId = useSelector(currentChatIdSelector);
 
     const buttonHandler = () => {
-        const message = new MessageModel(nickName, inputMessage);
+        const message = new MessageModel();
+        message.text = inputMessage;
+        message.chatId = chatId;
+
         dispatch(addMessageAction(message));
         dispatch(updateInputMessageAction(""));
     }
