@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { RestClient } from "../../utils";
 import { Button } from "../Button";
 import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import "./signup.scss";
 
 
-const API = "/api/signup";
+const API_URL = "signup/";
 
 export const Signup = () => {
     const [email, setEmeil] = useState("");
@@ -39,11 +40,7 @@ export const Signup = () => {
             console.log({ newUser: { email, password } });
         }
 
-        await fetch(API, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+        await RestClient.putAsync(API_URL, { email, password });
 
         setEmeil("");
         setPassword("");

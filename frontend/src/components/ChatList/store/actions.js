@@ -1,8 +1,9 @@
 import { ChatModel } from "../../../models/ChatModel";
+import { RestClient } from "../../../utils";
 import { ADD_CHAT, INIT_CHAT_LIST, SELECT_CURRENT_CHAT } from "./types";
 
 
-const API_URL = "/api/chat";
+const API_URL = "chat/";
 const UPDATE_INTERVAL = 250;
 
 export const addChatAction = (chat) => ({ type: ADD_CHAT, payload: chat });
@@ -24,8 +25,7 @@ export const initChatListAction = () =>
         }
 
         const timer = setInterval(async () => {
-            const response = await fetch(API_URL);
-            const chatList = await response.json();
+            const chatList = await RestClient.getAsync(API_URL);
             dispatch(initChatList(chatList, timer));
         }, UPDATE_INTERVAL);
     };

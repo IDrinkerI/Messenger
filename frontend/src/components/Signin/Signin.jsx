@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { RestClient } from "../../utils";
 import { Button } from "../Button";
 import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import "./signin.scss";
 
-const API = "api/signin";
+const API_URL = "signin/";
 
 export const Signin = () => {
     const [email, setEmail] = useState("");
@@ -26,12 +27,7 @@ export const Signin = () => {
         event.preventDefault();
 
         /*const response =*/
-        await fetch(API, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
-
+        await RestClient.postAsync(API_URL, { email, password });
         //const signinResult = await response.status;
 
         setEmail("");
