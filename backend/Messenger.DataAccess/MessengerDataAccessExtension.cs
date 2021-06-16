@@ -1,5 +1,4 @@
 ﻿using Messenger.Data;
-using Messenger.Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 

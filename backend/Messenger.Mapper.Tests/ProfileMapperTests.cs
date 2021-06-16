@@ -1,4 +1,4 @@
-﻿using Messenger.Data.Entities;
+﻿using Messenger.Data;
 using Messenger.Model;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
