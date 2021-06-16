@@ -7,20 +7,21 @@ import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
-import { profileIdSelector } from "../Profile";
 import { initProfileAction } from "../Profile/store/actions";
 import "./messenger.scss";
 
 
 export const Messenger = () => {
-    const dispatch = useDispatch();
+    const dispatch     = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
-    const profileId = useSelector(profileIdSelector);
-    const chatId = useSelector(currentChatIdSelector);
+    const chatId       = useSelector(currentChatIdSelector);
 
-    const buttonHandler = () => {
+    const buttonHandler = (event) => {
+        event.preventDefault();
+        if (!inputMessage) { return; }
+
         const message = new MessageModel();
-        message.text = inputMessage;
+        message.text   = inputMessage;
         message.chatId = chatId;
 
         dispatch(addMessageAction(message));
@@ -44,10 +45,15 @@ export const Messenger = () => {
                     <MessageField />
                 </div>
 
-                <div className="messenger_inner">
-                    <InputField style={{ "flex-grow": "1" }} value={inputMessage} onChange={inputFieldOnChangeHandler} />
+                <form className="messenger_inner">
+                    <InputField
+                        style={{ "flex-grow": "1" }}
+                        value={inputMessage}
+                        onChange={inputFieldOnChangeHandler}
+                    />
+
                     <Button onClick={buttonHandler}>Send</Button>
-                </div>
+                </form>
             </div>
         </HtmlContainer>
     );

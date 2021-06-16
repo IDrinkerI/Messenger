@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { store } from "../../store";
+import { Footer } from "../Footer";
 import { Messenger } from "../Messenger";
 import { Navigator } from "../Navigator";
 import { Profile } from "../Profile";
@@ -13,6 +14,7 @@ export const Application = () => (
     <Provider store={store}>
         <BrowserRouter>
             <Navigator />
+
             <Switch>
                 <Route exact path="/">
                     <Messenger />
@@ -32,6 +34,8 @@ export const Application = () => (
 
                 <Redirect to="/" />
             </Switch>
+
+            <Footer />
         </BrowserRouter>
     </Provider>
 )
