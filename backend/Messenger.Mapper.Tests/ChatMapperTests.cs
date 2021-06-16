@@ -15,7 +15,7 @@ namespace Messenger.Mapper.Tests
         [Fact]
         public void ToEntity_DefaulInitModel_DefaultInitEntity()
         {
-            var comparer = GetChatEntityComparer();
+            var comparer = GetEntityComparer();
             var expected = new ChatEntity();
 
             var model  = new ChatModel();
@@ -31,7 +31,7 @@ namespace Messenger.Mapper.Tests
         [Fact]
         public void ToEntity_InitModel_InitEntity()
         {
-            var comparer = GetChatEntityComparer();
+            var comparer = GetEntityComparer();
             var expected = new ChatEntity
             {
                 Id       = 1,
@@ -56,7 +56,7 @@ namespace Messenger.Mapper.Tests
         [Fact]
         public void ToModel_DefaultInitEntity_DefaultInitModel()
         {
-            var comparer = GetChatModelComparer();
+            var comparer = GetModelComparer();
             var expected = new ChatModel();
 
             var entity = new ChatEntity();
@@ -72,7 +72,7 @@ namespace Messenger.Mapper.Tests
         [Fact]
         public void ToModel_InitEntity_InitModel()
         {
-            var comparer = GetChatModelComparer();
+            var comparer = GetModelComparer();
             var expected = new ChatModel
             {
                 Id   = 1,
@@ -91,10 +91,10 @@ namespace Messenger.Mapper.Tests
         }
 
 
-        private IEqualityComparer<ChatEntity> GetChatEntityComparer() =>
+        private IEqualityComparer<ChatEntity> GetEntityComparer() =>
             new ChatEntityComparerNested();
 
-        private IEqualityComparer<ChatModel> GetChatModelComparer() =>
+        private IEqualityComparer<ChatModel> GetModelComparer() =>
             new ChatModelComparerNested();
 
 
