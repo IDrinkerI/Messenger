@@ -10,6 +10,7 @@ namespace Messenger.Mapper
         {
             var entity = new MessageEntity
             {
+                Id        = messageModel.Id,
                 Text      = messageModel.Text,
                 ChatId    = messageModel.ChatId,
                 ProfileId = messageModel.ProfileId,
@@ -26,7 +27,7 @@ namespace Messenger.Mapper
                 Text      = messageEntity.Text,
                 ChatId    = messageEntity.ChatId,
                 ProfileId = messageEntity.ProfileId,
-                Nickname  = messageEntity.Profile.Nickname,
+                Nickname  = messageEntity.Profile?.Nickname,
             };
 
             return model;
