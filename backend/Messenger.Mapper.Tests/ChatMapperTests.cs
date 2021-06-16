@@ -16,7 +16,7 @@ namespace Messenger.Mapper.Tests
     public class ChatMapperTests
     {
         [Fact]
-        public void ToEntity_NotInitialized_NotInitializedEntity()
+        public void ToEntity_DefaulInitModel_DefaultInitEntity()
         {
             var comparer = GetChatEntityComparer();
             var expected = new ChatEntity();
@@ -27,8 +27,10 @@ namespace Messenger.Mapper.Tests
             Assert.Equal(expected, actual, comparer);
         }
 
+
+
         [Fact]
-        public void ToModel_NotInitialized_NotInitializedModel()
+        public void ToModel_DefaultInitEnitity_DefaultInitModel()
         {
             var comparer = GetChatModelComparer();
             var expected = new ChatModel();
