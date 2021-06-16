@@ -12,13 +12,16 @@ import "./messenger.scss";
 
 
 export const Messenger = () => {
-    const dispatch = useDispatch();
+    const dispatch     = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
-    const chatId = useSelector(currentChatIdSelector);
+    const chatId       = useSelector(currentChatIdSelector);
 
-    const buttonHandler = () => {
+    const buttonHandler = (event) => {
+        event.preventDefault();
+        if (!inputMessage) { return; }
+
         const message = new MessageModel();
-        message.text = inputMessage;
+        message.text   = inputMessage;
         message.chatId = chatId;
 
         dispatch(addMessageAction(message));
@@ -42,10 +45,15 @@ export const Messenger = () => {
                     <MessageField />
                 </div>
 
-                <div className="messenger_inner">
-                    <InputField style={{ "flex-grow": "1" }} value={inputMessage} onChange={inputFieldOnChangeHandler} />
+                <form className="messenger_inner">
+                    <InputField
+                        style={{ "flex-grow": "1" }}
+                        value={inputMessage}
+                        onChange={inputFieldOnChangeHandler}
+                    />
+
                     <Button onClick={buttonHandler}>Send</Button>
-                </div>
+                </form>
             </div>
         </HtmlContainer>
     );
