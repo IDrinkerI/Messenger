@@ -1,41 +1,90 @@
-﻿using Xunit;
-using Messenger.Mapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Messenger.Data.Entities;
+﻿using Messenger.Data.Entities;
 using Messenger.Model;
-using Newtonsoft.Json;
-using System.Diagnostics;
+using System.Collections.Generic;
+using Xunit;
 
 
 namespace Messenger.Mapper.Tests
 {
     public class ChatMapperTests
     {
+        /// <summary>
+        /// Проверяем работу метода ToEntity() вызанного на объекте,
+        /// который создается конструктором по умолчанию.
+        /// </summary>
         [Fact]
         public void ToEntity_DefaulInitModel_DefaultInitEntity()
         {
             var comparer = GetChatEntityComparer();
             var expected = new ChatEntity();
 
-            var model = new ChatModel();
+            var model  = new ChatModel();
             var actual = model.ToEntity();
 
             Assert.Equal(expected, actual, comparer);
         }
 
-
-
+        /// <summary>
+        /// Проверяем работу метода ToEntity() вызанного на объекте, 
+        /// у когорого проинициализированы свойства.
+        /// </summary>
         [Fact]
-        public void ToModel_DefaultInitEnitity_DefaultInitModel()
+        public void ToEntity_InitModel_InitEntity()
+        {
+            var comparer = GetChatEntityComparer();
+            var expected = new ChatEntity
+            {
+                Id       = 1,
+                Name     = "ChatName",
+                Messages = null
+            };
+
+            var model = new ChatModel
+            {
+                Id   = 1,
+                Name = "ChatName"
+            };
+            var actual = model.ToEntity();
+
+            Assert.Equal(expected, actual, comparer);
+        }
+
+        /// <summary>
+        /// Проверяем работу метода ToModel() вызанного на объекте, 
+        /// который создается конструктором по умолчанию.
+        /// </summary>
+        [Fact]
+        public void ToModel_DefaultInitEntity_DefaultInitModel()
         {
             var comparer = GetChatModelComparer();
             var expected = new ChatModel();
 
             var entity = new ChatEntity();
+            var actual = entity.ToModel();
+
+            Assert.Equal(expected, actual, comparer);
+        }
+
+        /// <summary>
+        /// Проверяем работу метода ToModel() вызанного на объекте,
+        /// у когорого проинициализированы свойства.
+        /// </summary>
+        [Fact]
+        public void ToModel_InitEntity_InitModel()
+        {
+            var comparer = GetChatModelComparer();
+            var expected = new ChatModel
+            {
+                Id   = 1,
+                Name = "ChatName"
+            };
+
+            var entity = new ChatEntity
+            {
+                Id       = 1,
+                Name     = "ChatName",
+                Messages = null
+            };
             var actual = entity.ToModel();
 
             Assert.Equal(expected, actual, comparer);
