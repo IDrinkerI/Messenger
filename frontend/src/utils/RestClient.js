@@ -2,13 +2,13 @@
 export class RestClient {
     static API = "/api/";
 
-    static get = async (apiPath) => {
+    static getAsync = async (apiPath) => {
         var response = await fetch(this.API + apiPath);
         var result = await response.json();
         return result;
     }
 
-    static post = async (apiPath, newState) => {
+    static postAsync = async (apiPath, newState) => {
         await fetch(this.API + apiPath, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -16,7 +16,7 @@ export class RestClient {
         });
     }
 
-    static put = async (apiPath, dispatchObject) => {
+    static putAsync = async (apiPath, dispatchObject) => {
         await fetch(this.API + apiPath, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -24,7 +24,7 @@ export class RestClient {
         });
     }
 
-    static delete = async (apiPath, dispatchObject) => {
+    static deleteAsync = async (apiPath, dispatchObject) => {
         await fetch(this.API + apiPath, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
