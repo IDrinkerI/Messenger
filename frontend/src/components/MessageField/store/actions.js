@@ -5,7 +5,7 @@ import { MessageModel } from "../../../models/MessageModel";
 const API_URL = "/api/message";
 const UPDATE_INTERVAL = 250;
 
-const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });
+const addMessage       = (message) => ({ type: ADD_MESSAGE, payload: message });
 const initMessageStore = (messageList, timer) => ({ type: INIT_MESSAGE_STORE, payload: { messageList, timer } });
 
 export const initMessageStoreAction = () =>
@@ -24,16 +24,15 @@ export const initMessageStoreAction = () =>
 
         const timer = setInterval(async () => {
             const currentChatId = getState().chats.currentChatId;
-            const response = await fetch(API_URL + `/${currentChatId}`);
+            const response      = await fetch(API_URL + `/${currentChatId}`);
             const messageList = await response.json();
+
             dispath(initMessageStore(messageList, timer));
         }, UPDATE_INTERVAL);
     }
 
 export const addMessageAction = (message) =>
-    (dispatch, setState) => {
-        message.profileId = setState().profile.id;
-        console.log("ProfileID: ", setState().profile.id)
+    (dispatch) => {
         if (process.env.NODE_ENV == "development") {
             message.nickname = "Developer";
             dispatch(addMessage(message));
