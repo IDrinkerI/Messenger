@@ -1,11 +1,12 @@
 import { ADD_MESSAGE, INIT_MESSAGE_STORE } from "./types";
 import { MessageModel } from "../../../models/MessageModel";
+import { RestClient } from "../../../utils";
 
 
-const API_URL = "/api/message";
+const API_URL = "message/";
 const UPDATE_INTERVAL = 250;
 
-const addMessage       = (message) => ({ type: ADD_MESSAGE, payload: message });
+const addMessage = (message) => ({ type: ADD_MESSAGE, payload: message });
 const initMessageStore = (messageList, timer) => ({ type: INIT_MESSAGE_STORE, payload: { messageList, timer } });
 
 export const initMessageStoreAction = () =>
@@ -24,8 +25,7 @@ export const initMessageStoreAction = () =>
 
         const timer = setInterval(async () => {
             const currentChatId = getState().chats.currentChatId;
-            const response      = await fetch(API_URL + `/${currentChatId}`);
-            const messageList = await response.json();
+            const messageList = await RestClient.getAsync(API_URL + currentChatId);
 
             dispath(initMessageStore(messageList, timer));
         }, UPDATE_INTERVAL);
@@ -39,9 +39,5 @@ export const addMessageAction = (message) =>
             return;
         }
 
-        fetch(API_URL, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(message)
-        });
+        RestClient.putAsync(API_URL, message);
     }
