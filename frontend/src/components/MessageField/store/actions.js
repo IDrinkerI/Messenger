@@ -14,9 +14,9 @@ export const initMessageStoreAction = () =>
 
         if (process.env.NODE_ENV == "development") {
             const devMessageList = [
-                new MessageModel("TestBot", "Hallo!", 1, 1),
-                new MessageModel("TestBot", "Some message", 1, 1),
-                new MessageModel("TestBot", "Some message", 1, 1),
+                new MessageModel(1, "TestBot", "Hallo!", 1, 1),
+                new MessageModel(1, "TestBot", "Some message", 1, 1),
+                new MessageModel(1, "TestBot", "Next message", 1, 1),
             ];
 
             return dispath(initMessageStore(devMessageList, 1));
