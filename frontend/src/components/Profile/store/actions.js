@@ -1,7 +1,8 @@
+import { RestClient } from "../../../utils";
 import { CHANGE_PROFILE } from "./types";
 
 
-const API_URL = "/api/profile";
+const API_URL = "profile/";
 const changeProfile = (state) => ({ type: CHANGE_PROFILE, payload: state });
 
 export const initProfileAction = () =>
@@ -15,8 +16,7 @@ export const initProfileAction = () =>
             }
         }
         else {
-            const response = await fetch(API_URL);
-            state = await response.json();
+            state = await RestClient.getAsync(API_URL);
         }
 
         dispatch(changeProfile(state));
@@ -28,9 +28,6 @@ export const changeProfileAction = (state) =>
             return dispatch(changeProfile(state));
         }
 
-        fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...getState().profile, ...state }),
-        });
+        const newState = { ...getState().profile, ...state };
+        RestClient.postAsync(API_URL, newState);
     }

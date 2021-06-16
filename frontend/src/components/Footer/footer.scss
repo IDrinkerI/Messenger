@@ -1,0 +1,16 @@
+.footer {
+
+    &-link {
+    }
+
+    &-copyright {
+        background-color: lightgray;
+    }
+
+    &-copyright_text {
+        padding: 0.5rem;
+        display: block;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}

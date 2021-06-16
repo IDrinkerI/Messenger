@@ -3,35 +3,69 @@ import { useDispatch } from "react-redux";
 import { Button } from "../Button";
 import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
-import "./profile.scss";
 import { changeProfileAction, initProfileAction } from "./store/actions";
+import "./profile.scss";
+
 
 export const Profile = () => {
     const dispatch = useDispatch();
-    const [profile, setProfile] = useState({});
+    const [nickname,  setNickname]  = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname,  setLastname]  = useState("");
 
-    const inputFieldOnChangeHandler = (event) => {
-        const nickname = event.target.value;
-        setProfile({ ...profile, nickname });
+    const nicknameOnChangeHandler = (event) => {
+        const newValue = event.target.value;
+        setNickname(newValue);
+    }
+
+    const firstnameOnChangeHandler = (event) => {
+        const newValue = event.target.value;
+        setFirstname(newValue);
+    }
+
+    const lastnameOnChangeHandler = (event) => {
+        const newValue = event.target.value;
+        setLastname(newValue);
     }
 
     const saveButtonHandler = () => {
-        dispatch(changeProfileAction(profile));
+        event.preventDefault();
+
+        const profileState = {
+            nickname,
+            firstname,
+            lastname,
+        };
+
+        dispatch(changeProfileAction(profileState));
+
+        setNickname("");
+        setFirstname("");
+        setLastname("");
     }
 
     useEffect(() => {
         dispatch(initProfileAction())
     }, []);
 
+
     return (
         <HtmlContainer>
-            <h3>Profile</h3>
-            <InputField.Label label="New nickname:">
-                <InputField onChange={inputFieldOnChangeHandler} />
-            </InputField.Label>
+            <form className="profile-inner">
+                <h3>Profile setup</h3>
+                <InputField.Label label="Nickname:">
+                    <InputField value={nickname} onChange={nicknameOnChangeHandler} />
+                </InputField.Label>
+                <InputField.Label label="Firstname:">
+                    <InputField value={firstname} onChange={firstnameOnChangeHandler} />
+                </InputField.Label>
+                <InputField.Label label="Lastname:">
+                    <InputField value={lastname} onChange={lastnameOnChangeHandler} />
+                </InputField.Label>
 
-            <br />
-            <Button onClick={saveButtonHandler}>Save</Button>
+                <br />
+                <Button onClick={saveButtonHandler}>Save</Button>
+            </form>
         </HtmlContainer>
     );
 }
