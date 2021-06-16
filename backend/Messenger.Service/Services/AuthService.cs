@@ -1,4 +1,4 @@
-﻿using Messenger.Data.Entities;
+﻿using Messenger.Data;
 using Messenger.DataAccess;
 using Messenger.Model;
 using Microsoft.AspNetCore.Http;

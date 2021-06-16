@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 
-namespace Messenger.Data.Entities
+namespace Messenger.Data
 {
     public class SessionEntity : BaseEntity, IUpdatableEntity<SessionEntity>
     {

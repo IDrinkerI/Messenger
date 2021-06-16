@@ -1,5 +1,4 @@
 ﻿using Messenger.Data.Configuration;
-using Messenger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

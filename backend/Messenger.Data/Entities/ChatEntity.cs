@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Messenger.Data.Entities
+namespace Messenger.Data
 {
     public class ChatEntity : BaseEntity
     {
