@@ -7,7 +7,6 @@ import { HtmlContainer } from "../HtmlContainer";
 import { InputField } from "../InputField";
 import { inputMessageSelector, updateInputMessageAction } from "../InputMessage";
 import { MessageField, addMessageAction } from "../MessageField";
-import { profileIdSelector } from "../Profile";
 import { initProfileAction } from "../Profile/store/actions";
 import "./messenger.scss";
 
@@ -15,7 +14,6 @@ import "./messenger.scss";
 export const Messenger = () => {
     const dispatch = useDispatch();
     const inputMessage = useSelector(inputMessageSelector);
-    const profileId = useSelector(profileIdSelector);
     const chatId = useSelector(currentChatIdSelector);
 
     const buttonHandler = () => {

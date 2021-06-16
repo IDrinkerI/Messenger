@@ -32,12 +32,15 @@ export const initMessageStoreAction = () =>
     }
 
 export const addMessageAction = (message) =>
-    (dispatch) => {
+    (dispatch, getState) => {
         if (process.env.NODE_ENV == "development") {
             message.nickname = "Developer";
             dispatch(addMessage(message));
             return;
         }
+
+        const profileId = getState().profile.id;
+        message.profileId = profileId;
 
         RestClient.putAsync(API_URL, message);
     }
