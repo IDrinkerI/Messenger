@@ -8,9 +8,9 @@ namespace Messenger.Api.Controllers
 {
     public sealed class ChatController : MessengerApiController
     {
-        private readonly ChatService chatService;
+        private readonly IChatService chatService;
 
-        public ChatController(ChatService chatService) =>
+        public ChatController(IChatService chatService) =>
             this.chatService = chatService;
 
         [HttpGet]

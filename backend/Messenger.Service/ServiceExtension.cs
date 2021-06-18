@@ -7,10 +7,10 @@ namespace Messenger.Service
     {
         public static void AddMessengerServices(this IServiceCollection services)
         {
-            services.AddScoped<MessageService>();
-            services.AddScoped<ChatService>();
-            services.AddScoped<ProfileService>();
-            services.AddScoped<AuthService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }

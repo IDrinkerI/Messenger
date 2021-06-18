@@ -8,9 +8,9 @@ namespace Messenger.Api.Controllers
 {
     public sealed class SignupController : MessengerApiController
     {
-        private readonly AuthService authService;
+        private readonly IAuthService authService;
 
-        public SignupController(AuthService authService) =>
+        public SignupController(IAuthService authService) =>
             this.authService = authService;
 
         [HttpPut]

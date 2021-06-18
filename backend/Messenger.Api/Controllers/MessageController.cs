@@ -8,9 +8,9 @@ namespace Messenger.Api.Controllers
 {
     public sealed class MessageController : MessengerApiController
     {
-        private readonly MessageService messageService;
+        private readonly IMessageService messageService;
 
-        public MessageController(MessageService messageService) =>
+        public MessageController(IMessageService messageService) =>
             this.messageService = messageService;
 
         /// <summary>

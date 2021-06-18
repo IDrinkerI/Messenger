@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Service
 {
-    public sealed class AuthService
+    public sealed class AuthService : IAuthService
     {
         private readonly IRepository<AuthInfoEntity> authInfoRepository;
         private readonly IUserRepository<UserEntity> userRepository;
@@ -17,7 +17,7 @@ namespace Messenger.Service
         {
             get
             {
-                var user  = contextAccessor.HttpContext.User;
+                var user = contextAccessor.HttpContext.User;
                 var claim = user.FindFirst(c => c.Type == "Id");
                 if (claim is null) { return 0; }
 
@@ -31,8 +31,8 @@ namespace Messenger.Service
                            IHttpContextAccessor contextAccessor)
         {
             this.authInfoRepository = authInfoRepository;
-            this.userRepository     = userRepository;
-            this.contextAccessor    = contextAccessor;
+            this.userRepository = userRepository;
+            this.contextAccessor = contextAccessor;
         }
 
         public async Task<bool> CheckPassword(AuthInfoModel signinData)
@@ -53,9 +53,9 @@ namespace Messenger.Service
 
             var user = new UserEntity
             {
-                Email    = newUser.Email,
+                Email = newUser.Email,
                 AuthInfo = new AuthInfoEntity { PasswordHash = newUser.Password },
-                Profile  = new ProfileEntity { Nickname = newUser.Email }
+                Profile = new ProfileEntity { Nickname = newUser.Email }
             };
 
             await userRepository.Add(user);

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Messenger.Service
 {
-    public class ProfileService
+    public class ProfileService : IProfileService
     {
         private readonly IRepository<ProfileEntity> profileRepository;
 
-        public ProfileService(IRepository<ProfileEntity> profileRepository) => 
+        public ProfileService(IRepository<ProfileEntity> profileRepository) =>
             this.profileRepository = profileRepository;
 
         public async Task<ProfileModel> GetProfile(int id)
