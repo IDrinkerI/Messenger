@@ -17,7 +17,7 @@ namespace Messenger.Service
         {
             get
             {
-                var user = contextAccessor.HttpContext.User;
+                var user  = contextAccessor.HttpContext.User;
                 var claim = user.FindFirst(c => c.Type == "Id");
                 if (claim is null) { return 0; }
 
@@ -37,10 +37,12 @@ namespace Messenger.Service
 
         public async Task<bool> CheckPassword(AuthInfoModel signinData)
         {
+            if(signinData is null) { return false; }
+
             var user = await userRepository.Get(signinData.Email);
             if (user is null) { return false; }
 
-            var authInfo = await authInfoRepository.Get(user.AuthInfoId);
+            var authInfo     = await authInfoRepository.Get(user.AuthInfoId);
             var passwordHash = authInfo.PasswordHash;
 
             return passwordHash == signinData.Password;
@@ -53,9 +55,9 @@ namespace Messenger.Service
 
             var user = new UserEntity
             {
-                Email = newUser.Email,
+                Email    = newUser.Email,
                 AuthInfo = new AuthInfoEntity { PasswordHash = newUser.Password },
-                Profile = new ProfileEntity { Nickname = newUser.Email }
+                Profile  = new ProfileEntity { Nickname = newUser.Email }
             };
 
             await userRepository.Add(user);
