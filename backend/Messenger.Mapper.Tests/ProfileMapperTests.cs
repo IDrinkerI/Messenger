@@ -19,8 +19,7 @@ namespace Messenger.Mapper.Tests
             var comparer = GetEntityComparer();
             var expected = new ProfileEntity();
 
-            var model  = new ProfileModel();
-            var actual = model.ToEntity();
+            var actual = new ProfileModel().ToEntity();
 
             Assert.Equal(expected, actual, comparer);
         }
@@ -63,8 +62,7 @@ namespace Messenger.Mapper.Tests
             var comparer = GetModelComparer();
             var expected = new ProfileModel();
 
-            var entity = new ProfileEntity();
-            var actual = entity.ToModel();
+            var actual = new ProfileEntity().ToModel();
 
             Assert.Equal(expected, actual, comparer);
         }
