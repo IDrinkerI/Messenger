@@ -18,8 +18,7 @@ namespace Messenger.Mapper.Tests
             var comparer = GetEntityComparer();
             var expected = new ChatEntity();
 
-            var model  = new ChatModel();
-            var actual = model.ToEntity();
+            var actual = new ChatModel().ToEntity();
 
             Assert.Equal(expected, actual, comparer);
         }
@@ -59,8 +58,7 @@ namespace Messenger.Mapper.Tests
             var comparer = GetModelComparer();
             var expected = new ChatModel();
 
-            var entity = new ChatEntity();
-            var actual = entity.ToModel();
+            var actual = new ChatEntity().ToModel();
 
             Assert.Equal(expected, actual, comparer);
         }
@@ -101,19 +99,21 @@ namespace Messenger.Mapper.Tests
         private class ChatEntityComparerNested : IEqualityComparer<ChatEntity>
         {
             bool IEqualityComparer<ChatEntity>.Equals(ChatEntity x, ChatEntity y) =>
-                x.Name == y.Name && x.Id == y.Id;
+                x.Name == y.Name &&
+                x.Id   == y.Id;
 
             int IEqualityComparer<ChatEntity>.GetHashCode(ChatEntity entity) =>
-                entity.Name.GetHashCode() + entity.Id.GetHashCode();
+                entity.Id.GetHashCode();
         }
 
         private class ChatModelComparerNested : IEqualityComparer<ChatModel>
         {
             bool IEqualityComparer<ChatModel>.Equals(ChatModel x, ChatModel y) =>
-                x.Name == y.Name && x.Id == y.Id;
+                x.Name == y.Name &&
+                x.Id   == y.Id;
 
             int IEqualityComparer<ChatModel>.GetHashCode(ChatModel model) =>
-                model.Name.GetHashCode() + model.Id.GetHashCode();
+                model.Id.GetHashCode();
         }
     }
 }
