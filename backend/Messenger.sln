@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.Mapper", "Messeng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.Data", "Messenger.Data\Messenger.Data.csproj", "{254FD00E-05B3-46B3-A7F0-576266DD8463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Mapper.Tests", "Messenger.Mapper.Tests\Messenger.Mapper.Tests.csproj", "{1603EDA3-249C-493D-A1DD-1D58A34E0200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.Mapper.Tests", "Messenger.Mapper.Tests\Messenger.Mapper.Tests.csproj", "{1603EDA3-249C-493D-A1DD-1D58A34E0200}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Service.Tests", "Messenger.Service.Tests\Messenger.Service.Tests.csproj", "{97CA0C46-C6AC-4145-884E-E880EB9BC54E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{1603EDA3-249C-493D-A1DD-1D58A34E0200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1603EDA3-249C-493D-A1DD-1D58A34E0200}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1603EDA3-249C-493D-A1DD-1D58A34E0200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CA0C46-C6AC-4145-884E-E880EB9BC54E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CA0C46-C6AC-4145-884E-E880EB9BC54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CA0C46-C6AC-4145-884E-E880EB9BC54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CA0C46-C6AC-4145-884E-E880EB9BC54E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
