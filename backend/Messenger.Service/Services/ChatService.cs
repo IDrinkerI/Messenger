@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Service
 {
-    public sealed class ChatService
+    public sealed class ChatService : IChatService
     {
         private readonly IRepository<ChatEntity> repository;
 

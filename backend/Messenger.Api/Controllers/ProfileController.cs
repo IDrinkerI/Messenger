@@ -10,10 +10,10 @@ namespace Messenger.Api.Controllers
 {
     public sealed class ProfileController : MessengerApiController
     {
-        private readonly ProfileService profileService;
-        private readonly AuthService    authService;
+        private readonly IProfileService profileService;
+        private readonly IAuthService    authService;
 
-        public ProfileController(ProfileService profileService, AuthService authService)
+        public ProfileController(IProfileService profileService, IAuthService authService)
         {
             this.profileService = profileService;
             this.authService    = authService;

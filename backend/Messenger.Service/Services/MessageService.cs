@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Service
 {
-    public sealed class MessageService
+    public sealed class MessageService : IMessageService
     {
         private readonly IMessageRepository<MessageEntity> messageRepository;
 
