@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System;
 using Xunit;
 using Moq;
 using Messenger.DataAccess;
@@ -11,14 +12,14 @@ namespace Messenger.Service.Tests
     public class AuthServiceTests
     {
         [Fact]
-        public async void CheckPassword_Null_ReturnFalse()
+        public async void CheckPassword_Null_ThrowArgumentNullException()
         {
             AuthInfoModel authInfo = null;
 
-            var authService = new AuthService(null, null, null);
-            var condition   = await authService.CheckPassword(authInfo);
+            var authService     = new AuthService(null, null, null);
+            Func<Task> testCode = async () => await authService.CheckPassword(authInfo);
 
-            Assert.False(condition);
+            await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
 
         [Fact]
