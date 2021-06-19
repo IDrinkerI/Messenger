@@ -90,5 +90,17 @@ namespace Messenger.Service.Tests
             mockUserRepository.Verify();
             Assert.True(condition);
         }
+
+        [Fact]
+        public async void Contains_ExistingUser_ReturnTrue()
+        {
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep => 
+                    rep.Get(It.IsAny<string>()) == Task.FromResult(new UserEntity()));
+
+            var authService = new AuthService(null, userRepository, null);
+            var condition = await authService.Contains(new AuthInfoModel());
+
+            Assert.True(condition);
+        }
     }
 }
