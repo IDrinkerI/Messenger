@@ -24,16 +24,13 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void CheckPassword_WrongEmail_ReturnFalse()
         {
-            var authInfo = new AuthInfoModel { Email = "SomeWrong@mail.net" };
-            Mock<IUserRepository<UserEntity>> mockUserRepository = new();
+            var authInfo = new AuthInfoModel();
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep => 
+                    rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
 
-            mockUserRepository.Setup(rep => rep.Get(It.IsAny<string>()))
-                .Returns(Task.FromResult<UserEntity>(null));
-
-            var authService = new AuthService(null, mockUserRepository.Object, null);
+            var authService = new AuthService(null, userRepository, null);
             var condition   = await authService.CheckPassword(authInfo);
 
-            mockUserRepository.VerifyAll();
             Assert.False(condition);
         }
 
@@ -46,13 +43,11 @@ namespace Messenger.Service.Tests
             var authInfoId = 11;
 
             mockAuthInfoRepository.Setup(rep => rep.Get(
-                    It.Is<int>(value => value.Equals(authInfoId)))
-                )
+                    It.Is<int>(value => value.Equals(authInfoId))))
                 .Returns(Task.FromResult(new AuthInfoEntity { PasswordHash = "truePassword" }));
             mockUserRepository.Setup(rep => rep.Get(
 
-                    It.Is<string>(value => value.Equals(signInData.Email)))
-                )
+                    It.Is<string>(value => value.Equals(signInData.Email))))
                 .Returns(Task.FromResult(new UserEntity { AuthInfoId = authInfoId }));
 
 
@@ -62,8 +57,8 @@ namespace Messenger.Service.Tests
                 null);
             var condition = await authService.CheckPassword(signInData);
 
-            mockAuthInfoRepository.VerifyAll();
-            mockUserRepository.VerifyAll();
+            mockAuthInfoRepository.Verify();
+            mockUserRepository.Verify();
             Assert.False(condition);
         }
 
@@ -73,16 +68,14 @@ namespace Messenger.Service.Tests
             var signInData = new AuthInfoModel { Email = "TrueEmail@mail.net", Password = "truePassword" };
             Mock<IRepository<AuthInfoEntity>> mockAuthInfoRepository = new();
             Mock<IUserRepository<UserEntity>> mockUserRepository = new();
-            var authInfoId = 13;
 
+            var authInfoId = 13;
             mockAuthInfoRepository.Setup(rep => rep.Get(
-                    It.Is<int>(value => value.Equals(authInfoId)))
-                )
+                    It.Is<int>(value => value.Equals(authInfoId))))
                 .Returns(Task.FromResult(new AuthInfoEntity { PasswordHash = "truePassword" }));
 
             mockUserRepository.Setup(rep => rep.Get(
-                    It.Is<string>(value => value.Equals(signInData.Email)))
-                )
+                    It.Is<string>(value => value.Equals(signInData.Email))))
                 .Returns(Task.FromResult(new UserEntity { AuthInfoId = authInfoId, Email = signInData.Email }));
 
 
@@ -92,10 +85,9 @@ namespace Messenger.Service.Tests
                 null);
             var condition = await authService.CheckPassword(signInData);
 
-            mockAuthInfoRepository.VerifyAll();
-            mockUserRepository.VerifyAll();
+            mockAuthInfoRepository.Verify();
+            mockUserRepository.Verify();
             Assert.True(condition);
         }
     }
-
 }
