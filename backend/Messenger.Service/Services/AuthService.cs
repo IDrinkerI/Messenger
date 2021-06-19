@@ -3,6 +3,7 @@ using Messenger.DataAccess;
 using Messenger.Model;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System;
 
 
 namespace Messenger.Service
@@ -43,9 +44,10 @@ namespace Messenger.Service
             if (user is null) { return false; }
 
             var authInfo     = await authInfoRepository.Get(user.AuthInfoId);
-            var passwordHash = authInfo.PasswordHash;
+            if (authInfo is null)
+                throw new ApplicationException("AuthInfo is null. Каждый user должен иметь authInfo");
 
-            return passwordHash == signinData.Password;
+            return authInfo.PasswordHash == signinData.Password;
         }
 
         public async Task AddUser(AuthInfoModel newUser)
