@@ -25,8 +25,8 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void CheckPassword_WrongEmail_ReturnFalse()
         {
-            var authInfo = new AuthInfoModel();
-            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep => 
+            var authInfo       = new AuthInfoModel();
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
                     rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
 
             var authService = new AuthService(null, userRepository, null);
@@ -94,7 +94,7 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void Contains_ExistingUser_ReturnTrue()
         {
-            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep => 
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
                     rep.Get(It.IsAny<string>()) == Task.FromResult(new UserEntity()));
 
             var authService = new AuthService(null, userRepository, null);
@@ -113,6 +113,15 @@ namespace Messenger.Service.Tests
             var condition   = await authService.Contains(new AuthInfoModel());
 
             Assert.False(condition);
+        }
+
+        [Fact]
+        public async void Contains_Null_ThrowArgumentNullException()
+        {
+            var authService     = new AuthService(null, null, null);
+            Func<Task> testCode = async () => await authService.Contains(null);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
     }
 }
