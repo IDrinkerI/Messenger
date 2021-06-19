@@ -68,6 +68,9 @@ namespace Messenger.Service
 
         public async Task<bool> Contains(AuthInfoModel newUser)
         {
+            if (newUser is null)
+                throw new ArgumentNullException();
+
             var user = await userRepository.Get(newUser.Email);
 
             if (user is not null)
