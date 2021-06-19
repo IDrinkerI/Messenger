@@ -38,7 +38,8 @@ namespace Messenger.Service
 
         public async Task<bool> CheckPassword(AuthInfoModel signinData)
         {
-            if(signinData is null) { return false; }
+            if (signinData is null)
+                throw new ArgumentNullException();
 
             var user = await userRepository.Get(signinData.Email);
             if (user is null) { return false; }
