@@ -70,7 +70,7 @@ namespace Messenger.Service
         {
             var user = await userRepository.Get(newUser.Email);
 
-            if (user is null)
+            if (user is not null)
                 return true;
             else
                 return false;
