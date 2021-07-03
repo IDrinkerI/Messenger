@@ -36,10 +36,14 @@ namespace Messenger.Service
             }
         }
 
-        async Task IAuthService.AddUser(AuthInfoModel newUser)
+        async Task<bool> IAuthService.AddUser(AuthInfoModel newUser)
         {
+            if (newUser is null)
+                throw new ArgumentNullException();
+
             var checkUser = await userRepository.Get(newUser.Email);
-            if (checkUser is not null) { return; }
+            if (checkUser is not null)
+                return false;
 
             var user = new UserEntity
             {
@@ -49,6 +53,7 @@ namespace Messenger.Service
             };
 
             await userRepository.Add(user);
+            return true;
         }
 
         async Task<bool> IAuthService.CheckPassword(AuthInfoModel signinData)
