@@ -13,12 +13,14 @@ namespace Messenger.DataAccess
 
         public MessageRepository(StoreContext store) => this.store = store;
 
-        async Task IRepository<MessageEntity>.Add(MessageEntity item)
+        async Task<bool> IRepository<MessageEntity>.Add(MessageEntity item)
         {
-            if (item is null) { return; }
+            if (item is null)
+                return false;
 
             await store.Messages.AddAsync(item);
             await store.SaveChangesAsync();
+            return true;
         }
 
         async Task<MessageEntity> IRepository<MessageEntity>.Get(int id)

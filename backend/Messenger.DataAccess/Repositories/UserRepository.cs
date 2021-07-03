@@ -12,13 +12,17 @@ namespace Messenger.DataAccess
 
         public UserRepository(StoreContext store) => this.store = store;
 
-        async Task IRepository<UserEntity>.Add(UserEntity item)
+        async Task<bool> IRepository<UserEntity>.Add(UserEntity item)
         {
+            if (item is null)
+                return false;
+
             var newProfile = new ProfileEntity { Nickname = item.Email, };
-            item.Profile = newProfile;
+            item.Profile   = newProfile;
 
             await store.Users.AddAsync(item);
             await store.SaveChangesAsync();
+            return true;
         }
 
         async Task<UserEntity> IUserRepository<UserEntity>.Get(string email)

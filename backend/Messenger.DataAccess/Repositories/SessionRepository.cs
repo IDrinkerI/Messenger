@@ -13,12 +13,14 @@ namespace Messenger.DataAccess
 
         public SessionRepository(StoreContext store) => this.store = store;
 
-        async Task IRepository<SessionEntity>.Add(SessionEntity item)
+        async Task<bool> IRepository<SessionEntity>.Add(SessionEntity item)
         {
-            if (item is null) { return; }
+            if (item is null)
+                return false;
 
             await store.Sessions.AddAsync(item);
             await store.SaveChangesAsync();
+            return true;
         }
 
         async Task<SessionEntity> IRepository<SessionEntity>.Get(int id)

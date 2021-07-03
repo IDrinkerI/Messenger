@@ -13,12 +13,14 @@ namespace Messenger.DataAccess
 
         public AuthInfoRepository(StoreContext store) => this.store = store;
 
-        async Task IRepository<AuthInfoEntity>.Add(AuthInfoEntity item)
+        async Task<bool> IRepository<AuthInfoEntity>.Add(AuthInfoEntity item)
         {
-            if (item is null) { return; }
+            if (item is null)
+                return false;
 
             await store.AuthInfos.AddAsync(item);
             await store.SaveChangesAsync();
+            return true;
         }
 
         async Task<AuthInfoEntity> IRepository<AuthInfoEntity>.Get(int id)

@@ -12,12 +12,14 @@ namespace Messenger.DataAccess
 
         public ChatRepository(StoreContext store) => this.store = store;
 
-        async Task IRepository<ChatEntity>.Add(ChatEntity item)
+        async Task<bool> IRepository<ChatEntity>.Add(ChatEntity item)
         {
-            if (item is null) { return; }
+            if (item is null)
+                return false;
 
             await store.Chats.AddAsync(item);
             await store.SaveChangesAsync();
+            return true;
         }
 
         async Task<ChatEntity> IRepository<ChatEntity>.Get(int id)
