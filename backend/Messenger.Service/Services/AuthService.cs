@@ -14,7 +14,16 @@ namespace Messenger.Service
         private readonly IUserRepository<UserEntity> userRepository;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public int CurrentUserId
+        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
+                           IUserRepository<UserEntity> userRepository,
+                           IHttpContextAccessor contextAccessor)
+        {
+            this.authInfoRepository = authInfoRepository;
+            this.userRepository = userRepository;
+            this.contextAccessor = contextAccessor;
+        }
+
+        int IAuthService.CurrentUserId
         {
             get
             {
@@ -27,31 +36,7 @@ namespace Messenger.Service
             }
         }
 
-        public AuthService(IRepository<AuthInfoEntity> authInfoRepository,
-                           IUserRepository<UserEntity> userRepository,
-                           IHttpContextAccessor contextAccessor)
-        {
-            this.authInfoRepository = authInfoRepository;
-            this.userRepository = userRepository;
-            this.contextAccessor = contextAccessor;
-        }
-
-        public async Task<bool> CheckPassword(AuthInfoModel signinData)
-        {
-            if (signinData is null)
-                throw new ArgumentNullException();
-
-            var user = await userRepository.Get(signinData.Email);
-            if (user is null) { return false; }
-
-            var authInfo     = await authInfoRepository.Get(user.AuthInfoId);
-            if (authInfo is null)
-                throw new ApplicationException("AuthInfo is null. Каждый user должен иметь authInfo");
-
-            return authInfo.PasswordHash == signinData.Password;
-        }
-
-        public async Task AddUser(AuthInfoModel newUser)
+        async Task IAuthService.AddUser(AuthInfoModel newUser)
         {
             var checkUser = await userRepository.Get(newUser.Email);
             if (checkUser is not null) { return; }
@@ -66,7 +51,22 @@ namespace Messenger.Service
             await userRepository.Add(user);
         }
 
-        public async Task<bool> Contains(AuthInfoModel newUser)
+        async Task<bool> IAuthService.CheckPassword(AuthInfoModel signinData)
+        {
+            if (signinData is null)
+                throw new ArgumentNullException();
+
+            var user = await userRepository.Get(signinData.Email);
+            if (user is null) { return false; }
+
+            var authInfo     = await authInfoRepository.Get(user.AuthInfoId);
+            if (authInfo is null)
+                throw new ApplicationException("AuthInfo is null. Каждый user должен иметь authInfo");
+
+            return authInfo.PasswordHash == signinData.Password;
+        }
+
+        async Task<bool> IAuthService.Contains(AuthInfoModel newUser)
         {
             if (newUser is null)
                 throw new ArgumentNullException();

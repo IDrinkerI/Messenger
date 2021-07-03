@@ -16,8 +16,8 @@ namespace Messenger.Service.Tests
         {
             AuthInfoModel authInfo = null;
 
-            var authService     = new AuthService(null, null, null);
-            Func<Task> testCode = async () => await authService.CheckPassword(authInfo);
+            IAuthService authService = new AuthService(null, null, null);
+            async Task testCode() => await authService.CheckPassword(authInfo);
 
             await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
@@ -25,12 +25,12 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void CheckPassword_WrongEmail_ReturnFalse()
         {
-            var authInfo       = new AuthInfoModel();
+            var authInfo = new AuthInfoModel();
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
                     rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
 
-            var authService = new AuthService(null, userRepository, null);
-            var condition   = await authService.CheckPassword(authInfo);
+            IAuthService authService = new AuthService(null, userRepository, null);
+            var condition = await authService.CheckPassword(authInfo);
 
             Assert.False(condition);
         }
@@ -41,7 +41,7 @@ namespace Messenger.Service.Tests
             var signInData = new AuthInfoModel { Email = "TrueMail@mail.net", Password = "wrongPassword" };
             Mock<IRepository<AuthInfoEntity>> mockAuthInfoRepository = new();
             Mock<IUserRepository<UserEntity>> mockUserRepository = new();
-            var authInfoId = 11;
+            var authInfoId = 1;
 
             mockAuthInfoRepository.Setup(rep => rep.Get(
                     It.Is<int>(value => value.Equals(authInfoId))))
@@ -52,7 +52,7 @@ namespace Messenger.Service.Tests
                 .Returns(Task.FromResult(new UserEntity { AuthInfoId = authInfoId }));
 
 
-            var authService = new AuthService(
+            IAuthService authService = new AuthService(
                 mockAuthInfoRepository.Object,
                 mockUserRepository.Object,
                 null);
@@ -70,7 +70,7 @@ namespace Messenger.Service.Tests
             Mock<IRepository<AuthInfoEntity>> mockAuthInfoRepository = new();
             Mock<IUserRepository<UserEntity>> mockUserRepository = new();
 
-            var authInfoId = 13;
+            var authInfoId = 1;
             mockAuthInfoRepository.Setup(rep => rep.Get(
                     It.Is<int>(value => value.Equals(authInfoId))))
                 .Returns(Task.FromResult(new AuthInfoEntity { PasswordHash = "truePassword" }));
@@ -80,7 +80,7 @@ namespace Messenger.Service.Tests
                 .Returns(Task.FromResult(new UserEntity { AuthInfoId = authInfoId, Email = signInData.Email }));
 
 
-            var authService = new AuthService(
+            IAuthService authService = new AuthService(
                 mockAuthInfoRepository.Object,
                 mockUserRepository.Object,
                 null);
@@ -99,8 +99,8 @@ namespace Messenger.Service.Tests
                     rep.Get(It.Is<string>(value => value.Equals(authInfo.Email)))
                     == Task.FromResult(new UserEntity()));
 
-            var authService = new AuthService(null, userRepository, null);
-            var condition   = await authService.Contains(authInfo);
+            IAuthService authService = new AuthService(null, userRepository, null);
+            var condition = await authService.Contains(authInfo);
 
             Assert.True(condition);
         }
@@ -111,8 +111,8 @@ namespace Messenger.Service.Tests
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
                    rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
 
-            var authService = new AuthService(null, userRepository, null);
-            var condition   = await authService.Contains(new AuthInfoModel());
+            IAuthService authService = new AuthService(null, userRepository, null);
+            var condition = await (authService).Contains(new AuthInfoModel());
 
             Assert.False(condition);
         }
@@ -120,8 +120,8 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void Contains_Null_ThrowArgumentNullException()
         {
-            var authService     = new AuthService(null, null, null);
-            Func<Task> testCode = async () => await authService.Contains(null);
+            IAuthService authService = new AuthService(null, null, null);
+            async Task testCode() => await (authService).Contains(null);
 
             await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
