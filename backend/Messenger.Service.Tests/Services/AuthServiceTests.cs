@@ -12,10 +12,46 @@ namespace Messenger.Service.Tests
     public class AuthServiceTests
     {
         [Fact]
+        public async void AddUser_Null_ThrowArgumentNullException()
+        {
+            IAuthService authService = new AuthService(null, null, null);
+            Task testCode() => authService.AddUser(null);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(testCode);
+        }
+
+        [Fact]
+        public async void AddUser_ExistingUser_ReturnFalse()
+        {
+            var newUser = new AuthInfoModel { Email = "someEmail@mail.com" };
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
+                    rep.Get(It.Is<string>(value => value.Equals(newUser.Email)))
+                    == Task.FromResult(new UserEntity()));
+
+            IAuthService authService = new AuthService(null, userRepository, null);
+            bool condition = await authService.AddUser(newUser);
+
+            Assert.False(condition);
+        }
+
+        [Fact]
+        public async void AddUser_NotExistingUser_ReturnTrue()
+        {
+            var newUser = new AuthInfoModel { Email = "someEmail@mail.com" };
+            var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
+                   rep.Get(It.Is<string>(value => value.Equals(newUser.Email))) == Task.FromResult<UserEntity>(null));
+
+            IAuthService authService = new AuthService(null, userRepository, null);
+            bool condition = await authService.AddUser(newUser);
+
+            Assert.True(condition);
+        }
+
+        [Fact]
         public async void CheckPassword_Null_ThrowArgumentNullException()
         {
             IAuthService authService = new AuthService(null, null, null);
-            async Task testCode() => await authService.CheckPassword(null);
+            Task testCode() => authService.CheckPassword(null);
 
             await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
@@ -99,7 +135,7 @@ namespace Messenger.Service.Tests
         public async void Contains_Null_ThrowArgumentNullException()
         {
             IAuthService authService = new AuthService(null, null, null);
-            async Task testCode() => await (authService).Contains(null);
+            Task testCode() => authService.Contains(null);
 
             await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
