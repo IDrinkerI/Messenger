@@ -59,7 +59,7 @@ namespace Messenger.Service
             var user = await userRepository.Get(signinData.Email);
             if (user is null) { return false; }
 
-            var authInfo     = await authInfoRepository.Get(user.AuthInfoId);
+            var authInfo = await authInfoRepository.Get(user.AuthInfoId);
             if (authInfo is null)
                 throw new ApplicationException("AuthInfo is null. Каждый user должен иметь authInfo");
 

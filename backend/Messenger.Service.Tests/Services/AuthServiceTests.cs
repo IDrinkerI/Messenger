@@ -61,7 +61,7 @@ namespace Messenger.Service.Tests
                     == Task.FromResult(new AuthInfoEntity { PasswordHash = "truePassword" }));
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
                     rep.Get(It.Is<string>(value => value.Equals(signInData.Email)))
-                    == Task.FromResult(new UserEntity { AuthInfoId = authInfoId, Email = signInData.Email }));
+                    == Task.FromResult(new UserEntity { AuthInfoId = authInfoId }));
 
             IAuthService authService = new AuthService(authInfoRepository, userRepository, null);
             var condition = await authService.CheckPassword(signInData);
