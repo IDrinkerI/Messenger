@@ -25,10 +25,9 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void AddUser_ExistingUser_ReturnFalse()
         {
-            var newUser = new AuthInfoModel { Email = "someEmail@mail.com" };
+            var newUser = new AuthInfoModel { Email = "someEmail@mail.com", Password = "somePassword" };
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
-                    rep.Get(It.Is<string>(value => value.Equals(newUser.Email)))
-                    == Task.FromResult(new UserEntity()));
+                    rep.Get(It.Is<string>(value => value.Equals(newUser.Email))) == Task.FromResult(new UserEntity()));
 
             IAuthService authService = new AuthService(null, userRepository, null);
             bool condition = await authService.AddUser(newUser);
@@ -39,11 +38,13 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void AddUser_NotExistingUser_ReturnTrue()
         {
+            var newUser = new AuthInfoModel { Email = "someMail@mail.com", Password = "somePassword" };
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
-                   rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
+                   rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null) &&
+                   rep.Add(It.Is<UserEntity>(value => value.Email.Equals(newUser.Email))) == Task.FromResult(true));
 
             IAuthService authService = new AuthService(null, userRepository, null);
-            bool condition = await authService.AddUser(new AuthInfoModel());
+            bool condition = await authService.AddUser(newUser);
 
             Assert.True(condition);
         }

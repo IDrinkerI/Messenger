@@ -41,6 +41,12 @@ namespace Messenger.Service
             if (newUser is null)
                 throw new ArgumentNullException();
 
+            if (string.IsNullOrWhiteSpace(newUser.Email))
+                throw new ArgumentException("The email address should not be empty or contain only spaces!");
+
+            if (string.IsNullOrWhiteSpace(newUser.Password))
+                throw new ArgumentException("The Password address should not be empty or contain only spaces!");
+
             var checkUser = await userRepository.Get(newUser.Email);
             if (checkUser is not null)
                 return false;
