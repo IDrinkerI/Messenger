@@ -94,11 +94,13 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void Contains_ExistingUser_ReturnTrue()
         {
+            var authInfo = new AuthInfoModel { Email = "someMail@mail.com" };
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
-                    rep.Get(It.IsAny<string>()) == Task.FromResult(new UserEntity()));
+                    rep.Get(It.Is<string>(value => value.Equals(authInfo.Email)))
+                    == Task.FromResult(new UserEntity()));
 
             var authService = new AuthService(null, userRepository, null);
-            var condition   = await authService.Contains(new AuthInfoModel());
+            var condition   = await authService.Contains(authInfo);
 
             Assert.True(condition);
         }
