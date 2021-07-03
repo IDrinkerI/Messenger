@@ -8,7 +8,7 @@ namespace Messenger.Service
     {
         int CurrentUserId { get; }
 
-        Task AddUser(AuthInfoModel newUser);
+        Task<bool> AddUser(AuthInfoModel newUser);
         Task<bool> CheckPassword(AuthInfoModel signinData);
         Task<bool> Contains(AuthInfoModel newUser);
     }
