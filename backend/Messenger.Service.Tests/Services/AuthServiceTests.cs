@@ -11,6 +11,8 @@ namespace Messenger.Service.Tests
 {
     public class AuthServiceTests
     {
+        #region AddUser
+
         [Fact]
         public async void AddUser_Null_ThrowArgumentNullException()
         {
@@ -46,6 +48,11 @@ namespace Messenger.Service.Tests
 
             Assert.True(condition);
         }
+
+        #endregion
+
+
+        #region CheckPassword
 
         [Fact]
         public async void CheckPassword_Null_ThrowArgumentNullException()
@@ -105,6 +112,20 @@ namespace Messenger.Service.Tests
             Assert.True(condition);
         }
 
+        #endregion
+
+
+        #region Contains
+
+        [Fact]
+        public async void Contains_Null_ThrowArgumentNullException()
+        {
+            IAuthService authService = new AuthService(null, null, null);
+            Task testCode() => authService.Contains(null);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(testCode);
+        } 
+
         [Fact]
         public async void Contains_ExistingUser_ReturnTrue()
         {
@@ -131,13 +152,6 @@ namespace Messenger.Service.Tests
             Assert.False(condition);
         }
 
-        [Fact]
-        public async void Contains_Null_ThrowArgumentNullException()
-        {
-            IAuthService authService = new AuthService(null, null, null);
-            Task testCode() => authService.Contains(null);
-
-            await Assert.ThrowsAsync<ArgumentNullException>(testCode);
-        }
+        #endregion
     }
 }
