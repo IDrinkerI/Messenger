@@ -6,7 +6,7 @@ namespace Messenger.Service
 {
     public interface IChatService
     {
-        Task AddChat(ChatModel chat);
+        Task<bool> AddChat(ChatModel chat);
         Task<IEnumerable<ChatModel>> GetChats();
     }
 }
