@@ -39,12 +39,11 @@ namespace Messenger.Service.Tests
         [Fact]
         public async void AddUser_NotExistingUser_ReturnTrue()
         {
-            var newUser = new AuthInfoModel { Email = "someEmail@mail.com" };
             var userRepository = Mock.Of<IUserRepository<UserEntity>>(rep =>
-                   rep.Get(It.Is<string>(value => value.Equals(newUser.Email))) == Task.FromResult<UserEntity>(null));
+                   rep.Get(It.IsAny<string>()) == Task.FromResult<UserEntity>(null));
 
             IAuthService authService = new AuthService(null, userRepository, null);
-            bool condition = await authService.AddUser(newUser);
+            bool condition = await authService.AddUser(new AuthInfoModel());
 
             Assert.True(condition);
         }
