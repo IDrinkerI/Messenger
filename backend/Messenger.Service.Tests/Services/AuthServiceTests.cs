@@ -22,6 +22,34 @@ namespace Messenger.Service.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(testCode);
         }
 
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData(null)]
+        public async void AddUser_EmptyEmail_ThrowArgumentException(string email)
+        {
+            var newUser = new AuthInfoModel { Email = email, Password = "somePassword" };
+
+            IAuthService authService = new AuthService(null, null, null);
+            async Task<bool> testCode() => await authService.AddUser(newUser);
+
+            await Assert.ThrowsAsync<ArgumentException>(testCode);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData(null)]
+        public async void AddUser_EmptyPassword_ThrowArgumentException(string password)
+        {
+            var newUser = new AuthInfoModel { Email = "someEmail@mail.com", Password = password };
+
+            IAuthService authService = new AuthService(null, null, null);
+            async Task<bool> testCode() => await authService.AddUser(newUser);
+
+            await Assert.ThrowsAsync<ArgumentException>(testCode);
+        }
+
         [Fact]
         public async void AddUser_ExistingUser_ReturnFalse()
         {
