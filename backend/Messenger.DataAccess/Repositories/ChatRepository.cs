@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Messenger.DataAccess
 {
-    public sealed class ChatRepository : IRepository<ChatEntity>
+    public sealed class ChatRepository : IChatRepository<ChatEntity>
     {
         private readonly StoreContext store;
 
         public ChatRepository(StoreContext store) => this.store = store;
+
+        async Task<IEnumerable<ChatEntity>> IChatRepository<ChatEntity>.GetChats(int userId)
+        {
+            throw new System.NotImplementedException();
+        }
 
         async Task<bool> IRepository<ChatEntity>.Add(ChatEntity item)
         {
