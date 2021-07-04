@@ -35,12 +35,13 @@ namespace Messenger.Service
 
         async Task<IEnumerable<ChatModel>> IChatService.GetChats()
         {
+            var chats = new List<ChatModel>();
             var chatid = authService.CurrentUserId;
             var chatEntities = await repository.GetChats(chatid);
 
-            var chats = new List<ChatModel>();
-            foreach (var entity in chatEntities)
-                chats.Add(entity.ToModel());
+            if (chatEntities is not null)
+                foreach (var entity in chatEntities)
+                    chats.Add(entity.ToModel());
 
             return chats;
         }
