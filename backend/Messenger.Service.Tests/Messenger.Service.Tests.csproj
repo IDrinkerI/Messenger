@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj" />
+    <ProjectReference Include="..\Messenger.Mapper\Messenger.Mapper.csproj" />
+    <ProjectReference Include="..\Messenger.Model\Messenger.Model.csproj" />
     <ProjectReference Include="..\Messenger.Service\Messenger.Service.csproj" />
   </ItemGroup>
 
