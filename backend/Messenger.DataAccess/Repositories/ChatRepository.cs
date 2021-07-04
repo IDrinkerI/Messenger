@@ -1,6 +1,7 @@
 ﻿using Messenger.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -14,7 +15,11 @@ namespace Messenger.DataAccess
 
         async Task<IEnumerable<ChatEntity>> IChatRepository<ChatEntity>.GetChats(int userId)
         {
-            throw new System.NotImplementedException();
+            var chats = await store.Chats
+                .Where(c => c.UserId.Equals(userId))
+                .ToArrayAsync();
+
+            return chats;
         }
 
         async Task<bool> IRepository<ChatEntity>.Add(ChatEntity item)
